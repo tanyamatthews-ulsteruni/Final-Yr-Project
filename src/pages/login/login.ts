@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
- 
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -47,6 +47,6 @@ export class LoginPage {
       subTitle: text,
       buttons: ['OK']
     });
-    alert.present(prompt);
+   this.alert.present(prompt);
   }
 }
