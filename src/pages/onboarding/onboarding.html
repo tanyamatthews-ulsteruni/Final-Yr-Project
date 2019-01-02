@@ -1,0 +1,110 @@
+<!--
+  Generated template for the OnboardingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Profile setup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-slides pager=true>
+		
+		<ion-slide>
+			<h3>Set Workout Preferences</h3>
+
+			<p>These will be use to help tailor your workouts.</p>
+
+			<ion-item>
+			  <ion-label>Workout types</ion-label>
+			  <ion-select multiple="true" [(ngModel)]="workoutTypes">
+			    <ion-option value="1">Cardio</ion-option>
+			    <ion-option value="2">Weights</ion-option>
+			  </ion-select>
+			</ion-item>
+			<ion-item>
+			  <ion-label>Workout Location</ion-label>
+			  <ion-select multiple="true" [(ngModel)]="workoutLocation">
+			    <ion-option value="1">Home</ion-option>
+			    <ion-option value="2">Gym</ion-option>
+			  </ion-select>
+			</ion-item>
+			<ion-item>
+					<ion-label>Fitness level</ion-label>
+				<ion-select multiple="false" [(ngModel)]="workoutLevel">
+					<ion-option value="1">Beginner</ion-option>
+					<ion-option value="2">Intermediate</ion-option>
+					<ion-option value="3">Advanced</ion-option>
+				</ion-select>
+			</ion-item>
+		</ion-slide>
+
+		<ion-slide>
+			<h3>Set Health Details</h3>
+			<p>These details will be used to calculate your body mass index (BMI) and basal metabolic rate (BMR). Don't worry - we'll explain this more later.
+			<ion-item>
+				<ion-label>Weight</ion-label>
+    			<ion-input type="number" placeholder="kg"></ion-input>
+  			</ion-item>
+			<ion-item>
+				<ion-label>Height</ion-label>
+    			<ion-input type="number" placeholder="cm"></ion-input>
+  			</ion-item>
+  			<ion-item>
+				<ion-label>Age</ion-label>
+    			<ion-input type="number" placeholder="years"></ion-input>
+  			</ion-item>
+
+  			<ion-item>
+					<ion-label>Activity level</ion-label>
+				<ion-select multiple="false" [(ngModel)]="workoutLevel">
+					<ion-option value="1.2"> Sedentary</ion-option>
+					<ion-option value="1.375"> Lightly active (light exercise/sports 1-3 days/week)</ion-option>
+					<ion-option value="1.55">Moderately active</ion-option>
+					<ion-option value="1.725"> Very active</ion-option>
+					<ion-option value="1.9">Extra active</ion-option>
+				</ion-select>
+			</ion-item>
+
+		</ion-slide>
+
+		<ion-slide>
+			<h3>Set Reminder Preferences</h3>
+			<p>Reminders will help to motivate you towards reaching you goal.</p>
+
+			<ion-item>
+			    <ion-label>Enable reminders</ion-label>
+			    <ion-toggle [(ngModel)]="remindersEnabled"></ion-toggle>
+ 			</ion-item>
+ 			<ion-item>
+ 				<ion-label>Frequency</ion-label>
+ 				<ion-select multiple="false" [(ngModel)]="reminderFrequency">
+ 					<ion-option value="1">Every day</ion-option>
+ 					<ion-option value="2">Every weekday</ion-option>
+ 					<ion-option value="3">Once a week</ion-option>
+ 				</ion-select>
+
+ 			</ion-item>
+
+ 			<ion-item>
+			  <ion-label>Time</ion-label>
+			  <ion-datetime displayFormat="hh:mm" [(ngModel)]="myDate"></ion-datetime>
+			</ion-item>
+
+		</ion-slide>
+
+		<ion-slide>
+			<h3>Ready to start your fitness journey?</h3>
+				<button ion-button (click)="onboardingDone()">Lets go</button>
+		</ion-slide>
+
+	</ion-slides>
+
+</ion-content>

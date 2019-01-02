@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the RegisterDisclaimerPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { NavController, AlertController, IonicPage, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,11 +8,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RegisterDisclaimerPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public accept: boolean;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterDisclaimerPage');
+  }
+
+  public completeRegistration(){
+  	const accepted = this.accept;
+  	if(accepted){
+  		this.navCtrl.push('OnboardingPage');
+  	}
   }
 
 }

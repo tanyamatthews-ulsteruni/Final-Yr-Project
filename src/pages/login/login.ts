@@ -47,6 +47,6 @@ export class LoginPage {
       subTitle: text,
       buttons: ['OK']
     });
-   this.alert.present(prompt);
+   alert.present(prompt);
   }
 }
