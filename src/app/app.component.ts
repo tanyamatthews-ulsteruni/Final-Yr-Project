@@ -6,13 +6,24 @@ import * as firebase from 'firebase';
 
 
 import { ListPage } from '../pages/list/list';
-import { LoginPage } from '../pages/login/login';
+//import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
+
+//firebase config details
+const config = {
+    apiKey: "AIzaSyBP0X8X4o8dvCCUabEGpaE9deU2l0OYZr8",
+    authDomain: "fit2me.firebaseapp.com",
+    databaseURL: "https://fit2me.firebaseio.com",
+    projectId: "fit2me",
+    storageBucket: "fit2me.appspot.com",
+};
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+
+
   @ViewChild(Nav) nav: Nav;
 
   rootPage:any = 'LoginPage';
@@ -37,6 +48,8 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    //needed for firebase connectivity
+    firebase.initializeApp(config);
   }
 
   openPage(page) {
@@ -45,11 +58,4 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  const config = {
-    apiKey: 'YOUR_APIKEY',
-    authDomain: 'YOUR_AUTH_DOMAIN',
-    databaseURL: 'YOUR_DATABASE_URL',
-    projectId: 'YOUR_PROJECT_ID',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
-  };
 }
