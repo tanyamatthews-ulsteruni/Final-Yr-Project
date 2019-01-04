@@ -1,52 +1,75 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service/auth-service';
+import { NavController } from 'ionic-angular';
 
-@IonicPage()
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
+import { RegisterPage } from '../register/register';
+import { UserPage } from '../user/user';
+import { AuthService } from '../core/auth.service';
+
+
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
-  loading: Loading;
-  registerCredentials = { email: '', password: '' };
- 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
- 
-  public createAccount() {
-    this.nav.push('RegisterPage');
-  }
- 
-  public login() {
-    this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-      if (allowed) {        
-        this.nav.setRoot('HomePage');
-      } else {
-        this.showError("Access Denied");
-      }
-    },
-      error => {
-        this.showError(error);
-      });
-  }
- 
-  showLoading() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Please wait...',
-      dismissOnPageChange: true
+
+  loginForm: FormGroup;
+  errorMessage: string = '';
+
+  constructor(
+    public navCtrl: NavController,
+    public authService: AuthService,
+    public formBuilder: FormBuilder
+  ) {}
+
+  ionViewWillLoad(){
+    this.loginForm = this.formBuilder.group({
+      email: new FormControl(),
+      password: new FormControl(),
     });
-    this.loading.present();
   }
- 
-  showError(text) {
-    this.loading.dismiss();
- 
-    let alert = this.alertCtrl.create({
-      title: 'Fail',
-      subTitle: text,
-      buttons: ['OK']
+
+  tryLogin(value){
+    this.authService.doLogin(value)
+    .then(res => {
+      console.log(res);
+      this.navCtrl.push(UserPage);
+    }, err => {
+      console.log(err);
+      this.errorMessage = err.message;
+    })
+  }
+
+  tryFacebookLogin(){
+    this.authService.doFacebookLogin()
+    .then((res) => {
+      this.navCtrl.push(UserPage);
+    }, (err) => {
+      this.errorMessage = err.message;
     });
-   alert.present(prompt);
   }
+
+  tryGoogleLogin(){
+    this.authService.doGoogleLogin()
+    .then((res) => {
+      this.navCtrl.push(UserPage);
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
+  tryTwitterLogin(){
+    this.authService.doTwitterLogin()
+    .then((res) => {
+      this.navCtrl.push(UserPage);
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
+  goRegisterPage(){
+    this.navCtrl.push(RegisterPage);
+  }
+
 }

@@ -1,48 +1,77 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, IonicPage } from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service/auth-service';
- 
-@IonicPage()
+import { NavController } from 'ionic-angular';
+
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+
+import { AuthService } from '../core/auth.service';
+
+import { UserPage } from '../user/user';
+
+
+
 @Component({
   selector: 'page-register',
-  templateUrl: 'register.html',
+  templateUrl: 'register.html'
 })
 export class RegisterPage {
-  createSuccess = false;
-  registerCredentials = { email: '', password: '' };
- 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController) { }
- 
-  public register() {
-    this.auth.register(this.registerCredentials).subscribe(success => {
-      if (success) {
-        this.createSuccess = true;
-        this.nav.push("RegisterDisclaimerPage");
-        //this.showPopup("Success", "Account created.");
-      } else {
-        this.showPopup("Error", "Problem creating account.");
-      }
-    },
-      error => {
-        this.showPopup("Error", error);
-      });
-  }
- 
-  showPopup(title, text) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: text,
-      buttons: [
-        {
-          text: 'OK',
-          handler: data => {
-            if (this.createSuccess) {
-              this.nav.popToRoot();
-            }
-          }
-        }
-      ]
+
+  registerForm: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
+
+  constructor(
+    public navCtrl: NavController,
+    public authService: AuthService,
+    public formBuilder: FormBuilder
+  ) {}
+
+  ionViewWillLoad(){
+    this.registerForm = this.formBuilder.group({
+      email: new FormControl(),
+      password: new FormControl()
     });
-    alert.present();
   }
+
+  tryRegister(value){
+    this.authService.doRegister(value)
+     .then(res => {
+       this.errorMessage = "";
+       this.successMessage = "Your account has been created. Please log in now.";
+     }, err => {
+       this.errorMessage = err.message;
+       this.successMessage = "";
+     })
+  }
+
+  tryFacebookLogin(){
+    this.authService.doFacebookLogin()
+    .then((res) => {
+      this.navCtrl.push(UserPage);
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
+  tryGoogleLogin(){
+    this.authService.doGoogleLogin()
+    .then((res) => {
+      this.navCtrl.push(UserPage);
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
+  tryTwitterLogin(){
+    this.authService.doTwitterLogin()
+    .then((res) => {
+      this.navCtrl.push(UserPage);
+    }, (err) => {
+      this.errorMessage = err.message;
+    });
+  }
+
+  goLoginPage(){
+    this.navCtrl.pop();
+  }
+
 }
