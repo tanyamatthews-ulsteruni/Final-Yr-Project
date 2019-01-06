@@ -1,3 +1,5 @@
+
+//firebase authentication environment settings 
 export const environment = {
   production: false,
   // fbAppId: 186848361921511,

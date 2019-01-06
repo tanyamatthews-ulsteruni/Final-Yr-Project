@@ -3,10 +3,14 @@ import { NavController } from 'ionic-angular';
 
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
+import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
+import { FirebaseUserModel } from '../core/user.model';
+import * as firebase from 'firebase';
 
 import { UserPage } from '../user/user';
-
+import { RegisterDisclaimerPage } from '../register-disclaimer/register-disclaimer';
+import { OnboardingPage } from '../onboarding/onboarding';
 
 
 @Component({
@@ -22,11 +26,13 @@ export class RegisterPage {
   constructor(
     public navCtrl: NavController,
     public authService: AuthService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public userService: UserService
   ) {}
 
   ionViewWillLoad(){
     this.registerForm = this.formBuilder.group({
+      fullname: new FormControl(),
       email: new FormControl(),
       password: new FormControl()
     });
@@ -36,7 +42,18 @@ export class RegisterPage {
     this.authService.doRegister(value)
      .then(res => {
        this.errorMessage = "";
-       this.successMessage = "Your account has been created. Please log in now.";
+      console.log(value.email); 
+      var user = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: value.fullname,
+        photoURL: ""
+      });
+       console.log(res.user.displayName);
+       console.log(res.user.email);
+
+       //push to disclaimer page to accept disclaimer
+       this.navCtrl.push(RegisterDisclaimerPage);
+       console.log(res);   
      }, err => {
        this.errorMessage = err.message;
        this.successMessage = "";
@@ -46,7 +63,7 @@ export class RegisterPage {
   tryFacebookLogin(){
     this.authService.doFacebookLogin()
     .then((res) => {
-      this.navCtrl.push(UserPage);
+      this.navCtrl.push(OnboardingPage);
     }, (err) => {
       this.errorMessage = err.message;
     });
@@ -55,21 +72,12 @@ export class RegisterPage {
   tryGoogleLogin(){
     this.authService.doGoogleLogin()
     .then((res) => {
-      this.navCtrl.push(UserPage);
+      this.navCtrl.push(OnboardingPage);
     }, (err) => {
       this.errorMessage = err.message;
     });
   }
-
-  tryTwitterLogin(){
-    this.authService.doTwitterLogin()
-    .then((res) => {
-      this.navCtrl.push(UserPage);
-    }, (err) => {
-      this.errorMessage = err.message;
-    });
-  }
-
+  
   goLoginPage(){
     this.navCtrl.pop();
   }

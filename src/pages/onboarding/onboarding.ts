@@ -17,6 +17,7 @@ export class OnboardingPage {
 
 
 	onboardingDone(){
-		this.navCtrl.push("HomePage");
+    //set root ensures that the menu icon is not hidden. 
+		this.navCtrl.setRoot("ProfilePage");
 	}
 }

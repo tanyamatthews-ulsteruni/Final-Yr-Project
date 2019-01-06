@@ -1,39 +1,35 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { FirebaseUserModel } from '../core/user.model';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-profile',
+  templateUrl: 'profile.html',
 })
-
-export class HomePage {
-
- user: FirebaseUserModel = new FirebaseUserModel();
+export class ProfilePage {
 
   constructor(
-    public navCtrl: NavController,
+  	public navCtrl: NavController, 
+  	public navParams: NavParams,
     public userService: UserService,
     public authService: AuthService
   ) {}
+
+  user: FirebaseUserModel = new FirebaseUserModel();
 
   ionViewWillLoad(){
     this.userService.getCurrentUser()
     .then(user => {
       this.user = user;
+      console.log(user.name);
     }, err => console.log(err))
   }
 
-
-  logout(){
-    this.authService.doLogout()
-    .then((res) => {
-      this.navCtrl.pop();
-    }, (error) => {
-      console.log("Logout error", error);
-    });
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ProfilePage');
   }
+
 }

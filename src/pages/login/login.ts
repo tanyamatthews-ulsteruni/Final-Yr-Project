@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-
 import { RegisterPage } from '../register/register';
-import { UserPage } from '../user/user';
+import { HomePage } from '../home/home';
 import { AuthService } from '../core/auth.service';
-
 
 @Component({
   selector: 'page-login',
@@ -30,39 +27,33 @@ export class LoginPage {
     });
   }
 
+ 
+  //standard email & password login 
   tryLogin(value){
     this.authService.doLogin(value)
     .then(res => {
-      console.log(res);
-      this.navCtrl.push(UserPage);
+      this.navCtrl.setRoot(HomePage);
     }, err => {
       console.log(err);
       this.errorMessage = err.message;
     })
   }
 
+  //facebook login
   tryFacebookLogin(){
     this.authService.doFacebookLogin()
     .then((res) => {
-      this.navCtrl.push(UserPage);
+      this.navCtrl.setRoot(HomePage);
     }, (err) => {
       this.errorMessage = err.message;
     });
   }
 
+  //google login
   tryGoogleLogin(){
     this.authService.doGoogleLogin()
     .then((res) => {
-      this.navCtrl.push(UserPage);
-    }, (err) => {
-      this.errorMessage = err.message;
-    });
-  }
-
-  tryTwitterLogin(){
-    this.authService.doTwitterLogin()
-    .then((res) => {
-      this.navCtrl.push(UserPage);
+      this.navCtrl.setRoot(HomePage);
     }, (err) => {
       this.errorMessage = err.message;
     });
