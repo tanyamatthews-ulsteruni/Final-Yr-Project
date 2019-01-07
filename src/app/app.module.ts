@@ -15,6 +15,8 @@ import { AuthService } from '../pages/core/auth.service';
 import { UserService } from '../pages/core/user.service';
 //modular imports
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environment/environment';
 //imports for alternative login using facebook etc. 
@@ -35,7 +37,8 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
