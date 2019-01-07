@@ -1,0 +1,97 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<!--Personal details section. -->
+	<h3>Your Details</h3>
+	<p>Name: {{user.name}}</p>
+	<p>Email: {{user.email}}</p>
+
+	<button ion-button>Update Your Details</button>
+
+	<!--Health details section. -->
+	<h3>Health Details</h3>
+
+	<ion-item>
+		<ion-label>Weight</ion-label>
+    	<ion-input type="number" placeholder="kg"></ion-input>
+  	</ion-item>
+	<ion-item>
+		<ion-label>Height</ion-label>
+    	<ion-input type="number" placeholder="cm"></ion-input>
+  	</ion-item>
+  	<ion-item>
+		<ion-label>Age</ion-label>
+    	<ion-input type="number" placeholder="years"></ion-input>
+  	</ion-item>
+
+  	<ion-item>
+		<ion-label>Activity level</ion-label>
+		<ion-select multiple="false" [(ngModel)]="workoutLevel">
+			<ion-option value="1.2"> Sedentary</ion-option>
+			<ion-option value="1.375"> Lightly active (light exercise/sports 1-3 days/week)</ion-option>
+			<ion-option value="1.55">Moderately active</ion-option>
+			<ion-option value="1.725"> Very active</ion-option>
+			<ion-option value="1.9">Extra active</ion-option>
+		</ion-select>
+	</ion-item>
+
+	<button ion-button>Update Health Details</button>
+
+	<!--Workout preferences section. -->
+	<h3>Workout Preferences</h3>
+
+	<ion-item>
+	<ion-label>Workout types</ion-label>
+	    <ion-select multiple="true" [(ngModel)]="workoutTypes">
+	 	   <ion-option value="1">Cardio</ion-option>
+	    	<ion-option value="2">Weights</ion-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+	  <ion-label>Workout Location</ion-label>
+	  <ion-select multiple="true" [(ngModel)]="workoutLocation">
+	    <ion-option value="1">Home</ion-option>
+	    <ion-option value="2">Gym</ion-option>
+	  </ion-select>
+	</ion-item>
+	<ion-item>
+	<ion-label>Fitness level</ion-label>
+		<ion-select multiple="false" [(ngModel)]="workoutLevel">
+			<ion-option value="1">Beginner</ion-option>
+			<ion-option value="2">Intermediate</ion-option>
+			<ion-option value="3">Advanced</ion-option>
+		</ion-select>
+	</ion-item>
+
+	<button ion-button>Update Workout Preferences</button>
+
+	<!--Reminder preferences section. -->
+	<h3>Reminder Preferences</h3>
+	<ion-item>
+		<ion-label>Enable reminders</ion-label>
+		<ion-toggle [(ngModel)]="remindersEnabled"></ion-toggle>
+ 	</ion-item>
+ 	<ion-item>
+ 		<ion-label>Frequency</ion-label>
+ 		<ion-select multiple="false" [(ngModel)]="reminderFrequency">
+ 			<ion-option value="1">Every day</ion-option>
+ 			<ion-option value="2">Every weekday</ion-option>
+ 			<ion-option value="3">Once a week</ion-option>
+ 		</ion-select>
+ 	</ion-item>
+ 	<ion-item>
+       	<ion-label>Time</ion-label>
+	    <ion-datetime displayFormat="hh:mm" [(ngModel)]="myDate"></ion-datetime>
+	</ion-item>
+
+	<button ion-button>Update Reminder Preferences</button>
+
+</ion-content>

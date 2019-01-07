@@ -4,15 +4,14 @@ import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { FirebaseUserModel } from '../core/user.model';
 
-@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-user',
+  templateUrl: 'user.html'
 })
 
-export class HomePage {
+export class UserPage{
 
- user: FirebaseUserModel = new FirebaseUserModel();
+  user: FirebaseUserModel = new FirebaseUserModel();
 
   constructor(
     public navCtrl: NavController,
