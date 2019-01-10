@@ -12,20 +12,16 @@ import * as firebase from 'firebase';
 })
 export class OnboardingPage {
 
-  arrData = []
   user: FirebaseUserModel = new FirebaseUserModel();
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public db: AngularFireDatabase,
-    public userService: UserService,
+    public userService: UserService
   ) {
-
     
   }
-
-
 
   ionViewDidLoad() {
 
@@ -41,7 +37,8 @@ export class OnboardingPage {
   }
 
   onboardingDone(){
-    this.storeOnboardingDetails()
+    //store data on submit of onboarding page. 
+    this.storeOnboardingDetails();
     //set root ensures that the menu icon is not hidden. 
     this.navCtrl.setRoot("ProfilePage");
   }
