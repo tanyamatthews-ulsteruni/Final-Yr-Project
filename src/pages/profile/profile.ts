@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserService } from '../core/user.service';
+//database imports 
 import { FirebaseUserModel } from '../core/user.model';
+import { UserService } from '../core/user.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+//data model imports 
+import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
+import { ReminderPreferencesDataModel } from '../../app/models/ReminderPreferencesDataModel';
+import { WorkoutPreferencesDataModel } from '../../app/models/WorkoutPreferencesDataModel';
 
 @IonicPage()
 @Component({
@@ -13,7 +18,11 @@ import * as firebase from 'firebase';
 export class ProfilePage {
 
   user: FirebaseUserModel = new FirebaseUserModel();
-  userHealthDetails: any[];
+  userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
+  userReminderDetail: ReminderPreferencesDataModel = new ReminderPreferencesDataModel();
+  userWorkoutDetail: WorkoutPreferencesDataModel = new WorkoutPreferencesDataModel();
+  //public reminderTime:string=new Date().toISOString();
+
 
   constructor(
     public navCtrl: NavController, 
@@ -30,40 +39,53 @@ export class ProfilePage {
       this.user = user;
       console.log(user);
     }, err => console.log(err))
-    
-    this.getProfileDetails();
-
+ 
+    this.getHealthDetails(this.userHealthDetail);
+    this.getReminderDetails(this.userReminderDetail);
+    this.getWorkoutDetails(this.userWorkoutDetail);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  
 
-
-  }
-
-  getProfileDetails(){
+  getHealthDetails(userHealthDetail, userAge){
     var user = firebase.auth().currentUser;
-    var userId = 'Gm38qeLek9NtUDoQBXKoN0Au4Ic2';//user.uid;
+    var userId = 'XykYFK99f4Pmuz0vZWv6uzfEhZO2';//user.uid;
     firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
       snapshot.forEach((childSnapshot => {
-      console.log(childSnapshot.val().age);
-    }));
+        userHealthDetail.age = childSnapshot.val().age;
+        userHealthDetail.weight = childSnapshot.val().weight;
+        userHealthDetail.height = childSnapshot.val().height; 
+        userHealthDetail.activityLevel = childSnapshot.val().activityLevel;
+        console.log(childSnapshot.val().age);
+
+      }));
     });
+  }
 
-    /*console.log(userId);
-    if(!this.userId){
-      var firebaseUrl = '/' + userId + '/healthDetails/';
-      console.log(firebaseUrl);
-      const ref: firebase.database.Reference = firebase.database().ref('/Gm38qeLek9NtUDoQBXKoN0Au4Ic2/healthDetails/');
-      ref.on('value', healthDetailSnapshot => {
-        this.userHealthDetails = healthDetailSnapshot.val();
-        console.log(healthDetailSnapshot.val());
-        console.log('Details: ' + healthDetailSnapshot.val());
-      });
-    }
-    */
+  getReminderDetails(userReminderDetail){
+    var user = firebase.auth().currentUser;
+    var userId = 'XykYFK99f4Pmuz0vZWv6uzfEhZO2';//user.uid;
+    firebase.database().ref('/' + userId + '/reminderPreferences/').once('value').then(function(snapshot){
+      snapshot.forEach((childSnapshot => {
+        userReminderDetail.enableReminders = childSnapshot.val().enableReminders;
+        userReminderDetail.frequency = childSnapshot.val().frequency;
+        userReminderDetail.time = childSnapshot.val().time;
 
+        //this.reminderFrequency = childSnapshot.val().frequency;
+      }));
+    });
   } 
 
+  getWorkoutDetails(userWorkoutDetail){
+    var user = firebase.auth().currentUser;
+    var userId = 'XykYFK99f4Pmuz0vZWv6uzfEhZO2';//user.uid;
+    firebase.database().ref('/' + userId + '/workoutPreferences/').once('value').then(function(snapshot){
+      snapshot.forEach((childSnapshot => {
+        userWorkoutDetail.fitnessLevel = childSnapshot.val().fitnessLevel;
+        userWorkoutDetail.location = childSnapshot.val().location;
+        userWorkoutDetail.type = childSnapshot.val().type;
+      }))
+    });
+  }
 
 }

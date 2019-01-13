@@ -18,25 +18,22 @@
 
 	<!--Health details section. -->
 	<h3>Health Details</h3>
-
-	<!--<p>{{userHealthDetails.age}}</p>-->
-
 	<ion-item>
 		<ion-label>Weight</ion-label>
-    	<ion-input type="number" placeholder="kg"></ion-input>
+    	<ion-input type="number" placeholder="kg" [(ngModel)]="weight" value={{userHealthDetail.weight}}></ion-input>
   	</ion-item>
 	<ion-item>
 		<ion-label>Height</ion-label>
-    	<ion-input type="number" placeholder="cm"></ion-input>
+    	<ion-input type="number" placeholder="cm" [(ngModel)]="height" value={{userHealthDetail.height}}></ion-input>
   	</ion-item>
   	<ion-item>
 		<ion-label>Age</ion-label>
-    	<ion-input type="number" placeholder="years"></ion-input>
+    	<ion-input type="number" placeholder="years" [(ngModel)]="age" value={{userHealthDetail.age}}></ion-input>
   	</ion-item>
 
   	<ion-item>
 		<ion-label>Activity level</ion-label>
-		<ion-select multiple="false" [(ngModel)]="workoutLevel">
+		<ion-select multiple="false" [(ngModel)]="workoutLevel" [(ngModel)]="activityLevel">
 			<ion-option value="1.2"> Sedentary</ion-option>
 			<ion-option value="1.375"> Lightly active (light exercise/sports 1-3 days/week)</ion-option>
 			<ion-option value="1.55">Moderately active</ion-option>
@@ -91,7 +88,7 @@
  	</ion-item>
  	<ion-item>
        	<ion-label>Time</ion-label>
-	    <ion-datetime displayFormat="hh:mm" [(ngModel)]="myDate"></ion-datetime>
+	    <ion-datetime displayFormat="hh:mm" [(ngModel)]="reminderTime"></ion-datetime>
 	</ion-item>
 
 	<button ion-button>Update Reminder Preferences</button>
