@@ -48,7 +48,7 @@ export class OnboardingPage {
     //get user id to store details under
     var userId = firebase.auth().currentUser.uid;
 
-    this.db.list(userId + '/workoutPreferences/').push({ type: this.workoutTypes, location: this.workoutLocation , fitnessLevel: this.workoutLevel});
+    this.db.list(userId + '/workoutPreferences/').push({ type: this.workoutTypes, location: this.workoutLocation , fitnessLevel: this.workoutLevel, dayOfWorkout: this.workoutDay});
     this.db.list(userId + '/healthDetails/').push({ weight: this.weight, height: this.height , age: this.age, activityLevel: this.activityLevel});
     if(this.enableReminders){
           this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: this.reminderFrequency , time: this.reminderTime});

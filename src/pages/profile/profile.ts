@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+//page imports 
+import { UpdateHealthDetailsPage } from '../update-health-details/update-health-details';
+import { UpdateReminderDetailsPage } from '../update-reminder-details/update-reminder-details';
+import { UpdateWorkoutDetailsPage } from '../update-workout-details/update-workout-details';
 //database imports 
 import { FirebaseUserModel } from '../core/user.model';
 import { UserService } from '../core/user.service';
@@ -21,8 +25,6 @@ export class ProfilePage {
   userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
   userReminderDetail: ReminderPreferencesDataModel = new ReminderPreferencesDataModel();
   userWorkoutDetail: WorkoutPreferencesDataModel = new WorkoutPreferencesDataModel();
-  //public reminderTime:string=new Date().toISOString();
-
 
   constructor(
     public navCtrl: NavController, 
@@ -39,17 +41,16 @@ export class ProfilePage {
       this.user = user;
       console.log(user);
     }, err => console.log(err))
- 
+
     this.getHealthDetails(this.userHealthDetail);
     this.getReminderDetails(this.userReminderDetail);
     this.getWorkoutDetails(this.userWorkoutDetail);
+
   }
 
-  
-
-  getHealthDetails(userHealthDetail, userAge){
+  getHealthDetails(userHealthDetail, weight){
     var user = firebase.auth().currentUser;
-    var userId = 'XykYFK99f4Pmuz0vZWv6uzfEhZO2';//user.uid;
+    var userId = user.uid;
     firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
       snapshot.forEach((childSnapshot => {
         userHealthDetail.age = childSnapshot.val().age;
@@ -64,7 +65,7 @@ export class ProfilePage {
 
   getReminderDetails(userReminderDetail){
     var user = firebase.auth().currentUser;
-    var userId = 'XykYFK99f4Pmuz0vZWv6uzfEhZO2';//user.uid;
+    var userId = user.uid;
     firebase.database().ref('/' + userId + '/reminderPreferences/').once('value').then(function(snapshot){
       snapshot.forEach((childSnapshot => {
         userReminderDetail.enableReminders = childSnapshot.val().enableReminders;
@@ -78,7 +79,7 @@ export class ProfilePage {
 
   getWorkoutDetails(userWorkoutDetail){
     var user = firebase.auth().currentUser;
-    var userId = 'XykYFK99f4Pmuz0vZWv6uzfEhZO2';//user.uid;
+    var userId = user.uid;
     firebase.database().ref('/' + userId + '/workoutPreferences/').once('value').then(function(snapshot){
       snapshot.forEach((childSnapshot => {
         userWorkoutDetail.fitnessLevel = childSnapshot.val().fitnessLevel;
@@ -86,6 +87,19 @@ export class ProfilePage {
         userWorkoutDetail.type = childSnapshot.val().type;
       }))
     });
+  }
+
+
+
+  updateWorkoutPreferences():void{
+    this.navCtrl.push(UpdateWorkoutDetailsPage);
+  }
+  updateReminderPreferences():void{
+    this.navCtrl.push(UpdateReminderDetailsPage);
+  }
+
+  updateHealthDetail():void{
+    this.navCtrl.push(UpdateHealthDetailsPage);
   }
 
 }
