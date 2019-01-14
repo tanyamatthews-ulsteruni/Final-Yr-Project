@@ -3,10 +3,10 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+//page imports
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
-
 import { ListPage } from '../pages/list/list';
 
 @Component({
@@ -32,7 +32,6 @@ export class MyApp {
 		];
 
 	}
-  
   	
   openPage(page) {
     // Reset the content nav to have just this page
