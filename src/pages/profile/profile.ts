@@ -48,7 +48,7 @@ export class ProfilePage {
 
   }
 
-  getHealthDetails(userHealthDetail, weight){
+  getHealthDetails(userHealthDetail){
     var user = firebase.auth().currentUser;
     var userId = user.uid;
     firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
@@ -88,8 +88,6 @@ export class ProfilePage {
       }))
     });
   }
-
-
 
   updateWorkoutPreferences():void{
     this.navCtrl.push(UpdateWorkoutDetailsPage);

@@ -7,6 +7,7 @@ import { UserService } from '../core/user.service';
 import { FirebaseUserModel } from '../core/user.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -19,22 +20,13 @@ export class OnboardingPage {
   user: FirebaseUserModel = new FirebaseUserModel();
   @ViewChild(Slides) slides: Slides;
 
-
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public db: AngularFireDatabase,
     public userService: UserService
   ) {
-    
-  }
-
-  ionViewWillLoad(){
   
-  }
-
-  ionViewDidLoad() {
-
   }
 
   nextSlide(){
@@ -52,18 +44,18 @@ export class OnboardingPage {
     this.db.list(userId + '/healthDetails/').push({ weight: this.weight, height: this.height , age: this.age, activityLevel: this.activityLevel});
     if(this.enableReminders){
           this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: this.reminderFrequency , time: this.reminderTime});
-    }else{
+    }
+    else{
       this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: null, time: null});
     }
 
   }
 
   onboardingDone(){
-
     //store data on submit of onboarding page. 
     this.storeOnboardingDetails();
     //set root ensures that the menu icon is not hidden. 
-    this.navCtrl.setRoot("ProfilePage");
+    this.navCtrl.push(LoginPage);
   }
 
 }
