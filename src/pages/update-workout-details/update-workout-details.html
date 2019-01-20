@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>updateWorkoutDetails</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+	<h3>Set Workout Preferences</h3>
+				<p>These will be use to help tailor your workouts.</p>
+				<ion-item>
+				  <ion-label>Workout types</ion-label>
+				  <ion-select required multiple="true" [(ngModel)]="workoutTypes">
+				    <ion-option value="Cardio">Cardio</ion-option>
+				    <ion-option value="Weights">Weights</ion-option>
+				  </ion-select>
+				</ion-item>
+				<ion-item>
+				  <ion-label>Workout Location</ion-label>
+				  <ion-select required multiple="true" [(ngModel)]="workoutLocation">
+				    <ion-option value="Home">Home</ion-option>
+				    <ion-option value="Gym">Gym</ion-option>
+				  </ion-select>
+				</ion-item>
+				<ion-item>
+					<ion-label>Fitness level</ion-label>
+					<ion-select required multiple="false" [(ngModel)]="workoutLevel">
+						<ion-option value="Beginner">Beginner</ion-option>
+						<ion-option value="Intermediate">Intermediate</ion-option>
+						<ion-option value="Advanced">Advanced</ion-option>
+					</ion-select>
+				</ion-item>
+				<ion-item>
+				  <ion-label>Preferred Day</ion-label>
+				  <ion-select required multiple="true" [(ngModel)]="workoutDay">
+				    <ion-option value="Monday">Monday</ion-option>
+				    <ion-option value="Tuesday">Tuesday</ion-option>
+				    <ion-option value="Tuesday">Wednesday</ion-option>
+				    <ion-option value="Tuesday">Thursday</ion-option>
+				    <ion-option value="Tuesday">Friday</ion-option>
+				    <ion-option value="Tuesday">Saturday</ion-option>
+				    <ion-option value="Tuesday">Sunday</ion-option>
+				  </ion-select>
+				</ion-item>
+				<button [disabled]="!workoutLevel || !workoutLocation || !workoutTypes" ion-button (click)="update(workoutTypes, workoutLocation, workoutLevel, workoutDay)">Update</button>
+
+</ion-content>

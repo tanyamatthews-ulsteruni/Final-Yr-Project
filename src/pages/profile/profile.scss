@@ -1,3 +1,14 @@
 page-profile {
 
+	label{
+		font-weight: bold;
+	}
+
+	.displayItem{
+		border: 1px solid #ddd; /*border*/
+  		margin-top: -1px; /*margin*/
+ 		background-color: #f6f6f6; /*background colour*/
+  		padding: 12px; /*padding*/
+	}
+
 }

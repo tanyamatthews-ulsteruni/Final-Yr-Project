@@ -15,24 +15,36 @@
 				<ion-item>
 				  <ion-label>Workout types</ion-label>
 				  <ion-select required multiple="true" [(ngModel)]="workoutTypes">
-				    <ion-option value="cardio">Cardio</ion-option>
-				    <ion-option value="weights">Weights</ion-option>
+				    <ion-option value="Cardio">Cardio</ion-option>
+				    <ion-option value="Weights">Weights</ion-option>
 				  </ion-select>
 				</ion-item>
 				<ion-item>
 				  <ion-label>Workout Location</ion-label>
 				  <ion-select required multiple="true" [(ngModel)]="workoutLocation">
-				    <ion-option value="home">Home</ion-option>
-				    <ion-option value="gym">Gym</ion-option>
+				    <ion-option value="Home">Home</ion-option>
+				    <ion-option value="Gym">Gym</ion-option>
 				  </ion-select>
 				</ion-item>
 				<ion-item>
 					<ion-label>Fitness level</ion-label>
 					<ion-select required multiple="false" [(ngModel)]="workoutLevel">
-						<ion-option value="beginner">Beginner</ion-option>
-						<ion-option value="intermediate">Intermediate</ion-option>
-						<ion-option value="advanced">Advanced</ion-option>
+						<ion-option value="Beginner">Beginner</ion-option>
+						<ion-option value="Intermediate">Intermediate</ion-option>
+						<ion-option value="Advanced">Advanced</ion-option>
 					</ion-select>
+				</ion-item>
+				<ion-item>
+				  <ion-label>Preferred Day</ion-label>
+				  <ion-select required multiple="true" [(ngModel)]="workoutDay">
+				    <ion-option value="Monday">Monday</ion-option>
+				    <ion-option value="Tuesday">Tuesday</ion-option>
+				    <ion-option value="Tuesday">Wednesday</ion-option>
+				    <ion-option value="Tuesday">Thursday</ion-option>
+				    <ion-option value="Tuesday">Friday</ion-option>
+				    <ion-option value="Tuesday">Saturday</ion-option>
+				    <ion-option value="Tuesday">Sunday</ion-option>
+				  </ion-select>
 				</ion-item>
 				<button [disabled]="!workoutLevel || !workoutLocation || !workoutTypes" ion-button (click)="nextSlide()">Next</button>
 		</ion-slide>
@@ -56,11 +68,11 @@
   			<ion-item>
 					<ion-label>Activity level</ion-label>
 				<ion-select multiple="false" [(ngModel)]="activityLevel">
-					<ion-option value="1.2"> Sedentary</ion-option>
-					<ion-option value="1.375"> Lightly active (light exercise/sports 1-3 days/week)</ion-option>
-					<ion-option value="1.55">Moderately active</ion-option>
-					<ion-option value="1.725"> Very active</ion-option>
-					<ion-option value="1.9">Extra active</ion-option>
+					<ion-option value="Sedentary - 1.2"> Sedentary</ion-option>
+					<ion-option value="Lightly active - 1.375">Lightly active (light exercise/sports 1-3 days/week)</ion-option>
+					<ion-option value="Moderately active - 1.55">Moderately active</ion-option>
+					<ion-option value="Very active - 1.725">Very active</ion-option>
+					<ion-option value="Extra Active - 1.9">Extra active</ion-option>
 				</ion-select>
 			</ion-item>
 			<button [disabled]="!weight || !height || !age || !activityLevel" ion-button (click)="nextSlide()">Next</button>
@@ -77,9 +89,9 @@
  			<ion-item>
  				<ion-label>Frequency</ion-label>
  				<ion-select multiple="false" [(ngModel)]="reminderFrequency">
- 					<ion-option value="every-day">Every day</ion-option>
- 					<ion-option value="every-weekday">Every weekday</ion-option>
- 					<ion-option value="once-a-week">Once a week</ion-option>
+ 					<ion-option value="Every day">Every day</ion-option>
+ 					<ion-option value="Every weekday">Every weekday</ion-option>
+ 					<ion-option value="Once a week">Once a week</ion-option>
  				</ion-select>
  			</ion-item>
 

@@ -13,6 +13,9 @@ import { RegisterPage } from '../pages/register/register';
 import { RegisterDisclaimerPage } from '../pages/register-disclaimer/register-disclaimer';
 import { ProfilePage } from '../pages/profile/profile';
 import { ListPage } from '../pages/list/list';
+import { UpdateHealthDetailsPage } from '../pages/update-health-details/update-health-details';
+import { UpdateReminderDetailsPage } from '../pages/update-reminder-details/update-reminder-details';
+import { UpdateWorkoutDetailsPage } from '../pages/update-workout-details/update-workout-details';
 
 //service imports
 import { AuthService } from '../pages/core/auth.service';
@@ -37,7 +40,10 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
     RegisterPage,
     RegisterDisclaimerPage,
     ListPage,
-    ProfilePage
+    ProfilePage,
+    UpdateReminderDetailsPage, 
+    UpdateWorkoutDetailsPage,
+    UpdateHealthDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,10 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
     RegisterPage,
     RegisterDisclaimerPage,
     ListPage,
-    ProfilePage
+    ProfilePage,
+    UpdateReminderDetailsPage, 
+    UpdateWorkoutDetailsPage,
+    UpdateHealthDetailsPage
   ],
   providers: [
     StatusBar,
