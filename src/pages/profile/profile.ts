@@ -35,7 +35,7 @@ export class ProfilePage {
     
   }
 
-  ionViewWillLoad(){
+  ionViewDidEnter(){
     this.userService.getCurrentUser()
     .then(user => {
       this.user = user;
@@ -85,6 +85,7 @@ export class ProfilePage {
         userWorkoutDetail.fitnessLevel = childSnapshot.val().fitnessLevel;
         userWorkoutDetail.location = childSnapshot.val().location;
         userWorkoutDetail.type = childSnapshot.val().type;
+        userWorkoutDetail.dayOfWorkout = childSnapshot.val().dayOfWorkout;
       }))
     });
   }

@@ -21,28 +21,25 @@ export class UpdateHealthDetailsPage {
 	) 
   {}
 
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpdateHealthDetailsPage');
   }
 
-  changeDetails(){
+  //TODO NEED TO UPDATE ACITIVITY LEVEL 
+  // **** NEEDS UPDATED
+  changeDetails(age, weight, height){
     var userId = firebase.auth().currentUser.uid;
     firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
-      console.log(snapshot);
-        snapshot.forEach((childSnapshot => {
-          console.log('/' + userId + '/healthDetails/' + childSnapshot.key);
-          firebase.database().ref('/' + userId + '/healthDetails/' + childSnapshot.key).update({activityLevel: 'test', age: '90'});//, age: this.age, height: this.height ,  weight: this.weight});
-        }));
-      })
+
+      snapshot.forEach((childSnapshot => {
+        console.log('/' + userId + '/healthDetails/' + childSnapshot.key);
+        firebase.database().ref('/' + userId + '/healthDetails/' + childSnapshot.key).update({age: age, height: height, weight: weight});//, age: this.age, height: this.height ,  weight: this.weight});
+      }));
+    })
+
+    //return to previous page 
+    this.navCtrl.pop();
   }
 
-
-  update(){
-    this.changeDetails();
-  	
-  	//return to previous page 
-  	this.navCtrl.pop();
-  }
 
 }

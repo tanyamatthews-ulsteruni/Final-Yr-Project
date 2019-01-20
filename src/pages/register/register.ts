@@ -48,8 +48,13 @@ export class RegisterPage {
         displayName: value.fullname,
         photoURL: ""
       });
-       console.log(res.user.displayName);
-       console.log(res.user.email);
+      user.updateEmail(value.email).then(function(){
+        //success 
+        console.log('Email updated successfully');
+      }).catch(function(error){
+        //error
+        console.log('Error updating email.');
+      });
 
        //push to disclaimer page to accept disclaimer
        this.navCtrl.push(RegisterDisclaimerPage);

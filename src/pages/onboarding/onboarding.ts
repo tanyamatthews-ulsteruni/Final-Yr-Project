@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
-
 import { UserService } from '../core/user.service';
-import { FirebaseUserModel } from '../core/user.model';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { LoginPage } from '../login/login';
@@ -17,14 +15,13 @@ import { LoginPage } from '../login/login';
 
 export class OnboardingPage {
 
-  user: FirebaseUserModel = new FirebaseUserModel();
   @ViewChild(Slides) slides: Slides;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public db: AngularFireDatabase,
-    public userService: UserService
+
   ) {
   
   }
@@ -46,7 +43,7 @@ export class OnboardingPage {
           this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: this.reminderFrequency , time: this.reminderTime});
     }
     else{
-      this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: null, time: null});
+      this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: "", time: ""});
     }
 
   }
