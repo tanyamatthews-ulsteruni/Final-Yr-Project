@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, NavController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -8,6 +8,8 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+
+import { AuthService } from '../pages/core/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,7 +20,13 @@ export class MyApp {
 
   	pages: Array <{title: string, component: any}>;
 
-	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+	 constructor(
+    platform: Platform, 
+    statusBar: StatusBar, 
+    splashScreen: SplashScreen,
+    public auth: AuthService//,
+    //public navCtrl: NavController
+    ) {
 
     	platform.ready().then(() => {
     		statusBar.styleDefault();
@@ -39,7 +47,12 @@ export class MyApp {
   }
 
   logout(){
-    
+    this.auth.doLogout().then(res => {
+      this.nav.setRoot(LoginPage);
+    }, err => {
+      console.log(err);
+      
+    })
   }
 
 }
