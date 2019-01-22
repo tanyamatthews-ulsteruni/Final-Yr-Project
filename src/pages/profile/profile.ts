@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UpdateHealthDetailsPage } from '../update-health-details/update-health-details';
 import { UpdateReminderDetailsPage } from '../update-reminder-details/update-reminder-details';
 import { UpdateWorkoutDetailsPage } from '../update-workout-details/update-workout-details';
+import { UpdateUserDetailsPage } from '../update-user-details/update-user-details';
 //database imports 
 import { FirebaseUserModel } from '../core/user.model';
 import { UserService } from '../core/user.service';
@@ -88,6 +89,10 @@ export class ProfilePage {
         userWorkoutDetail.dayOfWorkout = childSnapshot.val().dayOfWorkout;
       }))
     });
+  }
+
+  updateUserDetails():void{
+    this.navCtrl.push(UpdateUserDetailsPage);
   }
 
   updateWorkoutPreferences():void{
