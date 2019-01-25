@@ -26,7 +26,9 @@ export class OnboardingPage {
   
   }
 
-  workoutTypes; workoutLocation; fitnessLevel; workoutLevel; 
+  workoutTypes; workoutLocation; fitnessLevel; workoutLevel; workoutDay;
+  weight; height; age; activityLevel; 
+  remindersEnabled; reminderFrequency; reminderTime; 
   
 
   nextSlide(){
