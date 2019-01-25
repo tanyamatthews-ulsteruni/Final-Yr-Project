@@ -26,6 +26,9 @@ export class OnboardingPage {
   
   }
 
+  workoutTypes; workoutLocation; fitnessLevel; workoutLevel; 
+  
+
   nextSlide(){
     let currentIndex = this.slides.getActiveIndex();
     console.log('Current index is', currentIndex);

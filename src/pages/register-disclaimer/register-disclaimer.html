@@ -8,6 +8,8 @@
 
 	<h5>Please read the following before completed registration.</h5>
 
+	<h6>Health & Wellbeing</h6>
+
 	<p>Fit2Me advises that you consult with your doctor before beginning any exercise program.</p>
 	<p>You should be in good physical condition and be able to participate in the exercise.</p>
 	<p>Fit2Me is not a licensed medical care provider and represents that it has no expertise in diagnosing, examining, or treating medical conditions of any kind, or in determining the effect of any specific exercise on a medical condition.</p>
@@ -15,11 +17,19 @@
 	<p>Fit2Me advises that you consult with your doctor before beginning any exercise program.</p>
 	<p>You should be in good physical condition and be able to participate in the exercise.</p>
 	<p>Fit2Me is not a licensed medical care provider and represents that it has no expertise in diagnosing, examining, or treating medical conditions of any kind, or in determining the effect of any specific exercise on a medical condition.</p>
+
+	<h6>Your data</h6>
+
+	<p>Here at Fit 2 Me, we take your privacy seriously and will only use your personal information to administer your account.</p>
+	<p>Your data will not be shared with anyone, nor will it be passed onto third party services for marketing purposes.</p> 
 
 	<ion-item>
 	    <ion-label>I accept</ion-label>
 	    <ion-toggle [(ngModel)]="accept"></ion-toggle>
     </ion-item>
+
+    <!--Should this message be left in or does this seem bias? -->
+
     <p>Please note you cannot register unless you agree to this disclaimer.</p>
     <button ion-button class="submit-btn" full type="submit"  [disabled]="!accept" (click)="completeRegistration()">Complete Registration</button>
 
