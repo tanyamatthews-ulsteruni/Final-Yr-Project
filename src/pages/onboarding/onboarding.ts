@@ -44,7 +44,7 @@ export class OnboardingPage {
 
     this.db.list(userId + '/workoutPreferences/').push({ type: this.workoutTypes, location: this.workoutLocation , fitnessLevel: this.workoutLevel, dayOfWorkout: this.workoutDay});
     this.db.list(userId + '/healthDetails/').push({ weight: this.weight, height: this.height , age: this.age, activityLevel: this.activityLevel});
-    if(this.enableReminders){
+    if(this.enableReminders == "true"){
           this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: this.reminderFrequency , time: this.reminderTime});
     }
     else{

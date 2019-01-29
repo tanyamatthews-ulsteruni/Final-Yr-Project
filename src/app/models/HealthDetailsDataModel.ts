@@ -4,8 +4,8 @@ export class HealthDetailsDataModel {
         public age: number;
         public weight:number; 
         public height: number;
-        public bmi: number;
-        public bmiDescription;
+        public bmi: any;
+        public bmiDescription: any;
 
     constructor(){
     	this.activityLevel = "";
