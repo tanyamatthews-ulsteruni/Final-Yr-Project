@@ -16,6 +16,7 @@ import { ListPage } from '../pages/list/list';
 import { UpdateHealthDetailsPage } from '../pages/update-health-details/update-health-details';
 import { UpdateReminderDetailsPage } from '../pages/update-reminder-details/update-reminder-details';
 import { UpdateWorkoutDetailsPage } from '../pages/update-workout-details/update-workout-details';
+import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
 
 //service imports
 import { AuthService } from '../pages/core/auth.service';
@@ -32,7 +33,9 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 
 import { HttpModule } from '@angular/http';
-import { YtProvider } from '../providers/yt/yt';
+import { HttpClientModule } from '@angular/common/http';
+
+import { RestProvider } from '../providers/rest/rest';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { YtProvider } from '../providers/yt/yt';
     ProfilePage,
     UpdateReminderDetailsPage, 
     UpdateWorkoutDetailsPage,
-    UpdateHealthDetailsPage
+    UpdateHealthDetailsPage,
+    ExerciseListPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ import { YtProvider } from '../providers/yt/yt';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,7 +72,8 @@ import { YtProvider } from '../providers/yt/yt';
     ProfilePage,
     UpdateReminderDetailsPage, 
     UpdateWorkoutDetailsPage,
-    UpdateHealthDetailsPage
+    UpdateHealthDetailsPage,
+    ExerciseListPage
   ],
   providers: [
     StatusBar,
@@ -78,7 +84,7 @@ import { YtProvider } from '../providers/yt/yt';
     TwitterConnect,
     UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    YtProvider
+    RestProvider
   ]
 })
 export class AppModule {}
