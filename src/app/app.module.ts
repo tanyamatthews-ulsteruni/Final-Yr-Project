@@ -31,6 +31,8 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 
+import { HttpModule } from '@angular/http';
+import { YtProvider } from '../providers/yt/yt';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -74,7 +77,8 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
     AuthService,
     TwitterConnect,
     UserService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    YtProvider
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { FirebaseUserModel } from '../core/user.model';
@@ -7,7 +7,6 @@ import * as firebase from 'firebase';
 
 //models 
 import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
-
 
 @IonicPage()
 @Component({
@@ -20,12 +19,13 @@ export class HomePage {
  user: FirebaseUserModel = new FirebaseUserModel();
  userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
 
-
   constructor(
     public navCtrl: NavController,
     public userService: UserService,
-    public authService: AuthService
-  ) {}
+    public authService: AuthService,
+    private alertCtrl: AlertController
+  ) {
+  }
 
   ionViewWillLoad(){
     this.userService.getCurrentUser()

@@ -88,4 +88,6 @@
     <plugin name="twitter-connect-plugin" spec="0.6.0">
         <variable name="FABRIC_KEY" value="cb32287a03457ff6cdefd66a3dbe9d93a97491fb" />
     </plugin>
+    <engine name="android" spec="~7.1.4" />
+    <engine name="ios" spec="~4.5.5" />
 </widget>
