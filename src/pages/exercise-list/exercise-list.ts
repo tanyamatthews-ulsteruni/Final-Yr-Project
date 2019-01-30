@@ -11,21 +11,35 @@ import { RestProvider } from '../../providers/rest/rest';
 export class ExerciseListPage {
 
 	exercises: any; 
+  exEquipment: any;
+  exType: any;
 
 	constructor(public navCtrl: NavController, public restProvider: RestProvider) {
 		this.getExercises();
 	}
 
-  	getExercises(){
-  		this.restProvider.getExercises()
-    .then(data => {
-      this.exercises = data.results;
-      console.log(this.exercises);
-    });
-  	}
+  getExercises(){
+  	this.restProvider.getExercises()
+  .then(data => {
+    this.exercises = data.results;
+    console.log(this.exercises);
+  });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ExercisesPage');
+  }
+
+  clearFilter(){
+    this.exEquipment = null;
+    this.exType = null;
+  }
+
+  applyFilter(){
+    var exerciseEquipment = this.exEquipment;
+    var exerciseType = this.exType; 
+
+
   }
 
 }
