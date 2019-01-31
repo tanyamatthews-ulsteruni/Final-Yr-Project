@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Exercises List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<ion-content>
+
+<h3>Filter Exercises</h3>
+
+<ion-item>
+  <ion-label>Exercise Type</ion-label>
+  <ion-select  multiple="false" [(ngModel)]="exType">
+    <ion-option value="10">Abs</ion-option>
+    <ion-option value="8">Arms</ion-option>
+    <ion-option value="12">Back</ion-option>
+    <ion-option value="11">Chest</ion-option>
+    <ion-option value="13">Shoulders</ion-option>
+    <ion-option value="9">Legs</ion-option>
+    <ion-option value="14">Calves</ion-option>
+  </ion-select>
+</ion-item>
+
+<ion-item>
+  <ion-label>Equipment</ion-label>
+  <ion-select  multiple="false" [(ngModel)]="exEquipment">
+    <ion-option value="4">Gym mat</ion-option>
+    <ion-option value="1">Barbell</ion-option>
+    <ion-option value="8">Bench</ion-option>
+    <ion-option value="3">Dumbbell</ion-option>
+    <ion-option value="10">Kettlebell</ion-option>
+    <ion-option value="5">Swiss Ball</ion-option>
+    <ion-option value="6">Pull-up Bar</ion-option>
+    <ion-option value="5">Incline Bench</ion-option>
+    <ion-option value="2">SZ-Bar</ion-option>
+  </ion-select>
+</ion-item>
+
+	<ion-item>
+		<button ion-button (click)="applyFilter()">Apply Filter</button>
+
+		<button ion-button (click)="clearFilter()">Clear Filter</button>
+	</ion-item>
+
+  	<ion-list inset>
+    <ion-item *ngFor="let ex of exercises">
+      <h2>{{ex.name}}</h2>
+      <p>{{ex.description}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+</ion-content>
