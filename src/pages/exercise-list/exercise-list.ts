@@ -13,6 +13,7 @@ export class ExerciseListPage {
 	exercises: any; 
   exEquipment: any;
   exType: any;
+  results: any;
 
 	constructor(public navCtrl: NavController, public restProvider: RestProvider) {
 		this.getExercises();
@@ -21,8 +22,10 @@ export class ExerciseListPage {
   getExercises(){
   	this.restProvider.getExercises()
   .then(data => {
-    this.exercises = data.results;
-    console.log(this.exercises);
+    if(data.hasOwnProperty('results')){
+      this.exercises = data.results;
+      console.log(this.exercises);
+    }
   });
   }
 
@@ -36,9 +39,12 @@ export class ExerciseListPage {
   }
 
   applyFilter(){
-    var exerciseEquipment = this.exEquipment;
-    var exerciseType = this.exType; 
-
+    console.log(this.exEquipment);
+    console.log(this.exType);
+    this.restProvider.getExercisesWithFilter(this.exType, this.exEquipment).then(data =>{
+      this.exercises = data.results;
+      console.log(this.exercises);
+    });
 
   }
 
