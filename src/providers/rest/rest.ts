@@ -7,22 +7,18 @@ import { Injectable } from '@angular/core';
 export class RestProvider {
 
 	apiUrl = "https://jsonplaceholder.typicode.com";
-	baseExerciseUrl = "https://wger.de/api/v2/exercise/?format=json&language=2";
+	baseExerciseUrl = "https://wger.de/api/v2/exerciseinfo/?format=json&language=2";
   url = "";
 	constructor(public http: HttpClient) {
   		console.log('Hello RestServiceProvider Provider');
+      this.getExercises();
 	}
 
 
-getUsers() {
-  return new Promise(resolve => {
-    this.http.get(this.apiUrl+'/users').subscribe(data => {
-      resolve(data);
-    }, err => {
-      console.log(err);
-    });
-  });
+ionViewDidLoad(){
+  this.getExercises();
 }
+
 
 getExercises(){
   return new Promise(resolve => {
@@ -36,7 +32,6 @@ getExercises(){
 
 getExercisesWithFilter(type: String, equipment: String){
   //build url based on parameter values
-
   console.log(equipment);
   console.log(type);
 
@@ -55,6 +50,7 @@ getExercisesWithFilter(type: String, equipment: String){
 return new Promise(resolve => {
     this.http.get(this.url).subscribe(data => {
       resolve(data);
+
     }, err => {
       console.log(err);
     });

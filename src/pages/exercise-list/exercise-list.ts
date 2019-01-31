@@ -24,6 +24,9 @@ export class ExerciseListPage {
   .then(data => {
     if(data.hasOwnProperty('results')){
       this.exercises = data.results;
+      for(let ex of this.exercises){
+        ex.description = ex.description.toString().replace(/<\/?[^>]+(>|$)/g, "");
+      }
       console.log(this.exercises);
     }
   });
@@ -34,8 +37,11 @@ export class ExerciseListPage {
   }
 
   clearFilter(){
+    //clear fields.
     this.exEquipment = null;
     this.exType = null;
+    //get basic exercise list with no features. 
+    this.getExercises();
   }
 
   applyFilter(){
