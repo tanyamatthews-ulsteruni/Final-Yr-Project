@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
+import {ExerciseDetailPage} from '../../pages/exercise-detail/exercise-detail';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,6 @@ export class ExerciseListPage {
       for(let ex of this.exercises){
         ex.description = ex.description.toString().replace(/<\/?[^>]+(>|$)/g, "");
       }
-      console.log(this.exercises);
     }
   });
   }
@@ -45,13 +45,19 @@ export class ExerciseListPage {
   }
 
   applyFilter(){
-    console.log(this.exEquipment);
-    console.log(this.exType);
     this.restProvider.getExercisesWithFilter(this.exType, this.exEquipment).then(data =>{
       this.exercises = data.results;
-      console.log(this.exercises);
+      for(let ex of this.exercises){
+        ex.description = ex.description.toString().replace(/<\/?[^>]+(>|$)/g, "");
+      }
     });
+  }
 
+  viewMoreDetail(ex){
+    console.log(ex);
+        this.navCtrl.push(ExerciseDetailPage, {
+      data: ex
+    });
   }
 
 }

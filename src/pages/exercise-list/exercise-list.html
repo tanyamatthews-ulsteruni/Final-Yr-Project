@@ -51,6 +51,7 @@
     <ion-item *ngFor="let ex of exercises">
       <h2>{{ex.name}}</h2>
       <p>{{ex.description}}</p>
+      <button item-right (click)="viewMoreDetail(ex)">More</button>
     </ion-item>
   </ion-list>
 </ion-content>

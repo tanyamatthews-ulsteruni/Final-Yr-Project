@@ -17,6 +17,7 @@ import { UpdateHealthDetailsPage } from '../pages/update-health-details/update-h
 import { UpdateReminderDetailsPage } from '../pages/update-reminder-details/update-reminder-details';
 import { UpdateWorkoutDetailsPage } from '../pages/update-workout-details/update-workout-details';
 import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
+import { ExerciseDetailPage } from '../pages/exercise-detail/exercise-detail';
 
 //service imports
 import { AuthService } from '../pages/core/auth.service';
@@ -49,7 +50,8 @@ import { RestProvider } from '../providers/rest/rest';
     UpdateReminderDetailsPage, 
     UpdateWorkoutDetailsPage,
     UpdateHealthDetailsPage,
-    ExerciseListPage
+    ExerciseListPage,
+    ExerciseDetailPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { RestProvider } from '../providers/rest/rest';
     UpdateReminderDetailsPage, 
     UpdateWorkoutDetailsPage,
     UpdateHealthDetailsPage,
-    ExerciseListPage
+    ExerciseListPage,
+    ExerciseDetailPage
   ],
   providers: [
     StatusBar,

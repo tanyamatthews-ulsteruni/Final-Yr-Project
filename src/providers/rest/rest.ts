@@ -7,18 +7,18 @@ import { Injectable } from '@angular/core';
 export class RestProvider {
 
 	apiUrl = "https://jsonplaceholder.typicode.com";
-	baseExerciseUrl = "https://wger.de/api/v2/exerciseinfo/?format=json&language=2";
+	baseExerciseUrl = "https://wger.de/api/v2/exercise/info?format=json&language=2";
+  baseExerciseImgUrl = "https://wger.de/api/v2/exerciseimage/";
   url = "";
+
 	constructor(public http: HttpClient) {
   		console.log('Hello RestServiceProvider Provider');
       this.getExercises();
 	}
 
-
 ionViewDidLoad(){
   this.getExercises();
 }
-
 
 getExercises(){
   return new Promise(resolve => {
@@ -47,7 +47,7 @@ getExercisesWithFilter(type: String, equipment: String){
 
   console.log(this.url);
 
-return new Promise(resolve => {
+  return new Promise(resolve => {
     this.http.get(this.url).subscribe(data => {
       resolve(data);
 
@@ -56,4 +56,16 @@ return new Promise(resolve => {
     });
   });}
 
+  getExerciseImage(id: any){
+    //get image for exercise id
+    console.log(id);
+    this.url = this.baseExerciseImgUrl + id + "/";
+    console.log(this.url);
+    return new Promise(resolve => {
+    this.http.get(this.url).subscribe(data => {
+      resolve(data);
+    }, err => {
+      console.log(err);
+    });
+  });}
 }
