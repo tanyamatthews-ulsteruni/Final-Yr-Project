@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // db imports
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-/**
- * Generated class for the UpdateWorkoutDetailsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -37,7 +31,7 @@ export class UpdateWorkoutDetailsPage {
 
      snapshot.forEach((childSnapshot => {
         console.log('/' + userId + '/workoutPreferences/' + childSnapshot.key);
-        firebase.database().ref('/' + userId + '/workoutPreferences/' + childSnapshot.key).update({dayOfWorkout: workoutDay, fitnessLevel: workoutLevel, location: workoutLocation, type: workoutTypes});//, age: this.age, height: this.height ,  weight: this.weight});
+        firebase.database().ref('/' + userId + '/workoutPreferences/' + childSnapshot.key).update({dayOfWorkout: workoutDay, fitnessLevel: workoutLevel, location: workoutLocation, type: workoutTypes});
       }));
 
     })
