@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Exercise Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<h2>{{ex.name}}</h2>
+	<h5>Description:</h5>
+    <p>{{ex.description}}</p>
+
+
+	<h5>Category:</h5> 
+	<p>{{ex.category.name}}</p>
+
+	<h5>Muscles worked:</h5> 
+	<ul *ngFor="let m of muscles">
+		<li>{{m.name}}</li>
+    </ul>
+
+	<h6>Secondary muscles worked:</h6>
+
+	<ul *ngFor="let m of second_muscles">
+		<li>{{sm.name}}</li>
+	</ul>
+
+	<h6>Equipment:</h6>
+
+	<ul *ngFor="let e of equipment">
+		<li>{{e.name}}</li>
+	</ul>
+
+	<div *ngFor="let img of exerciseImageData">
+		<img src={{img.image}}>
+	</div>	
+	
+</ion-content>
