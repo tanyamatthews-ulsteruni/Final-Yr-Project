@@ -8,7 +8,7 @@ export class RestProvider {
 
 	apiUrl = "https://jsonplaceholder.typicode.com";
   format = "format=json&language=2";
-	exerciseUrl = "https://wger.de/api/v2/exercise?format=json&language=2&limit=100&status=2";
+	exerciseUrl = "https://wger.de/api/v2/exercise?format=json&language=2&limit=150&status=2"; //limited to 150 to reduce load times on poor networks.
   exerciseMoreInfoUrl = "https://wger.de/api/v2/exerciseinfo/"
   exerciseImgUrl = "https://wger.de/api/v2/exerciseimage/?exercise=";
   url = "";

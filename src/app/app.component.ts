@@ -8,7 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { WorkoutsPage } from '../pages/workouts/workouts';
-import { WorkoutPlanList } from '../pages/workout-plan/workout-plan';
+import { WorkoutPlanPage } from '../pages/workout-plan/workout-plan';
 import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
 
 import { AuthService } from '../pages/core/auth.service';
@@ -38,7 +38,9 @@ export class MyApp {
 		this.pages = [
     		{title: 'Home', component: HomePage},
   			{title: 'Profile', component: ProfilePage},
-        {title: 'Exercise List', component: ExerciseListPage}
+        {title: 'Exercise List', component: ExerciseListPage},
+        {title: 'Workouts', component: WorkoutsPage},
+        {title: 'Workout Plan', component: WorkoutPlanPage}
 		];
 
 	}

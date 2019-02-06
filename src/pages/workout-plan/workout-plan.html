@@ -7,12 +7,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>workout-plan</ion-title>
+    <ion-title>Workout Plan</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+
+	<h5>Your preferences</h5>
+	<p class='displayItem'><label>Type(s): </label> {{userWorkoutDetail.type}}</p>
+	<p class='displayItem'><label>Location: </label> {{userWorkoutDetail.location}}</p>
+	<p class='displayItem'><label>Fitness Level: </label> {{userWorkoutDetail.fitnessLevel}}</p>
+	<p class='displayItem'><label>Day(s) of Workout: </label> {{userWorkoutDetail.dayOfWorkout}}</p>
+
 
 </ion-content>

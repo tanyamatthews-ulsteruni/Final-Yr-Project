@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the WorkoutPlanPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import * as firebase from 'firebase';
+import { WorkoutPreferencesDataModel } from '../../app/models/WorkoutPreferencesDataModel';
 
 @IonicPage()
 @Component({
@@ -15,11 +10,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WorkoutPlanPage {
 
+  userWorkoutDetail: WorkoutPreferencesDataModel = new WorkoutPreferencesDataModel();
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WorkoutPlanPage');
+
+    this.getWorkoutDetails(this.userWorkoutDetail);
+
   }
 
+   getWorkoutDetails(userWorkoutDetail){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutPreferences/').once('value').then(function(snapshot){
+      snapshot.forEach((childSnapshot => {
+        userWorkoutDetail.fitnessLevel = childSnapshot.val().fitnessLevel;
+        userWorkoutDetail.location = childSnapshot.val().location;
+        userWorkoutDetail.type = childSnapshot.val().type;
+        userWorkoutDetail.dayOfWorkout = childSnapshot.val().dayOfWorkout;
+      }))
+    });
+  }
+
+  numWorkoutsEachWeek(){
+  	var count = userWorkoutDetail.dayOfWorkout.split(',');  
+  	console.log(count);
+  }
 }
