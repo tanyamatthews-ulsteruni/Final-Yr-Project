@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 // Service aka provider for API calls. 
@@ -12,6 +12,10 @@ export class RestProvider {
   exerciseMoreInfoUrl = "https://wger.de/api/v2/exerciseinfo/"
   exerciseImgUrl = "https://wger.de/api/v2/exerciseimage/?exercise=";
   url = "";
+
+  apiKey = 'ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4';
+  workoutUrl = "https://wger.de/api/v2/workout";
+  workoutsDetailExtension = "/canonical_representation/";
 
 	constructor(public http: HttpClient) {
   		console.log('Hello RestServiceProvider Provider');
@@ -71,12 +75,45 @@ getExercisesWithFilter(type: String, equipment: String){
   getExerciseMoreData(id:any){
     this.url = this.exerciseMoreInfoUrl + id + "/?" + this.format;
     console.log(this.url);
-        return new Promise(resolve => {
+    return new Promise(resolve => {
     this.http.get(this.url).subscribe(data => {
       resolve(data);
     }, err => {
       console.log(err);
     });
   });}
+
+  getAllWorkoutData(){
+    //const headers = new HttpHeaders().set('Authorization', 'Token ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4');
+    //.set('Content-Type', 'application/json').set("Access-Control-Allow-Origin", "*").set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");//set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE').
+    console.log("Headers: ");
+    //console.log(headers);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4'
+      })
+    }
+    console.log(httpOptions);
+    return new Promise(resolve => {
+    this.http.get('https://wger.de/api/v2/workout/', httpOptions).subscribe(data => { 
+      resolve(data);
+    }, err => {
+      console.log(err);
+      console.log();
+    });
+  });}
+
+  getWorkoutDetail(id:any){
+    this.url = this.workoutUrl + this.workoutsDetailExtension + "/?" + this.format;
+    console.log(this.url);
+        return new Promise(resolve => {
+    this.http.get(this.url).subscribe(data => {
+      resolve(data);
+    }, err => {
+      console.log(err);
+    });
+  });
+  }
 
 }

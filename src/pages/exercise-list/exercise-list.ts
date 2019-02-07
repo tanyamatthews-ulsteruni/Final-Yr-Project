@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
-import {ExerciseDetailPage} from '../../pages/exercise-detail/exercise-detail';
+import { ExerciseDetailPage } from '../../pages/exercise-detail/exercise-detail';
 
 @IonicPage()
 @Component({

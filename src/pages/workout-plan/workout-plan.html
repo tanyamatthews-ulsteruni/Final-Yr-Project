@@ -1,9 +1,3 @@
-<!--
-  Generated template for the WorkoutPlanPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -20,5 +14,11 @@
 	<p class='displayItem'><label>Fitness Level: </label> {{userWorkoutDetail.fitnessLevel}}</p>
 	<p class='displayItem'><label>Day(s) of Workout: </label> {{userWorkoutDetail.dayOfWorkout}}</p>
 
+	<button ion-button (click)="getProfilePage()">Update preferences on your profile</button>
+
+
+	<h5>This week's workout</h5>
+
+	<p>{{days}}</p>
 
 </ion-content>
