@@ -84,10 +84,6 @@ getExercisesWithFilter(type: String, equipment: String){
   });}
 
   getAllWorkoutData(){
-    //const headers = new HttpHeaders().set('Authorization', 'Token ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4');
-    //.set('Content-Type', 'application/json').set("Access-Control-Allow-Origin", "*").set("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");//set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE').
-    console.log("Headers: ");
-    //console.log(headers);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -104,11 +100,17 @@ getExercisesWithFilter(type: String, equipment: String){
     });
   });}
 
-  getWorkoutDetail(id:any){
-    this.url = this.workoutUrl + this.workoutsDetailExtension + "/?" + this.format;
+  getCurrentWorkoutData(id:any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4'
+      })
+    }
+    this.url = this.workoutUrl + '/' + id + this.workoutsDetailExtension + "?" + this.format;
     console.log(this.url);
         return new Promise(resolve => {
-    this.http.get(this.url).subscribe(data => {
+    this.http.get(this.url, httpOptions).subscribe(data => {
       resolve(data);
     }, err => {
       console.log(err);

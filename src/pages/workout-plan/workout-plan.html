@@ -19,6 +19,11 @@
 
 	<h5>This week's workout</h5>
 
-	<p>{{days}}</p>
+	<!---->
+	<ul *ngFor="let e of exercisesNamesInWorkout">
+		<li>{{e.name}}</li>
+    </ul>
+
+
 
 </ion-content>
