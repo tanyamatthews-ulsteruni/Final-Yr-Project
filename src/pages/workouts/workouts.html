@@ -12,7 +12,7 @@
     	<ion-list inset>
     		<ion-item *ngFor="let workout of workoutNames">
 		    	<h2>{{workout.description}}</h2>
-      			<button item-right (click)="viewMoreDetail(w)">More</button>
+      			<button item-right (click)="viewMoreDetail(workout)">More</button>
     		</ion-item>
   		</ion-list>
 

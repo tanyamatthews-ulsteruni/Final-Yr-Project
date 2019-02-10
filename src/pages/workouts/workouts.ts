@@ -46,7 +46,6 @@ export class WorkoutsPage {
   		console.log(obj[0]);
   		console.log(obj[0].obj);
   		this.workoutNames.push(obj[0].obj);
-  		//console.log("Description: " + obj[0].obj.description);
   	})
   }
 
@@ -58,14 +57,14 @@ export class WorkoutsPage {
   		for(let i of obj[0].set_list){
   			let exList = i.exercise_list;
   			this.exercisesNamesInWorkout.push(exList[0].obj);
-  			console.log(exList[0].obj.name)
   		}
-  })
+  	})
   }
 
-  viewMoreDetail(w){
-  	let i = w;
-  	this.navCtrl.push(WorkoutDetailPage);
+  viewMoreDetail(id){
+  	this.navCtrl.push(WorkoutDetailPage, {
+      data: id
+    });
   }
 
 }

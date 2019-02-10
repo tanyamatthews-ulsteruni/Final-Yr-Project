@@ -13,11 +13,7 @@ import { RestProvider } from '../../providers/rest/rest';
 export class WorkoutPlanPage {
 
   userWorkoutDetail: WorkoutPreferencesDataModel = new WorkoutPreferencesDataModel();
-  workouts:any;
-  workout:any;
-  workoutIds: Array<String> = [];
-
-  exercisesNamesInWorkout: Array<String> = [];
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
 
   }

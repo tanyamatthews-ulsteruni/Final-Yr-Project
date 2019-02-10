@@ -15,11 +15,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WorkoutDetailPage {
 
+  workout: Array<String> = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  	this.workout.push(navParams.get('data'));
+  	console.log(navParams.get('data'));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WorkoutDetailPage');
+    console.log(this.workout);
   }
 
 }
