@@ -27,9 +27,6 @@ export class WorkoutPlanPage {
 
     this.getWorkoutDetails(this.userWorkoutDetail);
     this.numWorkoutsEachWeek(this.userWorkoutDetail);
-    this.getWorkouts();
-    console.log(this.getWorkouts());
-
   }
 
    getWorkoutDetails(userWorkoutDetail){
@@ -59,34 +56,6 @@ export class WorkoutPlanPage {
   	this.navCtrl.push(ProfilePage);
   }
 
-  getWorkouts(){
-  this.restProvider.getAllWorkoutData()
-  .then(data => {
-    if(data.hasOwnProperty('results')){
-      this.workouts = data.results;
-      for(let w of this.workouts){
-      	this.workoutIds.push(w.id);
-      	this.getWorkoutSpecifics(w.id);  	  }	
-    }
-  });
-  }
 
-  getWorkoutSpecifics(id: any){
-  	console.log(id + " current workout");
-  	this.restProvider.getCurrentWorkoutData(id).then(data =>{
-  		console.log(data);
-  		this.workout = data;
-  		const obj = this.workout.day_list;
-  		console.log("Description: " + obj[0].obj.description);
-  		for(let i of obj[0].set_list){
-  			console.log(i.exercise_list);
-  			let exList = i.exercise_list;
-  			this.exercisesNamesInWorkout.push(exList[0].obj);
-  			console.log(exList[0].obj.name)
-  		}
-  		//console.log("Exercise: " + obj[0].set_list.obj.name);
-  		console.log("Sets: " );
-  	})
-  }
 
 }

@@ -74,7 +74,6 @@ getExercisesWithFilter(type: String, equipment: String){
 
   getExerciseMoreData(id:any){
     this.url = this.exerciseMoreInfoUrl + id + "/?" + this.format;
-    console.log(this.url);
     return new Promise(resolve => {
     this.http.get(this.url).subscribe(data => {
       resolve(data);
@@ -90,13 +89,11 @@ getExercisesWithFilter(type: String, equipment: String){
         'Authorization': 'Token ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4'
       })
     }
-    console.log(httpOptions);
     return new Promise(resolve => {
     this.http.get('https://wger.de/api/v2/workout/', httpOptions).subscribe(data => { 
       resolve(data);
     }, err => {
       console.log(err);
-      console.log();
     });
   });}
 
@@ -108,7 +105,6 @@ getExercisesWithFilter(type: String, equipment: String){
       })
     }
     this.url = this.workoutUrl + '/' + id + this.workoutsDetailExtension + "?" + this.format;
-    console.log(this.url);
         return new Promise(resolve => {
     this.http.get(this.url, httpOptions).subscribe(data => {
       resolve(data);
