@@ -54,8 +54,7 @@ export class ExerciseListPage {
   }
 
   viewMoreDetail(ex){
-    console.log(ex);
-        this.navCtrl.push(ExerciseDetailPage, {
+    this.navCtrl.push(ExerciseDetailPage, {
       data: ex
     });
   }

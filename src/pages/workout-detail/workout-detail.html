@@ -1,9 +1,3 @@
-<!--
-  Generated template for the WorkoutDetailPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -15,7 +9,26 @@
 
 <ion-content padding>
 
-	<div *ngFor="let w of workout">
-		<h2>{{w.description}}</h2>
+<span id='centerAlign'>
+	
+	<h2>{{workoutName}}</h2>
+
+	<h4>Workout Summary</h4>
+
+	<h6>Exercises:</h6>
+
+ 	<ion-list inset>
+    <ion-item *ngFor="let detail of exerciseInWorkoutDetail">
+ 		<h3>{{detail.name}}</h3>
+ 	</ion-item>
+ 	</ion-list>
+
+ 	<div id="buttons">
+ 		<button (click)="startWorkout()" ion-button id='start' class="circleBtn">Start Workout</button>
+ 		<button (click)="logWorkout()" ion-button id='log' class="circleBtn">Log Workout</button>
  	</div>
+
+ 	<p><b>Top Tip:</b> You can press log workout if you have completed this without your phone already and want this workout to be recorded!</p>
+
+</span>
 </ion-content>

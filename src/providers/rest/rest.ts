@@ -35,7 +35,6 @@ getExercises(){
     });
   });}
 
-
 getExercisesWithFilter(type: String, equipment: String){
   //build url based on parameter values
   if(equipment != undefined && type != undefined){

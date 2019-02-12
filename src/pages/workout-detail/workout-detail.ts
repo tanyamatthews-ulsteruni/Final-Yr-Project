@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the WorkoutDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import { RestProvider } from '../../providers/rest/rest';
+import { WorkoutStartPage } from '../workout-start/workout-start';
 @IonicPage()
 @Component({
   selector: 'page-workout-detail',
@@ -16,15 +10,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class WorkoutDetailPage {
 
   workout: Array<String> = [];
+  workoutName: String;
+  exerciseInWorkoutDetail: Array<String> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
   	this.workout.push(navParams.get('data'));
-  	console.log(navParams.get('data'));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WorkoutDetailPage');
-    console.log(this.workout);
+    const currentWorkout = this.workout[0].id;
+    this.workoutName = this.workout[0].comment;
+    console.log(this.workoutName);
+    this.getWorkoutSpecifics(currentWorkout);
+  }
+
+  getWorkoutSpecifics(id: any){
+    this.restProvider.getCurrentWorkoutData(id).then(data =>{
+      this.workout = data;
+      for(let x of this.workout.day_list[0].set_list){
+        this.exerciseInWorkoutDetail.push(x.exercise_list[0].obj);
+        console.log("Pushed to array");
+        
+      }
+    })
+  }
+
+  startWorkout(workout){
+    this.navCtrl.push(WorkoutStartPage, {
+      data: workout
+    });
   }
 
 }

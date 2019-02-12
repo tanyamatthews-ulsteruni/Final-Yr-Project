@@ -54,7 +54,6 @@ export class HomePage {
         userHealthDetail.height = childSnapshot.val().height; 
         // if height and weight populated, calculate BMI.
         if(userHealthDetail.weight != null || userHealthDetail.height != null){
-          console.log(parseInt(userHealthDetail.weight)*parseInt(userHealthDetail.weight));
           var heightInMeters = parseInt(userHealthDetail.height) / 100;
           var heightSq = heightInMeters * heightInMeters;
           //set bmi value and round to 2 decimal places. 

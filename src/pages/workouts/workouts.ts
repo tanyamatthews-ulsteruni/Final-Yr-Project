@@ -15,11 +15,8 @@ export class WorkoutsPage {
 
   workouts:any;
   workout:any;
-  workoutIds: Array<String> = [];  
 
   workoutNames: Array<String> = [];
-
-  exercisesNamesInWorkout: Array<String> = [];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WorkoutsPage');
@@ -32,38 +29,19 @@ export class WorkoutsPage {
     if(data.hasOwnProperty('results')){
       this.workouts = data.results;
       for(let w of this.workouts){
-      	this.workoutIds.push(w.id);
-      	this.getWorkoutSpecifics(w.id);  	  }	
+        //pushing workout into array. Here you can access id through 'id' and name using 'comment.'
+        this.workoutNames.push(w);
+        console.log(w);
+        //this.getWorkoutSpecifics(w.id);  
+      }	
     }
   });
   }
 
-  getWorkoutSpecifics(id: any){
-  	console.log(id + " current workout");
-  	this.restProvider.getCurrentWorkoutData(id).then(data =>{
-  		this.workout = data;
-  		const obj = this.workout.day_list;
-  		console.log(obj[0]);
-  		console.log(obj[0].obj);
-  		this.workoutNames.push(obj[0].obj);
-  	})
-  }
 
-  getExerciseByWorkout(){
-  	this.restProvider.getCurrentWorkoutData(id).then(data =>{
-  		console.log(data);
-  		this.workout = data;
-  		const obj = this.workout.day_list;
-  		for(let i of obj[0].set_list){
-  			let exList = i.exercise_list;
-  			this.exercisesNamesInWorkout.push(exList[0].obj);
-  		}
-  	})
-  }
-
-  viewMoreDetail(id){
+  viewMoreDetail(workout){
   	this.navCtrl.push(WorkoutDetailPage, {
-      data: id
+      data: workout
     });
   }
 
