@@ -9,4 +9,22 @@
 
 <ion-content padding>
 
+	<ion-slides #exerciseSlider pager=false>
+
+		<ion-slide *ngFor="let ex of exerciseInWorkoutDetail">
+			
+			<h5>{{ex.exercise_list[0].obj.name}}</h5>
+
+			<p>Complete {{ex.exercise_list[0].setting_obj_list[0].reps}}</p>
+			<p>Weight {{ex.exercise_list[0].setting_obj_list[0].weight}}</p>
+			<p><b>Description:</b> {{ex.exercise_list[0].obj.description}} </p>
+
+			<button ion-button>Exercise completed</button>
+
+
+	    </ion-slide>
+
+	  
+	</ion-slides>
+
 </ion-content>

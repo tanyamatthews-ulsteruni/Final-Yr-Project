@@ -13,7 +13,7 @@ export class RestProvider {
   exerciseImgUrl = "https://wger.de/api/v2/exerciseimage/?exercise=";
   url = "";
 
-  apiKey = 'ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4';
+  apiKey = '684bc3c578869a4115190963d21ced8538f73d84';
   workoutUrl = "https://wger.de/api/v2/workout";
   workoutsDetailExtension = "/canonical_representation/";
 
@@ -85,7 +85,7 @@ getExercisesWithFilter(type: String, equipment: String){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Token ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4'
+        'Authorization': 'Token 684bc3c578869a4115190963d21ced8538f73d84'
       })
     }
     return new Promise(resolve => {
@@ -100,7 +100,7 @@ getExercisesWithFilter(type: String, equipment: String){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Token ce3f97690a6d06c2ac2d5adb22128a1b6f4e64e4'
+        'Authorization': 'Token 684bc3c578869a4115190963d21ced8538f73d84'
       })
     }
     this.url = this.workoutUrl + '/' + id + this.workoutsDetailExtension + "?" + this.format;
