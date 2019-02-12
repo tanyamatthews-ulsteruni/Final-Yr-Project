@@ -17,17 +17,16 @@
 
 	<h6>Exercises:</h6>
 
- 	<ion-list inset>
-    <ion-item *ngFor="let detail of exerciseInWorkoutDetail">
- 		<h3>{{detail.name}}</h3>
- 	</ion-item>
- 	</ion-list>
+	 	<ion-list inset>
+		    <ion-item *ngFor="let detail of exerciseInWorkoutDetail">
+		 		<h3>{{detail.name}}</h3>
+		 	</ion-item>
+		 </ion-list>
 
- 	<div id="buttons">
- 		<button (click)="startWorkout()" ion-button id='start' class="circleBtn">Start Workout</button>
- 		<button (click)="logWorkout()" ion-button id='log' class="circleBtn">Log Workout</button>
- 	</div>
 
+ 	<button ion-button id='start' class="circleBtn" (click)="startWorkout(workoutId)" >Start Workout</button>
+ 	<button ion-button id='log' class="circleBtn" (click)="logWorkout(detail)">Log Workout</button>
+ 	
  	<p><b>Top Tip:</b> You can press log workout if you have completed this without your phone already and want this workout to be recorded!</p>
 
 </span>
