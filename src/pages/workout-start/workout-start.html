@@ -11,15 +11,24 @@
 
 	<ion-slides #exerciseSlider pager=false>
 
-		<ion-slide *ngFor="let ex of exerciseInWorkoutDetail">
+		<ion-slide *ngFor="let ex of exerciseInWorkoutDetail; let i = index let odd = odd"
+      [class.odd]="odd">
+
+			<h6>Exercises {{i+1}} of {{exerciseCount}}</h6>
 			
 			<h5>{{ex.exercise_list[0].obj.name}}</h5>
+			<p><b>Description:</b></p>
+			<p>{{ex.exercise_list[0].obj.description}}</p>
 
-			<p>Complete {{ex.exercise_list[0].setting_obj_list[0].reps}}</p>
-			<p>Weight {{ex.exercise_list[0].setting_obj_list[0].weight}}</p>
-			<p><b>Description:</b> {{ex.exercise_list[0].obj.description}} </p>
+			<!--<p>If using weight specify:
+			<ion-input id='input' [(ngModel)]="ex-weight" type="number" placeholder="kg"></ion-input>
+			</p>-->
 
-			<button ion-button>Exercise completed</button>
+			<p>Repetitions: {{ex.exercise_list[0].setting_obj_list[0].reps}}</p>
+			<p>Sets: {{numDone}} of {{ex.obj.sets}}</p>
+			<button ion-button (click)="setComplete(ex)">Mark set complete</button>
+			<p><i>Please note you can't go to the next exercise until you mark your sets as complete!</i></p>
+			<button ion-button [disabled]="!isEnabled" (click)="nextSlide()">Next Exercise</button>
 
 
 	    </ion-slide>

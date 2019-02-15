@@ -1,36 +1,29 @@
 page-home {
 
-.red {
-   background-color: rgba(220, 83, 81, 1);
-}
-
 .green {
-   background-color: rgba(187, 225, 123, 1);
+   background-color:#ABEBC6  ;
 }
 
 .blue {
-   background-color: rgba(131, 150, 225, 1);
+   background-color: #85C1E9;
+}
+
+.red {
+   background-color: #F1948A  ;
 }
 
 .purple {
-   background-color: rgba(155, 121, 170, 1);
-}
-
-.yellow {
-   background-color: rgba(235, 229, 39, 1);
-}
-
-.violet {
-   background-color: rgba(213, 118, 211, 1);
+   background-color: #C39BD3  ;
 }
 
 .orange {
-   background-color: rgba(213, 151, 46, 1);
+   background-color: #F8C471  ;
 }
 
-.turquoise {
-   background-color: rgba(105, 203, 217, 1);
+.yellow{
+  background-color: #F9E79F ;
 }
+
 
 @supports (column-count: 5) {
    .wrapper {
@@ -47,7 +40,7 @@ page-home {
    	    margin: 0 0.5em 0.5em 0;
    	    padding: 1em;
    	    display: inline-block;
-        color: rgba(68, 68, 68, 1);
+        border-radius: 15px;
         text-align: center;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
