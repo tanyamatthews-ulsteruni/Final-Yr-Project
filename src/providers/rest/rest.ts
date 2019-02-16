@@ -13,7 +13,7 @@ export class RestProvider {
   exerciseImgUrl = "https://wger.de/api/v2/exerciseimage/?exercise=";
   url = "";
 
-  apiKey = '684bc3c578869a4115190963d21ced8538f73d84';
+  apiKey = 'fad7d1a9f71113d3e08ae7af891f7ec0051217bb';
   workoutUrl = "https://wger.de/api/v2/workout";
   workoutsDetailExtension = "/canonical_representation/";
 
@@ -85,7 +85,7 @@ getExercisesWithFilter(type: String, equipment: String){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Token 684bc3c578869a4115190963d21ced8538f73d84'
+        'Authorization': 'Token fad7d1a9f71113d3e08ae7af891f7ec0051217bb'
       })
     }
     return new Promise(resolve => {
@@ -96,15 +96,17 @@ getExercisesWithFilter(type: String, equipment: String){
     });
   });}
 
+ 
+
   getCurrentWorkoutData(id:any){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Token 684bc3c578869a4115190963d21ced8538f73d84'
+        'Authorization': 'Token fad7d1a9f71113d3e08ae7af891f7ec0051217bb'
       })
     }
     this.url = this.workoutUrl + '/' + id + this.workoutsDetailExtension + "?" + this.format;
-        return new Promise(resolve => {
+    return new Promise(resolve => {
     this.http.get(this.url, httpOptions).subscribe(data => {
       resolve(data);
     }, err => {

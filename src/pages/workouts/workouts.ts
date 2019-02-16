@@ -31,8 +31,6 @@ export class WorkoutsPage {
       for(let w of this.workouts){
         //pushing workout into array. Here you can access id through 'id' and name using 'comment.'
         this.workoutNames.push(w);
-        console.log(w);
-        //this.getWorkoutSpecifics(w.id);  
       }	
     }
   });

@@ -4,6 +4,9 @@ import { RestProvider } from '../../providers/rest/rest';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase';
+
 @IonicPage()
 @Component({
   selector: 'page-workout-start',
@@ -17,7 +20,6 @@ export class WorkoutStartPage {
   workoutName: String;
   exerciseInWorkoutDetail: Array<String> = [];
 
-  exerciseImageData: any;
   exData: Array<String> = [];
 
   exerciseCount: number = 0;
@@ -27,17 +29,31 @@ export class WorkoutStartPage {
 
   isEnabled: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
-  	this.workoutId = navParams.get('data');	
+  buttonClicked: boolean = false;
+
+  addHideWeightText = "Add Weight";
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public restProvider: RestProvider,    
+    public db: AngularFireDatabase)
+  {
+      this.workoutId = navParams.get('id');
+      this.workoutName = navParams.get('name');
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WorkoutStartPage');
-    console.log(this.workoutId);
     this.getWorkoutSpecifics(this.workoutId);
+    this.slides.lockSwipes(true);
+    this.saveWorkoutForUser(this.exerciseInWorkoutDetail);
   }
 
-    nextSlide(){
+
+  nextSlide(){
+    this.slides.lockSwipes(false);
     let currentIndex = this.slides.getActiveIndex();
     console.log('Current index is', currentIndex);
     var nextSlide = currentIndex + 1;
@@ -46,8 +62,17 @@ export class WorkoutStartPage {
     this.numDone = 0;
     //disable next page button.
     this.isEnabled=false;
-    //add something to check if last workout!
-    //display summary of workout / go to history and save workout. 
+    //lock swipes so user can't swipe themselves
+    this.slides.lockSwipes(true);
+    this.resetNextSlide();
+  }
+
+  resetNextSlide(){
+    if(this.addHideWeightText == 'Remove Weight'){
+      this.buttonClicked = !this.buttonClicked;
+      this.addHideWeightText = 'Add Weight';
+      this.weight = null;
+    }
   }
 
   getWorkoutSpecifics(id: any){
@@ -62,35 +87,39 @@ export class WorkoutStartPage {
     })
   }
 
-  getImage(id: any){
-    this.restProvider.getExerciseImage(id).then(data =>{
-      this.exerciseImageData = data.results;
-    });
-  }
-
-  getExerciseDetail(id: any){
-  	this.restProvider.getExerciseMoreData(id).then(data =>{
-  		console.log(data);
-  		this.exData.push(data);
-  	});
-  }
-
   setComplete(set){
-    console.log("HELLO");
   	const totalSets = set.obj.sets;
-    if(this.numDone == totalSets){
+    if(this.numDone == totalSets-1){
+      this.numDone = this.numDone + 1;
+      this.isEnabled=true; 
+    }else if(this.numDone == totalSets){
       this.isEnabled=true; 
     }else if(this.numDone !== totalSets){
     	this.numDone = this.numDone + 1;
-    }else if(this.numDone == totalSets-1){
-      this.numDone = this.numDone + 1;
-      this.isEnabled=true; 
     }
   }
 
+ showWeightInput(){
+    this.buttonClicked = !this.buttonClicked;
+    if(this.addHideWeightText == 'Add Weight'){
+      this.addHideWeightText = 'Remove Weight';
+      this.weight = null;
+    }else{
+      this.addHideWeightText = 'Add Weight';
+    }
+  }
 
-
-
+  saveWorkoutForUser(exercises){
+    var userId = firebase.auth().currentUser.uid;
+    console.log('Name = ' + this.workoutName);
+    this.db.list(userId + '/workoutHistory/').push({date: Date(), id: this.workoutId, name: this.workoutName});
+    //this.getWorkoutSpecifics(this.workoutId);
+    for(ex in exercises){
+      console.log(ex + ' in array');
+      const exName = ex.exercise_list[0].obj.name;
+      this.db.list(userId + '/workoutHistory/exercises/').push({exercise: exName});
+    }
+  }
 
 }
 

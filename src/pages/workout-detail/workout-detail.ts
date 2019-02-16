@@ -14,6 +14,7 @@ export class WorkoutDetailPage {
   workout: Array<String> = [];
   workoutName: String;
   exerciseInWorkoutDetail: Array<String> = [];
+  musclesWorked: Array<String> = [];
   workoutId: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
@@ -24,8 +25,7 @@ export class WorkoutDetailPage {
     console.log('ionViewDidLoad WorkoutDetailPage');
     this.workoutId = this.workout[0].id;
     this.workoutName = this.workout[0].comment;
-    console.log(this.workoutName);
-    this.getWorkoutSpecifics(this.workoutId);
+    this.getWorkoutSpecifics(this.workout[0].id);
   }
 
   getWorkoutSpecifics(id: any){
@@ -33,15 +33,18 @@ export class WorkoutDetailPage {
       this.workout = data;
       const setList = this.workout.day_list[0].set_list;
       for(let x of setList){
-        this.exerciseInWorkoutDetail.push(x.exercise_list[0].obj);        
+        this.exerciseInWorkoutDetail.push(x.exercise_list[0].obj);
+        //this.musclesWorked = setList.muscles.back[0];
+        //this.musclesWorked = setList.muscles.front[0];
       }
     })
   }
 
-  startWorkout(x){
-    console.log("Data to pass: " + this.workoutId);
+  startWorkout(x, y){
+    //console.log("Data to pass: " + this.workoutId);
     this.navCtrl.push(WorkoutStartPage, {
-      data: x
+      id: x, 
+      name: y
     });
   }
 
