@@ -21,7 +21,7 @@ import { WorkoutPlanPage } from '../pages/workout-plan/workout-plan';
 import { WorkoutsPage } from '../pages/workouts/workouts';
 import { WorkoutDetailPage } from '../pages/workout-detail/workout-detail';
 import { WorkoutStartPage } from '../pages/workout-start/workout-start';
-
+import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
 //service imports
 import { AuthService } from '../pages/core/auth.service';
 import { UserService } from '../pages/core/user.service';
@@ -57,7 +57,8 @@ import { RestProvider } from '../providers/rest/rest';
     WorkoutsPage,
     WorkoutPlanPage,
     WorkoutDetailPage,
-    WorkoutStartPage
+    WorkoutStartPage,
+    WorkoutHistoryPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +86,8 @@ import { RestProvider } from '../providers/rest/rest';
     WorkoutsPage,
     WorkoutPlanPage,
     WorkoutDetailPage,
-    WorkoutStartPage
+    WorkoutStartPage,
+    WorkoutHistoryPage
   ],
   providers: [
     StatusBar,

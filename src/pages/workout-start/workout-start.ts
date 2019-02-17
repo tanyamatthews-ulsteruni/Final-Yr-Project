@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
-
+import { WorkoutHistoryPage } from '../workout-history/workout-history';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 
@@ -48,7 +48,6 @@ export class WorkoutStartPage {
     console.log('ionViewDidLoad WorkoutStartPage');
     this.getWorkoutSpecifics(this.workoutId);
     this.slides.lockSwipes(true);
-    this.saveWorkoutForUser(this.exerciseInWorkoutDetail);
   }
 
 
@@ -109,16 +108,21 @@ export class WorkoutStartPage {
     }
   }
 
-  saveWorkoutForUser(exercises){
+  saveWorkoutForUser(){
     var userId = firebase.auth().currentUser.uid;
     console.log('Name = ' + this.workoutName);
     this.db.list(userId + '/workoutHistory/').push({date: Date(), id: this.workoutId, name: this.workoutName});
     //this.getWorkoutSpecifics(this.workoutId);
-    for(ex in exercises){
+    /*for(ex in exercises){
       console.log(ex + ' in array');
       const exName = ex.exercise_list[0].obj.name;
       this.db.list(userId + '/workoutHistory/exercises/').push({exercise: exName});
-    }
+    }*/
+  }
+
+  goToHistory(){
+    this.saveWorkoutForUser();
+    this.navCtrl.push(WorkoutHistoryPage);
   }
 
 }
