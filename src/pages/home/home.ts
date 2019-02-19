@@ -28,11 +28,11 @@ export class HomePage {
   }
 
   ionViewWillLoad(){
+    this.calculateBMI(this.userHealthDetail);
     this.userService.getCurrentUser()
     .then(user => {
       this.user = user;
     }, err => console.log(err))
-    this.calculateBMI(this.userHealthDetail);
   }
 
 

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import * as firebase from 'firebase';
-//import data model 
-import { WorkoutHistoryDataModel } from '../../app/models/WorkoutHistoryDataModel';
 
+import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 
 @IonicPage()
 @Component({
@@ -12,44 +11,60 @@ import { WorkoutHistoryDataModel } from '../../app/models/WorkoutHistoryDataMode
 })
 export class WorkoutHistoryPage {
 
-  workoutName = [];
+ workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
   
   }
   
+  workoutName = [];
+  workoutCount: number;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WorkoutHistoryPage');
     this.viewCtrl.showBackButton(false);
     this.workoutName = this.getWorkoutHistory();
-
+    this.countWorkouts(this.workoutStats);
+    this.getLastWorkout(this.workoutStats);
   }
 
   getWorkoutHistory(){
     var user = firebase.auth().currentUser;
   	var userId = user.uid;
-  	const test = [];
+  	const data = [];
   	firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
   		snapshot.forEach((childSnapshot=>{
   			let wId = childSnapshot.val().id;
   			let wName = childSnapshot.val().name;
   			let wDate = childSnapshot.val().date;
-  			test.push({
+  			data.push({
   				id: wId,
   				name: wName, 
   				date: wDate
   			});
-  			/*for(let k in result){
-  				console.log('RESULT' + result[k]);
-  				test.push({
-  					id: k, 
-  					value: result[k]
-  				})
-  			}*/
   		}));
   	});
-    return test;
+    return data;
+  }
+
+  countWorkouts(w){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+      w.countOfWorkout = snapshot.numChildren();
+    });
+  }
+
+  getLastWorkout(w){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').limitToLast(1).once('value').then(function(snapshot){
+      console.log(snapshot);
+      snapshot.forEach((childSnapshot=>{
+        w.lastWorkoutDay = childSnapshot.val().date;
+      }))
+    });
   }
 
 }

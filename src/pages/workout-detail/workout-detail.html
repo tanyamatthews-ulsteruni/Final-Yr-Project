@@ -17,12 +17,9 @@
 
 	<h6>Exercises:</h6>
 
-	 	<ion-list inset>
-		    <ion-item *ngFor="let detail of exerciseInWorkoutDetail">
-		 		<h3>{{detail.name}}</h3>
-		 	</ion-item>
-		 </ion-list>
-
+	<div *ngFor="let detail of exerciseInWorkoutDetail">
+		<p id='displayItem'>{{detail.name}}</p>
+	</div>
 
  	<button ion-button id='start' class="circleBtn" (click)="startWorkout(workoutId, workoutName)" >Start Workout</button>
  	<button ion-button id='log' class="circleBtn" (click)="logWorkout(detail)">Log Workout</button>

@@ -31,9 +31,12 @@ export class MyApp {
     //public navCtrl: NavController
     ) {
 
-    	platform.ready().then(() => {
-    		statusBar.styleDefault();
-        	splashScreen.hide();
+    	  platform.ready().then(() => {
+    	  statusBar.styleDefault();
+        splashScreen.hide();
+        setTimeout(()=>{
+        statusBar.backgroundColorByHexString("#6279AE");
+        }, 40000);
     	});
 
 		this.pages = [
