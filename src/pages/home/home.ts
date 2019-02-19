@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 
 //models 
 import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
+import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class HomePage {
 
  user: FirebaseUserModel = new FirebaseUserModel();
  userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
+ workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
 
   constructor(
     public navCtrl: NavController,
@@ -33,6 +35,10 @@ export class HomePage {
     .then(user => {
       this.user = user;
     }, err => console.log(err))
+
+
+    this.countWorkouts(this.workoutStats);
+    this.getLastWorkout(this.workoutStats);
   }
 
 
@@ -71,5 +77,28 @@ export class HomePage {
       }));
     });
   }
+
+   countWorkouts(w){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+      w.countOfWorkout = snapshot.numChildren();
+    });
+  }
+
+  getLastWorkout(w){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').limitToLast(1).once('value').then(function(snapshot){
+      console.log(snapshot);
+      snapshot.forEach((childSnapshot=>{
+        var i = childSnapshot.val().date.indexOf('GMT');
+
+        w.lastWorkoutDay = childSnapshot.val().date.substring(0, i);
+        w.lastWorkoutName = childSnapshot.val().name;
+      }))
+    });
+  }
+
 
 }

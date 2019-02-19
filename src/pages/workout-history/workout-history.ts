@@ -37,7 +37,8 @@ export class WorkoutHistoryPage {
   		snapshot.forEach((childSnapshot=>{
   			let wId = childSnapshot.val().id;
   			let wName = childSnapshot.val().name;
-  			let wDate = childSnapshot.val().date;
+        var i = childSnapshot.val().date.indexOf('GMT');
+  			let wDate = childSnapshot.val().date.substring(0, i);
   			data.push({
   				id: wId,
   				name: wName, 
@@ -62,7 +63,8 @@ export class WorkoutHistoryPage {
     firebase.database().ref('/' + userId + '/workoutHistory/').limitToLast(1).once('value').then(function(snapshot){
       console.log(snapshot);
       snapshot.forEach((childSnapshot=>{
-        w.lastWorkoutDay = childSnapshot.val().date;
+        var i = childSnapshot.val().date.indexOf('GMT');
+        w.lastWorkoutDay = childSnapshot.val().date.substring(0, i);
       }))
     });
   }
