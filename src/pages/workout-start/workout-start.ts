@@ -112,12 +112,6 @@ export class WorkoutStartPage {
     var userId = firebase.auth().currentUser.uid;
     console.log('Name = ' + this.workoutName);
     this.db.list(userId + '/workoutHistory/').push({date: Date(), id: this.workoutId, name: this.workoutName});
-    //this.getWorkoutSpecifics(this.workoutId);
-    /*for(ex in exercises){
-      console.log(ex + ' in array');
-      const exName = ex.exercise_list[0].obj.name;
-      this.db.list(userId + '/workoutHistory/exercises/').push({exercise: exName});
-    }*/
   }
 
   goToHistory(){
