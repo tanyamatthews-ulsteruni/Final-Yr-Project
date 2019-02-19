@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { WorkoutStartPage } from '../workout-start/workout-start';
+import { WorkoutHistoryPage } from '../workout-history/workout-history';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase';
+
 
 @IonicPage()
 @Component({
@@ -17,7 +21,13 @@ export class WorkoutDetailPage {
   musclesWorked: Array<String> = [];
   workoutId: String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider) {
+  constructor(
+      public navCtrl: NavController, 
+      public navParams: NavParams, 
+      public restProvider: RestProvider, 
+      public db: AngularFireDatabase
+    ) 
+  {
   	this.workout.push(navParams.get('data'));
   }
 
@@ -34,8 +44,6 @@ export class WorkoutDetailPage {
       const setList = this.workout.day_list[0].set_list;
       for(let x of setList){
         this.exerciseInWorkoutDetail.push(x.exercise_list[0].obj);
-        //this.musclesWorked = setList.muscles.back[0];
-        //this.musclesWorked = setList.muscles.front[0];
       }
     })
   }
@@ -46,6 +54,13 @@ export class WorkoutDetailPage {
       id: x, 
       name: y
     });
+  }
+
+  logWorkout(x, y){
+    var userId = firebase.auth().currentUser.uid;
+    console.log('Name = ' + this.workoutName);
+    this.db.list(userId + '/workoutHistory/').push({date: Date(), id: x, name: y});
+    this.navCtrl.push(WorkoutHistoryPage);
   }
 
 }
