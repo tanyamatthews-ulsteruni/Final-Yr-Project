@@ -11,7 +11,6 @@ import { WorkoutsPage } from '../pages/workouts/workouts';
 import { WorkoutPlanPage } from '../pages/workout-plan/workout-plan';
 import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
 import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
-
 import { AuthService } from '../pages/core/auth.service';
 
 @Component({
@@ -46,8 +45,6 @@ export class MyApp {
         {title: 'Workouts', component: WorkoutsPage},
         {title: 'Workout History', component: WorkoutHistoryPage},
         {title: 'Workout Plan', component: WorkoutPlanPage}
-		];
-
 	}
   	
   openPage(page) {

@@ -102,18 +102,5 @@ export class WorkoutPlanPage {
     });
   }
 
-  //set the preference filters.
-  setFilter(type, location, typeString, locationString){
-      if(location == 'Home'){
-        locationString = '#NoEquipment';
-      }else{
-        locationString = '#Equipment';
-      }
-      if(type == 'Strength'){
-        typeString = '#Strength';
-      }else{
-        typeString = '#Cardio';
-      }
-  }
 
 }
