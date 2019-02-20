@@ -12,4 +12,37 @@ export class WorkoutPreferencesDataModel {
     	this.dayOfWorkout = "";
     }
 
+    setLocation(val){
+        this.location = val;
+    }
+
+    getLocation(){
+        return this.location;
+    }
+
+
+    getFitnessLevel(){
+        return this.fitnessLevel;
+    }
+
+    setFitnessLevel(val){
+        this.fitnessLevel = val;
+    }
+
+    getType(){
+        return this.type;
+    }
+
+    setType(val){
+        this.type = val;
+    }
+
+    getDayOfWorkout(){
+        return this.dayOfWorkout;
+    }
+
+    setDayOfWorkout(val){
+        this.dayOfWorkout = val;
+    }
+
 }

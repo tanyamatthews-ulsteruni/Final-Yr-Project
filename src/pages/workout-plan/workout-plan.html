@@ -17,7 +17,15 @@
 	<button ion-button (click)="getProfilePage()">Update preferences on your profile</button>
 
 
-	<h5>This week's workout</h5>
+	<h5>Your suggested workouts</h5>
 
+	<div>
+	<ion-list inset>
+    	<ion-item class='displayItem' *ngFor="let w of preferredWorkoutsName">
+	    	<h2>{{w.comment}}</h2>
+     			<!--<button ion-button item-right (click)="viewMoreDetail(w)">View</button>-->
+    	</ion-item>
+  	</ion-list>
+	</div>
 
 </ion-content>

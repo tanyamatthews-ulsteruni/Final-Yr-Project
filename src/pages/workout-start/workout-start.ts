@@ -31,7 +31,7 @@ export class WorkoutStartPage {
 
   buttonClicked: boolean = false;
 
-  addHideWeightText = "Add Weight";
+  addHideWeightText = "Add Exercise Weight";
 
   constructor(
     public navCtrl: NavController, 
@@ -69,7 +69,7 @@ export class WorkoutStartPage {
   resetNextSlide(){
     if(this.addHideWeightText == 'Remove Weight'){
       this.buttonClicked = !this.buttonClicked;
-      this.addHideWeightText = 'Add Weight';
+      this.addHideWeightText = 'Add Exercise Weight';
       this.weight = null;
     }
   }
