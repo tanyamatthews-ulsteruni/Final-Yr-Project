@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Workout</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-slides #exerciseSlider pager=false>
+
+		<ion-slide *ngFor="let ex of exerciseInWorkoutDetail; let i = index let odd = odd"
+      [class.odd]="odd">
+
+			<h6>Exercises {{i+1}} of {{exerciseCount}}</h6>
+			
+			<h5>{{ex.exercise_list[0].obj.name}}</h5>
+
+			<p>{{ex.exercise_list[0].obj.description}}</p>
+
+			<button id='showWeightInput' ion-button (click)="showWeightInput()">{{addHideWeightText}}</button>
+			<br>
+			<ion-input id='weight' [(ngModel)]="weight" *ngIf="buttonClicked" type="number" value=""></ion-input>
+
+			<p>{{ex.exercise_list[0].repetition_units[0].name}}: {{ex.exercise_list[0].setting_obj_list[0].reps}}</p>
+			<p>Sets: {{numDone}} of {{ex.obj.sets}}</p>
+			<button ion-button (click)="setComplete(ex)">Mark set complete</button>
+			<p><i>Please note you can't go to the next exercise until you mark your sets as complete!</i></p>
+			<button ion-button [disabled]="!isEnabled" (click)="nextSlide()">Next Exercise</button>
+
+
+	    </ion-slide>
+
+	    <ion-slide>
+	    	<h6>Workout Complete!</h6>
+	    	<p>Great job, you did brilliant completing your workout. We're proud of you and you should be of yourself. Keep the awesome work up</p>
+	    	<p>Fit2Me</p>
+	    	<button ion-button (click)="goToHistory()">Workout History</button>
+	    </ion-slide>
+
+	  
+	</ion-slides>
+
+</ion-content>

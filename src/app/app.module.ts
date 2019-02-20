@@ -12,13 +12,16 @@ import { HomePage } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { RegisterDisclaimerPage } from '../pages/register-disclaimer/register-disclaimer';
 import { ProfilePage } from '../pages/profile/profile';
-import { ListPage } from '../pages/list/list';
 import { UpdateHealthDetailsPage } from '../pages/update-health-details/update-health-details';
 import { UpdateReminderDetailsPage } from '../pages/update-reminder-details/update-reminder-details';
 import { UpdateWorkoutDetailsPage } from '../pages/update-workout-details/update-workout-details';
 import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
 import { ExerciseDetailPage } from '../pages/exercise-detail/exercise-detail';
-
+import { WorkoutPlanPage } from '../pages/workout-plan/workout-plan';
+import { WorkoutsPage } from '../pages/workouts/workouts';
+import { WorkoutDetailPage } from '../pages/workout-detail/workout-detail';
+import { WorkoutStartPage } from '../pages/workout-start/workout-start';
+import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
 //service imports
 import { AuthService } from '../pages/core/auth.service';
 import { UserService } from '../pages/core/user.service';
@@ -50,7 +53,12 @@ import { RestProvider } from '../providers/rest/rest';
     UpdateWorkoutDetailsPage,
     UpdateHealthDetailsPage,
     ExerciseListPage,
-    ExerciseDetailPage
+    ExerciseDetailPage,
+    WorkoutsPage,
+    WorkoutPlanPage,
+    WorkoutDetailPage,
+    WorkoutStartPage,
+    WorkoutHistoryPage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +82,12 @@ import { RestProvider } from '../providers/rest/rest';
     UpdateWorkoutDetailsPage,
     UpdateHealthDetailsPage,
     ExerciseListPage,
-    ExerciseDetailPage
+    ExerciseDetailPage,
+    WorkoutsPage,
+    WorkoutPlanPage,
+    WorkoutDetailPage,
+    WorkoutStartPage,
+    WorkoutHistoryPage
   ],
   providers: [
     StatusBar,

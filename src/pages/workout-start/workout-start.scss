@@ -1,0 +1,41 @@
+page-workout-start {
+
+	#input{
+		width: 40%;
+		display: inline-block;
+
+	}
+
+
+	.circleBtn{
+	  height: 130px;
+	  width: 130px;
+	  border-radius: 50%;
+	  display: inline-block;
+	  text-align: center;
+	}
+
+
+	#repCounter:hover{
+		color: #378FF8;
+		background-color: white;
+		border-color: #378FF8;
+		border-width: 0.5px;
+		border: solid;
+	}
+
+
+
+	#repCounter{
+		text-align:center;
+	}
+
+	#showWeightInput{
+		background-color: grey;
+	}
+
+	#weight{
+		width: 15%;
+		display: inline-block;
+	}
+}

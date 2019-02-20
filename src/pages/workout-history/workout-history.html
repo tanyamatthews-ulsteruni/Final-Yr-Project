@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Workout History</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+ <h3>Your Statistics</h3>
+
+ <p id='displayItem'><b>Total Workouts:</b> {{workoutStats.countOfWorkout}}</p>
+ <p id='displayItem'><b>Date of Last Workout:</b> {{workoutStats.lastWorkoutDay}}</p>
+
+ <h3>Your Workout History</h3>
+
+  <div *ngFor="let w of workoutName">
+  	<p id='displayItem'>
+  		<b>Date:</b> {{w.date}} <br/>
+  		<b>Workout:</b> {{w.name}}
+  	</p>
+  </div>
+
+</ion-content>

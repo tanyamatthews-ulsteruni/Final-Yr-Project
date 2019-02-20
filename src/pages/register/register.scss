@@ -36,4 +36,11 @@ page-register {
 		margin-top: 20px;
 		@include call-to-action-button-styles(color($colors, google, base), color($colors, google, contrast));
 	}
+
+  
+  #logoImg{
+    height:30%;
+    width:24%; 
+    display: inline-block;
+  }
 }

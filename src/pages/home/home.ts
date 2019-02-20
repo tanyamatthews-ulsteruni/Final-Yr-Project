@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 
 //models 
 import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
+import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class HomePage {
 
  user: FirebaseUserModel = new FirebaseUserModel();
  userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
+ workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
 
   constructor(
     public navCtrl: NavController,
@@ -28,11 +30,15 @@ export class HomePage {
   }
 
   ionViewWillLoad(){
+    this.calculateBMI(this.userHealthDetail);
     this.userService.getCurrentUser()
     .then(user => {
       this.user = user;
     }, err => console.log(err))
-    this.calculateBMI(this.userHealthDetail);
+
+
+    this.countWorkouts(this.workoutStats);
+    this.getLastWorkout(this.workoutStats);
   }
 
 
@@ -54,7 +60,6 @@ export class HomePage {
         userHealthDetail.height = childSnapshot.val().height; 
         // if height and weight populated, calculate BMI.
         if(userHealthDetail.weight != null || userHealthDetail.height != null){
-          console.log(parseInt(userHealthDetail.weight)*parseInt(userHealthDetail.weight));
           var heightInMeters = parseInt(userHealthDetail.height) / 100;
           var heightSq = heightInMeters * heightInMeters;
           //set bmi value and round to 2 decimal places. 
@@ -72,5 +77,28 @@ export class HomePage {
       }));
     });
   }
+
+   countWorkouts(w){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+      w.countOfWorkout = snapshot.numChildren();
+    });
+  }
+
+  getLastWorkout(w){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').limitToLast(1).once('value').then(function(snapshot){
+      console.log(snapshot);
+      snapshot.forEach((childSnapshot=>{
+        var i = childSnapshot.val().date.indexOf('GMT');
+
+        w.lastWorkoutDay = childSnapshot.val().date.substring(0, i);
+        w.lastWorkoutName = childSnapshot.val().name;
+      }))
+    });
+  }
+
 
 }

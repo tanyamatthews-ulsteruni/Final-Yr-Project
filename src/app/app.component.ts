@@ -8,9 +8,9 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { WorkoutsPage } from '../pages/workouts/workouts';
-import { WorkoutPlanList } from '../pages/workout-plan/workout-plan';
+import { WorkoutPlanPage } from '../pages/workout-plan/workout-plan';
 import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
-
+import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
 import { AuthService } from '../pages/core/auth.service';
 
 @Component({
@@ -30,17 +30,21 @@ export class MyApp {
     //public navCtrl: NavController
     ) {
 
-    	platform.ready().then(() => {
-    		statusBar.styleDefault();
-        	splashScreen.hide();
+    	  platform.ready().then(() => {
+    	  statusBar.styleDefault();
+        splashScreen.hide();
+        setTimeout(()=>{
+        statusBar.backgroundColorByHexString("#6279AE");
+        }, 40000);
     	});
 
 		this.pages = [
     		{title: 'Home', component: HomePage},
   			{title: 'Profile', component: ProfilePage},
-        {title: 'Exercise List', component: ExerciseListPage}
-		];
-
+        {title: 'Exercise List', component: ExerciseListPage},
+        {title: 'Workouts', component: WorkoutsPage},
+        {title: 'Workout History', component: WorkoutHistoryPage},
+        {title: 'Workout Plan', component: WorkoutPlanPage}
 	}
   	
   openPage(page) {

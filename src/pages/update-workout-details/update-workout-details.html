@@ -14,14 +14,14 @@
 				<p>These will be use to help tailor your workouts.</p>
 				<ion-item>
 				  <ion-label>Workout types</ion-label>
-				  <ion-select required multiple="true" [(ngModel)]="workoutTypes">
+				  <ion-select required multiple="false" [(ngModel)]="workoutTypes">
 				    <ion-option value="Cardio">Cardio</ion-option>
-				    <ion-option value="Weights">Weights</ion-option>
+				    <ion-option value="Strength">Strength</ion-option>
 				  </ion-select>
 				</ion-item>
 				<ion-item>
 				  <ion-label>Workout Location</ion-label>
-				  <ion-select required multiple="true" [(ngModel)]="workoutLocation">
+				  <ion-select required multiple="false" [(ngModel)]="workoutLocation">
 				    <ion-option value="Home">Home</ion-option>
 				    <ion-option value="Gym">Gym</ion-option>
 				  </ion-select>

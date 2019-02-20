@@ -35,7 +35,6 @@ export class ExerciseDetailPage {
   	console.log("DA ID " + this.ex.id);
     this.restProvider.getExerciseImage(this.ex.id).then(data =>{
       this.exerciseImageData = data.results;
-      //this.exerciseImageString = this.exerciseImageData.image;
     });
   }
 

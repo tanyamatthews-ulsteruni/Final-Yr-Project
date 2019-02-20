@@ -1,0 +1,42 @@
+page-workout-detail {
+
+	.circleBtn{
+	  height: 130px;
+	  width: 130px;
+	  border-radius: 50%;
+	  display: inline-block;
+	  text-align: center;
+	}
+
+	#start:hover{
+		color: green;
+		background-color: white;
+		border-color: green;
+		border-width: 0.5px;
+		border: solid;
+	}
+
+	#log:hover{
+		color: #378FF8;
+		background-color: white;
+		border-color: #378FF8;
+		border-width: 0.5px;
+		border: solid;
+	}
+
+	#start{
+		background-color: green;
+	}
+
+	#log{
+		text-align:center;
+	}
+
+	#displayItem{
+		border: 1px solid #ddd; /*border*/
+  		margin-top: -1px; /*margin*/
+ 		background-color: #f6f6f6; /*background colour*/
+  		padding: 12px; /*padding*/
+	}
+
+}
