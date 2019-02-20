@@ -11,19 +11,18 @@
 	<h5>Your preferences</h5>
 	<p class='displayItem'><label>Type(s): </label> {{userWorkoutDetail.type}}</p>
 	<p class='displayItem'><label>Location: </label> {{userWorkoutDetail.location}}</p>
-	<p class='displayItem'><label>Fitness Level: </label> {{userWorkoutDetail.fitnessLevel}}</p>
 	<p class='displayItem'><label>Day(s) of Workout: </label> {{userWorkoutDetail.dayOfWorkout}}</p>
 
-	<button ion-button (click)="getProfilePage()">Update preferences on your profile</button>
+	<button ion-button (click)="getProfilePage()">Update preferences</button>
 
 
 	<h5>Your suggested workouts</h5>
 
 	<div>
 	<ion-list inset>
-    	<ion-item class='displayItem' *ngFor="let w of preferredWorkoutsName">
+    	<ion-item *ngFor="let w of preferredWorkoutsName">
 	    	<h2>{{w.comment}}</h2>
-     			<!--<button ion-button item-right (click)="viewMoreDetail(w)">View</button>-->
+     		<button ion-button item-right (click)="viewMoreDetail(w)">View</button>
     	</ion-item>
   	</ion-list>
 	</div>

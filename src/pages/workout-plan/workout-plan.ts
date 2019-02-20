@@ -5,6 +5,8 @@ import { WorkoutPreferencesDataModel } from '../../app/models/WorkoutPreferences
 import {ProfilePage} from '../profile/profile';
 import { RestProvider } from '../../providers/rest/rest';
 
+import { WorkoutDetailPage } from '../workout-detail/workout-detail';
+
 @IonicPage()
 @Component({
   selector: 'page-workout-plan',
@@ -22,16 +24,17 @@ export class WorkoutPlanPage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad WorkoutPlanPage');
 
     this.getWorkoutPreferencesForUser(this.userWorkoutDetail);
     this.numWorkoutsEachWeek(this.userWorkoutDetail);
-    //console.log(this.userWorkoutDetail);
+
     this.getPreferredWorkouts(this.userWorkoutDetail);
+
   }
 
-   getWorkoutPreferencesForUser(userWorkoutDetail){
+  getWorkoutPreferencesForUser(userWorkoutDetail){
     var user = firebase.auth().currentUser;
     var userId = user.uid;    
     firebase.database().ref('/' + userId + '/workoutPreferences/').once('value').then(function(snapshot){
@@ -40,6 +43,7 @@ export class WorkoutPlanPage {
         userWorkoutDetail.setFitnessLevel(childSnapshot.val().fitnessLevel);
         userWorkoutDetail.setType(childSnapshot.val().type);
         userWorkoutDetail.setDayOfWorkout(childSnapshot.val().dayOfWorkout);
+
       }))
     });
   }
@@ -58,28 +62,33 @@ export class WorkoutPlanPage {
   	this.navCtrl.push(ProfilePage);
   }
 
-  //filter workouts based on user preference
-  getPreferredWorkouts(){
-    const location = 'Home';
+
+  viewMoreDetail(workout){
+    this.navCtrl.push(WorkoutDetailPage, {
+      data: workout
+    });
+  }
+
+   //filter workouts based on user preference
+  getPreferredWorkouts(workout){
     const locationMatchString;
-    const type = 'Strength';
     const typeMatchString;
-
-    if(location == 'Home'){
-      locationMatchString = '#NoEquipment';
-    }else{
-      locationMatchString = '#Equipment';
-    }
-
-    if(type == 'Strength'){
-      typeMatchString = '#Strength';
-    }else{
-      typeMatchString = '#Cardio';
-    }
-
     this.restProvider.getAllWorkoutData()
     .then(data => {
       if(data.hasOwnProperty('results')){
+        const location = workout.getLocation();
+        const type = workout.getType();
+
+        if(location == 'Home'){
+          locationMatchString = '#NoEquipment';
+        }else{
+          locationMatchString = '#Equipment';
+        }
+        if(type == 'Strength'){
+          typeMatchString = '#Strength';
+        }else{
+          typeMatchString = '#Cardio';
+        }
         this.workouts = data.results;
         for(let w of this.workouts){
           //pushing workout into array. Here you can access id through 'id' and name using 'comment.'
@@ -91,7 +100,20 @@ export class WorkoutPlanPage {
         } 
       }
     });
+  }
 
+  //set the preference filters.
+  setFilter(type, location, typeString, locationString){
+      if(location == 'Home'){
+        locationString = '#NoEquipment';
+      }else{
+        locationString = '#Equipment';
+      }
+      if(type == 'Strength'){
+        typeString = '#Strength';
+      }else{
+        typeString = '#Cardio';
+      }
   }
 
 }

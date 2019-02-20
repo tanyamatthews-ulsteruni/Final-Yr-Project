@@ -36,7 +36,6 @@ export class WorkoutsPage {
   });
   }
 
-
   viewMoreDetail(workout){
   	this.navCtrl.push(WorkoutDetailPage, {
       data: workout
