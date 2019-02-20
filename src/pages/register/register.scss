@@ -2,6 +2,11 @@ page-register {
 /*  ion-header {
     @include header-styles(color($colors, header, base), color($colors, header, contrast));
   }*/
+
+    h3, h4{
+    text-align: center;
+    color: grey;
+  }
   
   .error-message
   {
