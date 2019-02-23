@@ -41,10 +41,10 @@ export class MyApp {
 		this.pages = [
     		{title: 'Home', component: HomePage},
   			{title: 'Profile', component: ProfilePage},
-        {title: 'Exercise List', component: ExerciseListPage},
-        {title: 'Workouts', component: WorkoutsPage},
+        {title: 'Workout Plan', component: WorkoutPlanPage},
+        {title: 'All Workouts', component: WorkoutsPage},
         {title: 'Workout History', component: WorkoutHistoryPage},
-        {title: 'Workout Plan', component: WorkoutPlanPage}
+        {title: 'Exercise List', component: ExerciseListPage}
 	}
   	
   openPage(page) {
