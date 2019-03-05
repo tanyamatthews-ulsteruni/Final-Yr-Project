@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AddGoalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -15,11 +10,52 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddGoalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  weightGoals: boolean = false;
+  amountOfWorkoutsGoals: boolean = false;
+  otherGoals: boolean = false;
+
+  goalName; goalType; gtAmountOfWorkoutsVal; gtWeightVal; gtOtherVal; targetDate;
+
+
+  constructor(
+  	public navCtrl: NavController, 
+  	public navParams: NavParams, 
+    public db: AngularFireDatabase) 
+  {
+  
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddGoalPage');
+  }
+
+  showHideFurtherGoalInput(goalType){
+  	if(goalType == 'gtAmountOfWorkouts'){
+  		this.amountOfWorkoutsGoals = true;
+  		this.weightGoals = false;
+  		this.otherGoals = false;
+  	}else if(goalType == 'gtWeight'){
+  		this.weightGoals = true;
+  		this.otherGoals = false;
+  		this.amountOfWorkoutsGoals = false;
+  	}else if(goalType == 'gtOther'){
+  		this.otherGoals = true;
+  		this.amountOfWorkoutsGoals = false;
+  		this.weightGoals = false;
+  	}
+  }
+
+  addGoal(){
+ 	var userId = firebase.auth().currentUser.uid;
+
+	if(this.amountOfWorkoutsGoals){
+		this.db.list(userId + '/goals/workoutGoals/').push({dateAdded: Date(), name: this.goalName, workoutTarget: this.gtAmountOfWorkoutsVal, targetDate: this.targetDate});
+	}else if(this.weightGoals){
+		this.db.list(userId + '/goals/weightGoals/').push({dateAdded: Date(), name: this.goalName, weightTarget: this.gtWeightVal, targetDate: this.targetDate});
+	}else if(this.otherGoals){
+		this.db.list(userId + '/goals/otherGoals/').push({dateAdded: Date(), name: this.goalName, goalDescription: this.gtOtherVal, targetDate: this.targetDate});
+	}
+	this.navCtrl.pop();
   }
 
 }
