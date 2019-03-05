@@ -11,6 +11,43 @@
 
 <button ion-button (click)="setGoal()">Add Goal</button>
 
-<h2>Your Goals</h2>
+<h2>Active Goals</h2>
+
+  <h4>Weight Goals</h4>
+
+  <div class='activeTile' *ngFor="let x of weightGoalData">
+	
+	<p>Name: {{x.name}}</p>
+  	<p>Goal Weight: <b>{{x.weightTarget}}</b></p>
+  	<p>Date Added: {{x.dateAdded}}</p>
+  	<p>Target Completion Date: {{x.targetDate}}</p>
+  	<button ion-button>View detail</button>
+
+  </div>
+
+  <h4>Workout Goals</h4>
+
+  <div class='activeTile' *ngFor="let y of workoutGoalData">
+  	
+	<p>Name: {{y.name}}</p>
+  	<p>Complete <b>{{y.workoutTarget}}</b> workouts</p>
+  	<p>Date Added: {{y.dateAdded}}</p>
+  	<p>Target Completion Date: {{y.targetDate}}</p>
+  	<button ion-button>View detail</button>
+
+  </div>
+
+
+  <h4>Other Goals</h4>
+
+  <div class='activeTile' *ngFor="let x of otherGoalData">
+	<p>Name: {{x.name}}</p>
+  	<p>Complete <b>{{x.otherTarget}}</b> workouts</p>
+  	<p>Date Added: {{x.dateAdded}}</p>
+  	<p>Target Completion Date: {{x.targetDate}}  <button ion-button item-right>Mark complete</button></p>
+  	
+  </div>
+
+  <h2>Completed Goals</h2>
 
 </ion-content>

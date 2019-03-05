@@ -29,7 +29,6 @@ export class WorkoutPlanPage {
 
     this.getWorkoutPreferencesForUser(this.userWorkoutDetail);
     this.numWorkoutsEachWeek(this.userWorkoutDetail);
-
     this.getPreferredWorkouts(this.userWorkoutDetail);
 
   }
