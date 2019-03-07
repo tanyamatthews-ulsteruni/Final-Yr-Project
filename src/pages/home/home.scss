@@ -1,29 +1,8 @@
 page-home {
 
-.green {
-   background-color:#ABEBC6  ;
+.tile{
+  background-color: #AED6F1;  
 }
-
-.blue {
-   background-color: #85C1E9;
-}
-
-.red {
-   background-color: #F1948A  ;
-}
-
-.purple {
-   background-color: #C39BD3  ;
-}
-
-.orange {
-   background-color: #F8C471  ;
-}
-
-.yellow{
-  background-color: #F9E79F ;
-}
-
 
 @supports (column-count: 5) {
    .wrapper {
@@ -34,13 +13,12 @@ page-home {
       -webkit-column-gap: 0.5em;
       column-gap: 0.5em;
 
-
       section {
    	    width: 100%;
    	    margin: 0 0.5em 0.5em 0;
    	    padding: 1em;
    	    display: inline-block;
-        border-radius: 15px;
+        
         text-align: center;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;

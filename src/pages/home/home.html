@@ -7,13 +7,11 @@
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <h3>Menu - Dashboard</h3>
-  
-  <h4>Hi {{user.name}}</h4>
+<ion-content id='bg' padding>
+  <h3>Welcome {{user.name}}</h3>
   
   <div class="wrapper">
-      <section class="purple">
+      <section class="tile">
          <h2>BMI</h2>
          <h6>Body Mass Index</h6>
          <p><b>Weight:</b> {{userHealthDetail.weight}}</p>
@@ -21,36 +19,48 @@
          <p><b>BMI:</b> {{userHealthDetail.bmi}}</p>
          <p><b>BMI Classification:</b> {{userHealthDetail.bmiDescription}}</p>
          
-         <p>Like any measure, it is only an indication and other issues such as body type and shape have a bearing as well. Remember, BMI is just a guide - it does not accurately apply to elderly populations, pregnant women or very muscular athletes such as weight lifters.</p>
+         <!--<p>Like any measure, it is only an indication and other issues such as body type and shape have a bearing as well. Remember, BMI is just a guide - it does not accurately apply to elderly populations, pregnant women or very muscular athletes such as weight lifters.</p>-->
          For more information on BMI you can visit the <a href="https://www.nhs.uk/live-well/healthy-weight/bmi-calculator/">NHS BMI site</a>.
       </section>
 
+      <section class="tile">
+        <h2>Log last workout again</h2>
+        <h5>{{workoutStats.lastWorkoutName}}</h5>
+        <button ion-button>Log</button>
+      </section>
 
-      <section class="yellow">
+      <section class="tile">
+         <h2>Start Workout</h2>
         
       </section>
 
-      <section class="green">
+      <section class='tile'>
+        <h2>{{workoutStats.workoutLevel}} Level</h2>
+
+        <h6>{{workoutStats.workoutsToNextLevel}} more workouts until you level up!</h6>
+      </section>
+
+      <section class="tile">
          <h2>Workout Summary</h2>
-         <p>You have completed {{workoutStats.countOfWorkout}} workouts in total!</p>
-         <p>Your last workout was on {{workoutStats.lastWorkoutDay}}</p>
-         <p>This workout was {{workoutStats.lastWorkoutName}}</p>
+         <h6>Total Workouts - {{workoutStats.countOfWorkout}}</h6>
+         <h6>Last workout - {{workoutStats.lastWorkoutName}}</h6>
+         <h6>Date completed - {{workoutStats.lastWorkoutDay}}</h6>
       </section>
  
-      <section class="blue">
-         <h2>BMR</h2>
-      </section>
 
-      <section class="red">
-         <h2></h2>
 
-         <p></p>
+      <section class="tile">
+         <h2>View exercises</h2>
       </section>
       
-      <section class="orange">
-         <h2></h2>
-
-         <p></p>
+      <section class="tile">
+        <h2>Reasons to workout</h2>
+          <h6>Improve your mood</h6>
+          <h6>Build muscle</h6>
+          <h6>Reduce risk of diseases</h6>
+          <h6>Lose body fat</h6>
+          <h6>Improve sleep</h6>
+          <h6>For the fun</h6>
       </section>
 
    </div>

@@ -78,11 +78,30 @@ export class HomePage {
     });
   }
 
+
    countWorkouts(w){
     var user = firebase.auth().currentUser;
     var userId = user.uid;
+    let count = 0;
+    let workoutsToGo = 0;
     firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
       w.countOfWorkout = snapshot.numChildren();
+      count = snapshot.numChildren();
+      
+      if(count < 25){
+        w.workoutLevel = 'Beginner';
+        workoutsToGo = 25 - count;
+        w.workoutsToNextLevel = workoutsToGo;
+      }else if(count >25 && count< 50){
+        w.workoutLevel = 'Intermediate';
+        workoutsToGo = 50 - count;
+        w.workoutsToNextLevel = workoutsToGo;
+      }else if(count > 50 && count< 100){
+        w.workoutLevel = 'Advanced';
+        workoutsToGo = 100 - count;
+        w.workoutsToNextLevel = workoutsToGo;
+      }
+
     });
   }
 
