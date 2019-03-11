@@ -9,6 +9,28 @@
 
 <ion-content padding>
 
+	<h3>Filter Workouts</h3>
+
+		<ion-item>
+		  <ion-label>Workout Type</ion-label>
+		  <ion-select  multiple="false" [(ngModel)]="workoutTypeFilter">
+		    <ion-option value="#Strength">Strength</ion-option>
+		    <ion-option value="#Cardio">Cardio</ion-option>
+		  </ion-select>
+		</ion-item>
+
+		<ion-item>
+	    	<ion-label>Equipment</ion-label>
+	    	<ion-toggle [(ngModel)]="equipFilter"></ion-toggle>
+	  	</ion-item>
+
+	<ion-item>
+		<button [disabled]='!workoutTypeFilter' ion-button (click)="applyFilter()">Apply Filter</button>
+
+		<button ion-button (click)="clearFilter()">Clear Filter</button>
+	</ion-item>
+
+
     	<ion-list inset>
     		<ion-item *ngFor="let w of workoutNames">
 		    	<h2>{{w.comment}}</h2>
