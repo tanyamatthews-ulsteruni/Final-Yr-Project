@@ -2,9 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import chart js for charting. 
 import { Chart } from 'chart.js';
-
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+
+//models 
+import { FirebaseUserModel } from '../core/user.model';
+import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
+import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 
 @IonicPage()
 @Component({
@@ -17,19 +21,32 @@ export class GoalGraphedPage {
 	@ViewChild('lineCanvas') lineCanvas;
 	@ViewChild('doughnutCanvas') doughnutCanvas;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,    
+    public db: AngularFireDatabase) {
   }
 
+  user: FirebaseUserModel = new FirebaseUserModel();
+  userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
+  workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
+
+
   weightGraphData = [];
+  barChartData:any;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GoalGraphedPage');
     
     this.weightGraphData = this.getWeightOverTime();
+    this.barChartData = this.getWorkoutHistory();
+    this.countWorkouts(this.workoutStats);
 
     setTimeout(() => {
-    	this.generateLineChart(this.weightGraphData);
-  	}, 1000);
+      this.generateLineChart(this.weightGraphData);
+      this.generateDoughnutChart(this.workoutStats);
+      this.generateBarChart(this.barChartData);
+  	}, 1500);
 
 
   }
@@ -97,16 +114,56 @@ export class GoalGraphedPage {
    
 
 
-  generateBarChart(){
+ getWorkoutHistory(){
+    const dec = 0;
+    const jan = 0;
+    const feb = 0;
+    const mar = 0;
+    const apr = 0;
+    const may = 0;
+    const barData = [];
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+      //console.log(snapshot);
+      snapshot.forEach((childSnapshot=>{
+        var currentDate = childSnapshot.val().date;
+        if(currentDate.includes('Dec')){
+          dec = dec + 1;
+        }else if(currentDate.includes('Jan')){
+          jan = jan + 1;
+        }else if(currentDate.includes('Feb')){
+          feb = feb +1;
+        }else if(currentDate.includes('Mar')){
+          mar = mar + 1;
+        }else if(currentDate.includes('Apr')){
+          apr = apr + 1; 
+        }else if(currentDate.includes('May')){
+          may = may + 1;
+        }
+      }))
+      barData.push({
+        dec: dec,
+        jan: jan,
+        feb: feb, 
+        mar: mar, 
+        apr: apr, 
+        may: may 
+      })
+    });
+    return barData;
 
-  	this.barChart = new Chart(this.barCanvas.nativeElement, {
+  }
 
+  generateBarChart(data){
+  
+  this.barChart = new Chart(this.barCanvas.nativeElement, {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ["Dec", "Jan", "Feb", "Mar", "Apr", "May"],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: 'Amount of Workouts',
+                    data: [data[0].dec, data[0].jan, data[0].feb, data[0].mar, data[0].apr, data[0].may],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -135,21 +192,44 @@ export class GoalGraphedPage {
                     }]
                 }
             }
-
         });
 
+    }
+
+    countWorkouts(w){
+      var user = firebase.auth().currentUser;
+      var userId = user.uid;
+      let count = 0;
+      let workoutsToGo = 0;
+      let progress = 0;
+      firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+      w.countOfWorkout = snapshot.numChildren();
+      count = snapshot.numChildren();
+      if(count < 25){
+        w.workoutLevel = 'Beginner';
+        workoutsToGo = 25 - count;
+        w.workoutsToNextLevel = workoutsToGo;
+      }else if(count >=25 && count< 50){
+        w.workoutLevel = 'Intermediate';
+        workoutsToGo = 50 - count;
+        w.workoutsToNextLevel = workoutsToGo;
+      }else if(count >= 50 && count< 100){
+        w.workoutLevel = 'Advanced';
+        workoutsToGo = 100 - count;
+        w.workoutsToNextLevel = workoutsToGo;
+      }
+    });
   }
 
-
-  generateDoughnutChart(){
-  	this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+  generateDoughnutChart(w){
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
             type: 'doughnut',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ["Workouts Completed", "Workouts Needed to Level Up"],
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [w.countOfWorkout, w.workoutsToNextLevel],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -171,7 +251,6 @@ export class GoalGraphedPage {
 
         });
   }
-
 
 
    }

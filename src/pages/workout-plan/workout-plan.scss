@@ -3,22 +3,14 @@ page-workout-plan {
 		font-weight: bold;
 	}
 
-	.displayItem{
-		border: 1px solid #ddd; /*border*/
-  		margin-top: -1px; /*margin*/
- 		background-color: #f6f6f6; /*background colour*/
-  		padding: 12px; /*padding*/
-	}
+  ion-card{
+    border-top: 4px solid #558bf7;;
+  }
 
-
-	.cardTop{
-   		border-top: 4px solid #558bf7;
-	}
-
-	.center{
+	/*.center{
 		text-align: center;
 		display: block;
 	    margin-left: auto;
 	    margin-right: auto
-	}
+	}*/
 }
