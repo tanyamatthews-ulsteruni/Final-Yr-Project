@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseUserModel } from '../core/user.model';
 import * as firebase from 'firebase';
 
@@ -25,19 +26,27 @@ export class HomePage {
   workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
 
   @ViewChild('lineCanvas') lineCanvas;
+  @ViewChild('doughnutCanvas') doughnutCanvas;
+  @ViewChild('barCanvas') barCanvas;
+
+  doughnutChart: any;
   lineChart: any;
+  barChart: any;
+  stars: any;
 
   constructor(
     public navCtrl: NavController,
     public userService: UserService,
     public authService: AuthService,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,    
+    public db: AngularFireDatabase
   ) {
   }
 
   weightGraphData = [];
+  barChartData:any;
 
-  ionViewWillLoad(){
+  ionViewDidEnter(){
     this.calculateBMI(this.userHealthDetail);
     this.userService.getCurrentUser()
     .then(user => {
@@ -46,14 +55,23 @@ export class HomePage {
 
 
     this.countWorkouts(this.workoutStats);
-    this.getLastWorkout(this.workoutStats);
 
     this.weightGraphData = this.getWeightOverTime();
+    this.barChartData = this.getWorkoutHistory();
+    console.log(this.barChartData);
 
     setTimeout(() => {
       this.generateLineChart(this.weightGraphData);
+      this.generateDoughnutChart(this.workoutStats);
+      this.generateBarChart(this.barChartData);
     }, 1500);
+
+    this.getLastWorkout(this.workoutStats);
+    this.calculateBMR(this.userHealthDetail);
+
   }
+
+
 
   logout(){
     this.authService.doLogout()
@@ -91,30 +109,46 @@ export class HomePage {
     });
   }
 
-
-   countWorkouts(w){
+  calculateBMR(userHealthDetail){
     var user = firebase.auth().currentUser;
     var userId = user.uid;
-    let count = 0;
-    let workoutsToGo = 0;
-    firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+    const bmr; 
+    firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
+      snapshot.forEach((childSnapshot => {
+        userHealthDetail.weight = childSnapshot.val().weight;
+        userHealthDetail.height = childSnapshot.val().height;
+        userHealthDetail.age = childSnapshot.val().age;
+        userHealthDetail.activityLevel = childSnapshot.val().activityLevel;
+        bmr = (10 * userHealthDetail.weight) + (6.25 * userHealthDetail.height) - (5 * userHealthDetail.age) + 5;
+        bmr = bmr * userHealthDetail.activityLevel;
+        userHealthDetail.bmr = Math.round(bmr);
+      }))
+    });
+
+  }
+
+  countWorkouts(w){
+      var user = firebase.auth().currentUser;
+      var userId = user.uid;
+      let count = 0;
+      let workoutsToGo = 0;
+      let progress = 0;
+      firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
       w.countOfWorkout = snapshot.numChildren();
       count = snapshot.numChildren();
-      
       if(count < 25){
         w.workoutLevel = 'Beginner';
         workoutsToGo = 25 - count;
         w.workoutsToNextLevel = workoutsToGo;
-      }else if(count >25 && count< 50){
+      }else if(count >=25 && count< 50){
         w.workoutLevel = 'Intermediate';
         workoutsToGo = 50 - count;
         w.workoutsToNextLevel = workoutsToGo;
-      }else if(count > 50 && count< 100){
+      }else if(count >= 50 && count< 100){
         w.workoutLevel = 'Advanced';
         workoutsToGo = 100 - count;
         w.workoutsToNextLevel = workoutsToGo;
       }
-
     });
   }
 
@@ -124,14 +158,14 @@ export class HomePage {
     firebase.database().ref('/' + userId + '/workoutHistory/').limitToLast(1).once('value').then(function(snapshot){
       console.log(snapshot);
       snapshot.forEach((childSnapshot=>{
-        var i = childSnapshot.val().date.indexOf('GMT');
-
-        w.lastWorkoutDay = childSnapshot.val().date.substring(0, i);
+        w.lastWorkoutDay = childSnapshot.val().date.substring(0, 15);
         w.lastWorkoutName = childSnapshot.val().name;
+        w.lastWorkoutId = childSnapshot.val().id;
       }))
     });
   }
 
+  //chart historic weight data to show progress 
   getWeightOverTime(){
     var user = firebase.auth().currentUser;
     var userId = user.uid;
@@ -147,20 +181,15 @@ export class HomePage {
     }))
     });
     return healthDetails;
-
-    //this.generateLineChart(healthDetails);
   }
 
   generateLineChart(w){
+    const labels = []; const weight = [];
 
-  const labels = [];
-  const weight = [];
-
-  for (let i in w) {
-      labels.push(w[i].date.substring(0, 15));
-      weight.push(w[i].weight);
-  }
-
+    for (let i in w) {
+        labels.push(w[i].date.substring(0, 15));
+        weight.push(w[i].weight);
+    }
 
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
@@ -197,5 +226,135 @@ export class HomePage {
 
     }
 
+  generateDoughnutChart(w){
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+
+            type: 'doughnut',
+            data: {
+                labels: ["Workouts Completed", "Workouts Needed to Level Up"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [w.countOfWorkout, w.workoutsToNextLevel],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]
+            }
+
+        });
+  }
+
+  logLastWorkout(w){
+    console.log(w);
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    this.db.list(userId + '/workoutHistory/').push({date: Date(), id: w.lastWorkoutId, name: w.lastWorkoutName});
+
+    let alert = this.alertCtrl.create({
+      title: "Workout logged",
+      subTitle: "Great news on completing another workout, keep up the brilliant work!",
+      buttons: ['OK']
+    });
+    alert.present();
+
+    //update pie chart 
+    this.generateDoughnutChart(w);
+
+  }
+
+  getWorkoutHistory(){
+    const dec = 0;
+    const jan = 0;
+    const feb = 0;
+    const mar = 0;
+    const apr = 0;
+    const may = 0;
+    const barData = [];
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+      //console.log(snapshot);
+      snapshot.forEach((childSnapshot=>{
+        var currentDate = childSnapshot.val().date;
+        if(currentDate.includes('Dec')){
+          dec = dec + 1;
+        }else if(currentDate.includes('Jan')){
+          jan = jan + 1;
+        }else if(currentDate.includes('Feb')){
+          feb = feb +1;
+        }else if(currentDate.includes('Mar')){
+          mar = mar + 1;
+        }else if(currentDate.includes('Apr')){
+          apr = apr + 1; 
+        }else if(currentDate.includes('May')){
+          may = may + 1;
+        }
+      }))
+      barData.push({
+        dec: dec,
+        jan: jan,
+        feb: feb, 
+        mar: mar, 
+        apr: apr, 
+        may: may 
+      })
+    });
+    return barData;
+
+  }
+
+  generateBarChart(data){
+  
+  this.barChart = new Chart(this.barCanvas.nativeElement, {
+            type: 'bar',
+            data: {
+                labels: ["Dec", "Jan", "Feb", "Mar", "Apr", "May"],
+                datasets: [{
+                    label: 'Amount of Workouts',
+                    data: [data[0].dec, data[0].jan, data[0].feb, data[0].mar, data[0].apr, data[0].may],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+    }
 
 }

@@ -18,8 +18,7 @@
 
   <ion-card class='active'>
       <ion-card-header>
-        <ion-card-title>{{x.name}}</ion-card-title>
-       <ion-card-title>Reach target weight {{x.weightTarget}} kg</ion-card-title>
+        <ion-card-title>{{x.name}} - Reach target weight {{x.weightTarget}} kg</ion-card-title>
      </ion-card-header>
       <ion-card-content>
 
@@ -40,8 +39,7 @@
   	
   <ion-card class='active'>
     <ion-card-header>
-      <ion-card-title>{{x.name}}</ion-card-title>
-      <ion-card-title>Complete {{x.workoutTarget}} workouts</ion-card-title>
+      <ion-card-title>{{x.name}} - Complete {{x.workoutTarget}} workouts</ion-card-title>
     </ion-card-header>
     <ion-card-content>
 
@@ -61,8 +59,7 @@
   <div *ngFor="let x of otherGoalData">
   <ion-card class='active'>
     <ion-card-header>
-      <ion-card-title>{{x.name}}</ion-card-title>
-     <ion-card-title>{{x.otherTarget}}</ion-card-title>
+      <ion-card-title>{{x.name}} - {{x.otherTarget}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
 
@@ -88,8 +85,7 @@
 
   <ion-card class='complete'>
       <ion-card-header>
-        <ion-card-title>{{x.name}}</ion-card-title>
-        <ion-card-title>Reach target weight {{x.weightTarget}}</ion-card-title>
+        <ion-card-title>{{x.name}} - Reach target weight {{x.weightTarget}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p><b>Date Added:</b> {{x.dateAdded}}</p>
@@ -107,8 +103,7 @@
   <div *ngFor='let x of workoutGoalDataComplete'>
     <ion-card class='complete'>
       <ion-card-header>
-       <ion-card-title>{{x.name}}</ion-card-title>
-       <ion-card-title>Complete {{x.workoutTarget}} workouts</ion-card-title>
+       <ion-card-title>{{x.name}} - Complete {{x.workoutTarget}} workouts</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p><b>Date Added:</b> {{x.dateAdded}}</p>
@@ -127,8 +122,7 @@
     
   <ion-card class='complete'>
     <ion-card-header>
-    <ion-card-title>{{x.name}}</ion-card-title>
-    <ion-card-title>{{x.otherTarget}}</ion-card-title>
+    <ion-card-title>{{x.name}} - {{x.otherTarget}}</ion-card-title>
   </ion-card-header>
     <ion-card-content>
       <p><b>Date Added:</b> {{x.dateAdded}}</p>

@@ -54,18 +54,12 @@ export class GoalGraphedPage {
   }
 
 	generateLineChart(w){
-
-	console.log(w);
-
 	const labels = [];
 	const weight = [];
-
 	for (let i in w) {
    		labels.push(w[i].date.substring(0, 15));
    		weight.push(w[i].weight);
 	}
-
-
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
             type: 'line',

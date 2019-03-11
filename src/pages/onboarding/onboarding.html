@@ -68,13 +68,14 @@
   			<ion-item>
 					<ion-label>Activity level</ion-label>
 				<ion-select multiple="false" [(ngModel)]="activityLevel">
-					<ion-option value="Sedentary - 1.2"> Sedentary</ion-option>
-					<ion-option value="Lightly active - 1.375">Lightly active (light exercise/sports 1-3 days/week)</ion-option>
-					<ion-option value="Moderately active - 1.55">Moderately active</ion-option>
-					<ion-option value="Very active - 1.725">Very active</ion-option>
-					<ion-option value="Extra Active - 1.9">Extra active</ion-option>
+					<ion-option value="1.2"> Sedentary</ion-option>
+					<ion-option value="1.375">Lightly active (light exercise/sports 1-3 days/week)</ion-option>
+					<ion-option value="1.55">Moderately active</ion-option>
+					<ion-option value="1.725">Very active</ion-option>
+					<ion-option value="1.9">Extra active</ion-option>
 				</ion-select>
 			</ion-item>
+
 			<button [disabled]="!weight || !height || !age || !activityLevel" ion-button (click)="nextSlide()">Next</button>
 		</ion-slide>
 
