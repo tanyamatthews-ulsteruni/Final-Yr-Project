@@ -24,9 +24,7 @@ export class WorkoutPlanPage {
 
   }
 
-  ionViewWillEnter() {
-    console.log('ionViewDidLoad WorkoutPlanPage');
-
+  ionViewDidEnter() {
     this.getWorkoutPreferencesForUser(this.userWorkoutDetail);
     this.numWorkoutsEachWeek(this.userWorkoutDetail);
     this.getPreferredWorkouts(this.userWorkoutDetail);
@@ -42,7 +40,6 @@ export class WorkoutPlanPage {
         userWorkoutDetail.setFitnessLevel(childSnapshot.val().fitnessLevel);
         userWorkoutDetail.setType(childSnapshot.val().type);
         userWorkoutDetail.setDayOfWorkout(childSnapshot.val().dayOfWorkout);
-
       }))
     });
   }
@@ -70,6 +67,8 @@ export class WorkoutPlanPage {
 
    //filter workouts based on user preference
   getPreferredWorkouts(workout){
+    //clear array on reload of page, sometimes this can cache e.g. if updating profile and then the array is added too. 
+    this.preferredWorkoutsName = [];
     const locationMatchString;
     const typeMatchString;
     this.restProvider.getAllWorkoutData()

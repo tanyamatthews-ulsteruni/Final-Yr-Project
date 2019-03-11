@@ -16,6 +16,9 @@ export class WorkoutsPage {
   workouts:any;
   workout:any;
 
+  workoutTypeFilter:any;
+  equipFilter:any;
+
   workoutNames: Array<String> = [];
 
   ionViewDidLoad() {
@@ -24,6 +27,7 @@ export class WorkoutsPage {
   }
 
   getWorkouts(){
+  this.workoutNames = [];
   this.restProvider.getAllWorkoutData()
   .then(data => {
     if(data.hasOwnProperty('results')){
@@ -39,6 +43,39 @@ export class WorkoutsPage {
   viewMoreDetail(workout){
   	this.navCtrl.push(WorkoutDetailPage, {
       data: workout
+    });
+  }
+
+  clearFilter(){
+    //clear fields.
+    this.workoutTypeFilter = null;
+    this.equipFilter = false;
+    //get basic exercise list with no features. 
+    this.getWorkouts();
+  }
+
+  applyFilter(){
+    this.workoutNames = [];
+    const equipment; 
+    if(this.equipFilter == true){
+      equipment ='#Equipment';
+    }else{
+      equipment ='#NoEquipment';
+    }
+
+    this.restProvider.getAllWorkoutData().then(data =>{
+    this.exercises = data.results;
+      
+    console.log(this.workoutTypeFilter);
+    console.log(equipment);
+
+    if(data.hasOwnProperty('results')){
+      for(let w of this.workouts){
+        if(w.comment.includes(this.workoutTypeFilter) && w.comment.includes(equipment)){
+          this.workoutNames.push(w);
+        }
+      }
+    }
     });
   }
 
