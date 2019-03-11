@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { FormsModule }   from '@angular/forms';
-import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 //page imports 
 import { LoginPage } from '../pages/login/login';
@@ -25,6 +24,7 @@ import { WorkoutStartPage } from '../pages/workout-start/workout-start';
 import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
 import { AddGoalPage } from '../pages/add-goal/add-goal';
 import { GoalsPage } from '../pages/goals/goals';
+import { GoalGraphedPage } from '../pages/goal-graphed/goal-graphed';
 //service imports
 import { AuthService } from '../pages/core/auth.service';
 import { UserService } from '../pages/core/user.service';
@@ -63,7 +63,8 @@ import { RestProvider } from '../providers/rest/rest';
     WorkoutStartPage,
     WorkoutHistoryPage,
     GoalsPage,
-    AddGoalPage
+    AddGoalPage,
+    GoalGraphedPage
   ],
   imports: [
     BrowserModule,
@@ -94,7 +95,8 @@ import { RestProvider } from '../providers/rest/rest';
     WorkoutStartPage,
     WorkoutHistoryPage,
     GoalsPage,
-    AddGoalPage
+    AddGoalPage,
+    GoalGraphedPage
   ],
   providers: [
     StatusBar,

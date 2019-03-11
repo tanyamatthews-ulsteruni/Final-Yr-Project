@@ -12,6 +12,7 @@ import { WorkoutPlanPage } from '../pages/workout-plan/workout-plan';
 import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
 import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
 import { GoalsPage } from '../pages/goals/goals';
+import { GoalGraphedPage } from '../pages/goal-graphed/goal-graphed';
 import { AuthService } from '../pages/core/auth.service';
 
 @Component({
@@ -46,7 +47,8 @@ export class MyApp {
         {title: 'All Workouts', component: WorkoutsPage},
         {title: 'Workout History', component: WorkoutHistoryPage},
         {title: 'Exercise List', component: ExerciseListPage},
-        {title: 'Goals', component: GoalsPage}
+        {title: 'Goals', component: GoalsPage},
+        {title: 'Progress', component: GoalGraphedPage}
         ]
 	}
   	

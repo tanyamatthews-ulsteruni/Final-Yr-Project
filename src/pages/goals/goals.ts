@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AddGoalPage } from '../add-goal/add-goal';
 import * as firebase from 'firebase';
 
+import { AlertController } from 'ionic-angular';
+
+
 import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
 
 //models
@@ -15,30 +18,24 @@ import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 })
 export class GoalsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private alertCtrl: AlertController) 
+  {}
 
   workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
   userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
 
-  weightGoalData = [];
-  workoutGoalData = [];
-  otherGoalData = [];
+  weightGoalData = []; workoutGoalData = []; otherGoalData = [];
 
-  weightGoalDataCompleted = [];
-  workoutGoalDataCompleted = [];
-  otherGoalDataCompleted = [];
+  weightGoalDataCompleted = []; workoutGoalDataCompleted = []; otherGoalDataCompleted = [];
 
-  weightGoalDataComplete = [];
-  workoutGoalDataComplete = [];
-  otherGoalDataComplete = [];
+  weightGoalDataComplete = []; workoutGoalDataComplete = []; otherGoalDataComplete = [];
 
-  currentWeight: any; 
-  currentWorkoutCount: any;
+  currentWeight: any; currentWorkoutCount: any; 
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GoalsPage');
-
+  ionViewDidEnter() {
     this.weightGoalData = this.getWeightGoals();
     this.workoutGoalData = this.getWorkoutGoals();
     this.otherGoalData = this.getOtherGoals();
@@ -50,10 +47,22 @@ export class GoalsPage {
     this.getCurrentWorkoutCount(this.workoutStats);
     this.getWeight(this.userHealthDetail);
 
+    this.autoCheckForCompleteWeightGoal(this.alertCtrl, this.navCtrl);
+    this.autoCheckForCompleteWorkoutGoal(this.alertCtrl, this.navCtrl);
   }
 
-  getCurrentWeight(){
 
+  presentAlert(titleTxt, subtitleTxt) {
+    let alert = this.alertCtrl.create({
+      title: titleTxt,
+      subTitle: subtitleTxt,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  reloadPage(){
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   getCurrentWorkoutCount(w){
@@ -62,17 +71,22 @@ export class GoalsPage {
     const count;
     firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
       count = snapshot.numChildren();
-      console.log(count);    
       w.countOfWorkout = snapshot.numChildren();
+    });
+  }
+
+  getWeight(userHealthDetail){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
+      snapshot.forEach((childSnapshot => {
+        userHealthDetail.weight = childSnapshot.val().weight;
+      }));
     });
   }
 
   setGoal(){
     this.navCtrl.push(AddGoalPage);
-  }
-
-  removeGoal(reference){
-
   }
 
   getWeightGoals(){
@@ -85,9 +99,8 @@ export class GoalsPage {
       ref = childSnapshot.key;
       if(childSnapshot.val().status == 'In Progress'){
         let name = childSnapshot.val().name; 
-        var i = childSnapshot.val().dateAdded.indexOf('GMT');
-        let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-        let targetDate = childSnapshot.val().targetDate;
+        let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+        let targetDate = childSnapshot.val().targetDate.substring(0, 15);
         let weightTarget = childSnapshot.val().weightTarget;
         weightGoals.push({
           name: name,
@@ -112,9 +125,8 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'In Progress'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let workoutTarget = childSnapshot.val().workoutTarget;
           workoutGoals.push({
             name: name,
@@ -139,8 +151,7 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'In Progress'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
           let targetDate = childSnapshot.val().targetDate;
           let goalDescription = childSnapshot.val().goalDescription;
           otherGoals.push({
@@ -166,16 +177,17 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'Complete'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let goalDescription = childSnapshot.val().goalDescription;
+          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);          
           workoutGoalsComplete.push({
             name: name,
             dateAdded: dateAdded,
             targetDate: targetDate,
             goalDescription: goalDescription,
-            directPath: ref
+            directPath: ref, 
+            dateAchieved: dateAchieved
           });
         }
       }))
@@ -193,16 +205,17 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'Complete'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let goalDescription = childSnapshot.val().goalDescription;
+          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);
           weightGoalsComplete.push({
             name: name,
             dateAdded: dateAdded,
             targetDate: targetDate,
             goalDescription: goalDescription,
-            directPath: ref
+            directPath: ref, 
+            dateAchieved: dateAchieved
           });
         }
       }))
@@ -220,16 +233,17 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'Complete'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0,15);
           let goalDescription = childSnapshot.val().goalDescription;
+          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);      
           otherGoalsComplete.push({
             name: name,
             dateAdded: dateAdded,
             targetDate: targetDate,
             goalDescription: goalDescription,
-            directPath: ref
+            directPath: ref, 
+            dateAchieved: dateAchieved
           });
         }
       }))
@@ -237,37 +251,34 @@ export class GoalsPage {
     return otherGoalsComplete;  
   }
 
+ /* 
+  
+  **** NO LONGER REQUIRED ***** 
+
+  For the weight and workout goals, these are based on metrics recorded in the app so user shouldn't be able to mark them complete.
+  App will detect if completed. 
+
   markWeightGoalComplete(snapshot){
     var userId = firebase.auth().currentUser.uid;
-    firebase.database().ref('/' + userId + '/goals/weightGoals/' + snapshot + '/').update({status: 'Complete'});
+    firebase.database().ref('/' + userId + '/goals/weightGoals/' + snapshot + '/').update({status: 'Complete', dateAchieved: Date()});
     this.reloadPage();
+    this.presentAlert("Weight goal achieved!", "Awesome work! You just completed your weight goal, keep up the great work.");
   }
 
   markWorkoutGoalComplete(snapshot){
     var userId = firebase.auth().currentUser.uid;
-    firebase.database().ref('/' + userId + '/goals/workoutGoals/' + snapshot + '/').update({status: 'Complete'});
+    firebase.database().ref('/' + userId + '/goals/workoutGoals/' + snapshot + '/').update({status: 'Complete', dateAchieved: Date()});
     this.reloadPage();
-  }
+    this.presentAlert("Workout goal achieved!", "Awesome work! You just completed your workout goal, keep up the great work.");
+  } */
 
   markOtherGoalComplete(snapshot){
     var userId = firebase.auth().currentUser.uid;
-    firebase.database().ref('/' + userId + '/goals/otherGoals/' + snapshot + '/').update({status: 'Complete'});
+    firebase.database().ref('/' + userId + '/goals/otherGoals/' + snapshot + '/').update({status: 'Complete', dateAchieved: Date()});
     this.reloadPage();
+    this.presentAlert("Custom goal achieved!", "Awesome work! You just completed your custom goal, keep up the great work.");
   }
 
-  reloadPage(){
-    this.navCtrl.setRoot(this.navCtrl.getActive().component);
-  }
-
-  getWeight(userHealthDetail){
-    var user = firebase.auth().currentUser;
-    var userId = user.uid;
-    firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
-      snapshot.forEach((childSnapshot => {
-        userHealthDetail.weight = childSnapshot.val().weight;
-      }));
-    });
-  }
 
   deleteWeightGoal(path){
     var user = firebase.auth().currentUser;
@@ -290,5 +301,70 @@ export class GoalsPage {
     this.reloadPage();
   }
 
+  autoCheckForCompleteWeightGoal(alt, nav){
+    var user = firebase.auth().currentUser;
+    var userId = user.uid;
+    //initialise vars.
+    const ref;
+    const currentWeight;
+    const weightTarget;
+    //get weight target goal
+    firebase.database().ref('/' + userId + '/goals/weightGoals/').once('value').then(function(snapshot){
+      snapshot.forEach((childSnapshot=>{
+      ref = childSnapshot.key;
+      if(childSnapshot.val().status == 'In Progress'){
+        weightTarget = childSnapshot.val().weightTarget;
+        //get current weight. 
+        firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
+          snapshot.forEach((childSnapshot => {
+            currentWeight = childSnapshot.val().weight;
+            if(currentWeight == weightTarget){
+              //target weight and current weight match, so goal is complete!. 
+              firebase.database().ref('/' + userId + '/goals/weightGoals/' + ref + '/').update({status: 'Complete', dateAchieved: Date()});
+              let alert = alt.create({
+                title: "Weight goal achieved!",
+                subTitle: "Awesome work! You just completed your weight goal, keep up the great work. You reached your target weight of " + weightTarget + "kg.",
+                buttons: ['OK']
+              });
+              alert.present();   
+              nav.setRoot(nav.getActive().component);
+            }
+          }));
+        });
+      }
+    }))
+    });
+  }
+
+  autoCheckForCompleteWorkoutGoal(alt, nav){
+    var user = firebase.auth().currentUser; var userId = user.uid;
+    //initialise vars.
+    const ref; const count; const workoutTarget;
+    //get workout target goal
+    firebase.database().ref('/' + userId + '/goals/workoutGoals/').once('value').then(function(snapshot){
+      snapshot.forEach((childSnapshot=>{
+      ref = childSnapshot.key;
+      if(childSnapshot.val().status == 'In Progress'){
+        workoutTarget = childSnapshot.val().workoutTarget;
+        //get current count of workouts.
+        firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
+            count = snapshot.numChildren();
+            if(count == workoutTarget){
+              //target weight and current weight match, so goal is complete!. 
+              firebase.database().ref('/' + userId + '/goals/workoutGoals/' + ref + '/').update({status: 'Complete', dateAchieved: Date()});
+
+              let alert = alt.create({
+                title: "Workout goal achieved!",
+                subTitle: "Awesome work! You just completed your workout goal, keep up the great work. You completed " + workoutTarget + " workouts.",
+                buttons: ['OK']
+              });
+              alert.present();
+              nav.setRoot(nav.getActive().component);
+            }
+          });
+      }
+    }))
+    });
+  }
 
 }
