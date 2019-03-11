@@ -30,6 +30,7 @@
     "@ionic-native/youtube-video-player": "^5.0.0",
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.1.1",
+    "chart.js": "^2.7.3",
     "cordova": "^8.1.2",
     "cordova-android": "7.1.4",
     "cordova-ios": "4.5.5",

@@ -41,7 +41,6 @@ export class ExerciseDetailPage {
   getExerciseDetail(){
   	console.log("ID = " + this.ex.id);
   	this.restProvider.getExerciseMoreData(this.ex.id).then(data =>{
-  		console.log(data);
   		this.exercises = data;
   		this.muscles = data.muscles;
   		this.second_muscles = data.secondary_muscles;

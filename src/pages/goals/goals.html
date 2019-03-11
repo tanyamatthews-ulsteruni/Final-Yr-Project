@@ -1,0 +1,129 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Goals</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<h2 class='center'>Goals in progress</h2>
+
+<button class='center' ion-button (click)="setGoal()">Add New Goal</button>
+
+
+  <div *ngFor="let x of weightGoalData">
+
+  <ion-card class='active'>
+      <ion-card-header>{{x.name}}</ion-card-header>
+      <ion-card-content>
+        <p><b>Goal Weight:</b> {{x.weightTarget}}</p>
+        <p><b>Current Weight:</b> {{userHealthDetail.weight}}</p>
+
+        <p><b>Date Added:</b> {{x.dateAdded}}</p>
+        <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
+
+        <button ion-button (click)="markWeightGoalComplete(x.directPath)">Mark complete</button>
+        <button ion-button (click)="deleteWeightGoal(x.directPath)">Delete goal</button>
+        <br/>
+        <span class='tag' id='tagActive'>Weight Goal</span>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <div *ngFor="let x of workoutGoalData">
+  	
+  <ion-card class='active'>
+    <ion-card-header>{{x.name}}</ion-card-header>
+    <ion-card-content>
+    	<p>Complete <b>{{x.workoutTarget}}</b> workouts</p>
+      <p><b>Status:</b> {{workoutStats.countOfWorkout}} / {{x.workoutTarget}} complete</p>
+
+    	<p><b>Date Added:</b> {{x.dateAdded}}</p>
+    	<p><b>Target Completion Date:</b> {{x.targetDate}}</p>
+
+      <button ion-button (click)="markWorkoutGoalComplete(x.directPath)">Mark complete</button>
+      <button ion-button (click)="deleteWorkoutGoal(x.directPath)">Delete goal</button>
+      <br/>
+      <span class='tag' id='tagActive'>Workout Goal</span>
+    </ion-card-content>
+  </ion-card>
+
+  </div>
+
+  <div *ngFor="let x of otherGoalData">
+  <ion-card class='active'>
+    <ion-card-header>{{x.name}}</ion-card-header>
+    <ion-card-content>
+      <p><b>Description:</b> {{x.otherTarget}}</p>
+      <p><b>Date Added:</b> {{x.dateAdded}}</p>
+      <p><b>Target Completion Date:</b> {{x.targetDate}} </p>
+
+      <button ion-button (click)="markOtherGoalComplete(x.directPath)">Mark complete</button>
+      <button ion-button (click)="deleteOtherGoal(x.directPath)">Delete goal</button>
+      <br/>
+      <span class='tag' id='tagActive'>Other Goal</span>
+    </ion-card-content>
+  </ion-card>
+
+  </div>
+
+  <h2 class='center'>Completed Goals</h2>
+
+  <!--COMPLETED GO DOWN HERE AT BOTTOM-->
+
+  <!--Weight goals-->
+
+  <div *ngFor="let x of weightGoalDataComplete">
+
+  <ion-card class='complete'>
+      <ion-card-header>{{x.name}}</ion-card-header>
+      <ion-card-content>
+        <p><b>Goal Weight:</b> {{x.weightTarget}}</p>
+        <p><b>Date Added:</b> {{x.dateAdded}}</p>
+        <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
+        <br/>
+        <span class='tag' id='tagInactive'>Weight Goal</span>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <!--Workout goals-->
+
+  <div *ngFor='let x of workoutGoalDataComplete'>
+    <ion-card class='complete'>
+      <ion-card-header>{{x.name}}</ion-card-header>
+      <ion-card-content>
+        <p>Complete <b>{{x.workoutTarget}}</b> workouts</p>
+        <p><b>Date Added:</b> {{x.dateAdded}}</p>
+        <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
+        <br/>
+        <span class='tag' id='tagInactive'>Workout Goal</span>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!--Other goals-->
+
+  <div *ngFor="let x of otherGoalDataComplete">
+    
+  <ion-card class='complete'>
+    <ion-card-header>{{x.name}}</ion-card-header>
+    <ion-card-content>
+      <p><b>Description:</b> {{x.otherTarget}}</p>
+      <p><b>Date Added:</b> {{x.dateAdded}}</p>
+      <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
+      <br/>
+      <span class='tag' id='tagInactive'>Other Goal</span>
+    </ion-card-content>
+  </ion-card>
+
+  </div>
+
+
+</ion-content>

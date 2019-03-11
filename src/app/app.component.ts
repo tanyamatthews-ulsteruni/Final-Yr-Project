@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -11,6 +11,7 @@ import { WorkoutsPage } from '../pages/workouts/workouts';
 import { WorkoutPlanPage } from '../pages/workout-plan/workout-plan';
 import { ExerciseListPage } from '../pages/exercise-list/exercise-list';
 import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
+import { GoalsPage } from '../pages/goals/goals';
 import { AuthService } from '../pages/core/auth.service';
 
 @Component({
@@ -44,7 +45,9 @@ export class MyApp {
         {title: 'Workout Plan', component: WorkoutPlanPage},
         {title: 'All Workouts', component: WorkoutsPage},
         {title: 'Workout History', component: WorkoutHistoryPage},
-        {title: 'Exercise List', component: ExerciseListPage}
+        {title: 'Exercise List', component: ExerciseListPage},
+        {title: 'Goals', component: GoalsPage}
+        ]
 	}
   	
   openPage(page) {

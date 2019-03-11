@@ -7,53 +7,104 @@
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <h3>Menu - Dashboard</h3>
+<ion-content id='bg' padding>
+  <h3>Welcome {{user.name}}</h3>
+
+  <ion-card>
+    <ion-card-header>
+        Workouts Complete
+    </ion-card-header>
+    <ion-card-content>
+    <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      {{workoutStats.workoutLevel}} Level
+    </ion-card-header>
+    <ion-card-content>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star"></span>
+      <span class="fa fa-star"></span>
+
+      <h6>{{workoutStats.workoutsToNextLevel}} more workouts until you level up - keep up the great work!</h6>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-header>
+      BMI - Body Mass Index
+    </ion-card-header>
+    <ion-card-content>
+      <p><b>Weight:</b> {{userHealthDetail.weight}}</p>
+      <p><b>Height:</b> {{userHealthDetail.height}}</p>
+      <p><b>BMI:</b> {{userHealthDetail.bmi}}</p>
+      <p><b>BMI Classification:</b> {{userHealthDetail.bmiDescription}}</p>
+      <p>For more information on BMI you can visit the <a href="https://www.nhs.uk/live-well/healthy-weight/bmi-calculator/">NHS BMI site</a>.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Log last workout again
+    </ion-card-header>
+    <ion-card-content>
+        <h5>{{workoutStats.lastWorkoutName}}</h5>
+        <button ion-button>Log</button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <!--<img src='../../../www/assets/imgs/dumbell.png'>-->
+
+    <ion-card-header>
+      Workout
+    </ion-card-header>
+    <ion-card-content>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      View exercises
+    </ion-card-header>
+    <ion-card-content>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Workout Summary 
+    </ion-card-header>
+    <ion-card-content>
+      <h6>Total Workouts - {{workoutStats.countOfWorkout}}</h6>
+      <h6>Last workout - {{workoutStats.lastWorkoutName}}</h6>
+      <h6>Date completed - {{workoutStats.lastWorkoutDay}}</h6>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Reasons to workout
+    </ion-card-header>
+    <ion-card-content>
+      <h6>Improve your mood</h6>
+      <h6>Build muscle</h6>
+      <h6>Reduce risk of diseases</h6>
+      <h6>Lose body fat</h6>
+      <h6>Improve sleep</h6>
+      <h6>For the fun</h6>
+    </ion-card-content>
+  </ion-card>
   
-  <h4>Hi {{user.name}}</h4>
-  
-  <div class="wrapper">
-      <section class="purple">
-         <h2>BMI</h2>
-         <h6>Body Mass Index</h6>
-         <p><b>Weight:</b> {{userHealthDetail.weight}}</p>
-         <p><b>Height:</b> {{userHealthDetail.height}}</p>
-         <p><b>BMI:</b> {{userHealthDetail.bmi}}</p>
-         <p><b>BMI Classification:</b> {{userHealthDetail.bmiDescription}}</p>
-         
-         <p>Like any measure, it is only an indication and other issues such as body type and shape have a bearing as well. Remember, BMI is just a guide - it does not accurately apply to elderly populations, pregnant women or very muscular athletes such as weight lifters.</p>
-         For more information on BMI you can visit the <a href="https://www.nhs.uk/live-well/healthy-weight/bmi-calculator/">NHS BMI site</a>.
-      </section>
-
-
-      <section class="yellow">
-        
-      </section>
-
-      <section class="green">
-         <h2>Workout Summary</h2>
-         <p>You have completed {{workoutStats.countOfWorkout}} workouts in total!</p>
-         <p>Your last workout was on {{workoutStats.lastWorkoutDay}}</p>
-         <p>This workout was {{workoutStats.lastWorkoutName}}</p>
-      </section>
- 
-      <section class="blue">
-         <h2>BMR</h2>
-      </section>
-
-      <section class="red">
-         <h2></h2>
-
-         <p></p>
-      </section>
-      
-      <section class="orange">
-         <h2></h2>
-
-         <p></p>
-      </section>
-
-   </div>
-
-
 </ion-content>

@@ -1,0 +1,114 @@
+page-goals {
+
+	.active{
+   border-top: 4px solid #F8BE39;
+	}
+
+	.complete{
+   border-top: 4px solid #78D26A;
+	}
+
+	.center{
+		text-align: center;
+		display: block;
+	    margin-left: auto;
+	    margin-right: auto
+	}
+
+body {
+  font: 12px/1.5 'PT Sans', serif;
+  margin: 25px;
+}
+
+.tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden; 
+  padding: 0;
+}
+
+.tags li {
+  float: left; 
+}
+
+.tag {
+  /*background: #eee;*/
+  border-radius: 3px 0 0 3px;
+  /*color: #999;*/
+  color: black;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+}
+
+#tagActive{
+	background-color:  #F8BE39;
+}
+
+#tagInactive, #tagInactive::after{
+	background-color:  #78D26A;
+}
+
+.tag::before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+
+
+#tagActive::after{
+  background: #fff;
+}
+
+#tagInactive::after{
+  background: #fff;
+}
+
+
+#tagActive{
+	background-color:  #F8BE39;
+}
+
+#tagInactive{
+	background-color:  #78D26A;
+}
+
+#tagActive::after{
+	border-left: 10px solid #F8BE39;
+
+}
+
+#tagInactive::after{
+  border-left: 10px solid #78D26A;
+
+}
+
+.tag::after {
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.tag:hover {
+  background-color: crimson;
+  color: white;
+}
+
+.tag:hover::after {
+   border-left-color: crimson; 
+}
+}

@@ -3,12 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // db imports
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-/**
- * Generated class for the UpdateReminderDetailsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

@@ -9,9 +9,11 @@
 <ion-content padding>
 
 	<h5>Your preferences</h5>
-	<p class='displayItem'><label>Type(s): </label> {{userWorkoutDetail.type}}</p>
-	<p class='displayItem'><label>Location: </label> {{userWorkoutDetail.location}}</p>
-	<p class='displayItem'><label>Day(s) of Workout: </label> {{userWorkoutDetail.dayOfWorkout}}</p>
+	<div class='displayItem'>
+		<p><label>Type(s): </label> {{userWorkoutDetail.type}}</p>
+		<p><label>Location: </label> {{userWorkoutDetail.location}}</p>
+		<p><label>Day(s) of Workout: </label> {{userWorkoutDetail.dayOfWorkout}}</p>
+	</div>
 
 	<button ion-button (click)="getProfilePage()">Update preferences</button>
 

@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Goal</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-item>
+		<ion-label>Goal type</ion-label>
+			<ion-select required multiple="false" placeholder='Select your goal type' [(ngModel)]="goalType" (ionChange)='showHideFurtherGoalInput(goalType)'>
+			<ion-option value="gtAmountOfWorkouts">Target amount of workouts</ion-option>
+			<ion-option value="gtWeight">Weight goal</ion-option>
+			<ion-option value='gtOther'>Other</ion-option>
+			</ion-select>
+	</ion-item>
+
+	<ion-item>
+		<ion-label>Goal Name</ion-label>
+			<ion-input [(ngModel)]="goalName" placeholder='Enter a name for your goal' type='text'></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf='amountOfWorkoutsGoals'>
+		<ion-label>How many workouts?</ion-label>
+		<ion-input [(ngModel)]="gtAmountOfWorkoutsVal" placeholder='15' type='number'></ion-input>
+	</ion-item>
+
+	<ion-item *ngIf='weightGoals'>
+		<ion-label>Goal weight (kg)</ion-label>
+		<ion-input [(ngModel)]="gtWeightVal" placeholder='85' type='number'></ion-input>
+	</ion-item>
+
+	<ion-item  *ngIf='otherGoals'>
+		<ion-label>Other goal (description)</ion-label>
+		<ion-input [(ngModel)]="gtOtherVal" placeholder='Enter your goal description' type='text'></ion-input>
+	</ion-item>
+
+	<ion-item>
+  		<ion-label>Date</ion-label>
+  		<ion-datetime [(ngModel)]='targetDate' placeholder='Enter the date you would like to achieve goal by' display-format="DDD MMM YYYY"></ion-datetime>
+	</ion-item>
+
+	<br/>
+	<button ion-button [disabled]="!goalName || !targetDate && !gtAmountOfWorkoutsVal && !gtWeightVal && !gtOtherVal" (click)="addGoal()">Add Goal</button>
+
+</ion-content>
