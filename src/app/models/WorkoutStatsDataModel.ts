@@ -5,7 +5,7 @@ export class WorkoutStatsDataModel {
 	public lastWorkoutName: any;
 	public workoutLevel: any;
 	public workoutsToNextLevel: any;
-
+    public lastWorkoutId: any;
 
     constructor(){
     	this.countOfWorkout = 0;
@@ -13,6 +13,7 @@ export class WorkoutStatsDataModel {
     	this.lastWorkoutName = '';
     	this.workoutLevel = '';
     	this.workoutsToNextLevel = 0;
+        this.lastWorkoutId = 0;
     }
 
 }

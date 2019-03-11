@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { FormsModule }   from '@angular/forms';
-
 //page imports 
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
@@ -41,7 +40,6 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
 
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
 import { RestProvider } from '../providers/rest/rest';
 
 @NgModule({
@@ -74,7 +72,7 @@ import { RestProvider } from '../providers/rest/rest';
     AngularFireDatabaseModule,
     FormsModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

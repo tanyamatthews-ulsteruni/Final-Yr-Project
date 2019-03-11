@@ -49,9 +49,7 @@ export class AddGoalPage {
  	var userId = firebase.auth().currentUser.uid;
   const status = 'In Progress';
   const dateAchieved = 'N/A';
-  const targetDateFormatted;
-  console.log(this.targetDate);
-  targetDateFormatted = new Date(this.targetDate).toString();
+  const targetDateFormatted = new Date(this.targetDate).toString();
 
 	if(this.amountOfWorkoutsGoals){
 		this.db.list(userId + '/goals/workoutGoals/').push({dateAdded: Date(), name: this.goalName, workoutTarget: this.gtAmountOfWorkoutsVal, targetDate: targetDateFormatted, status: status, dateAchieved: dateAchieved});

@@ -6,6 +6,7 @@ export class HealthDetailsDataModel {
         public height: number;
         public bmi: any;
         public bmiDescription: any;
+        public bmr: any;
 
     constructor(){
     	this.activityLevel = "";
@@ -14,6 +15,7 @@ export class HealthDetailsDataModel {
     	this.height = null;
         this.bmi = "No data to calculate, please set health details in the profile section.";
         this.bmiDescription = "";
+        this.bmr = "No data to calculate. please set health details in the profile section.";
     }
 
 }

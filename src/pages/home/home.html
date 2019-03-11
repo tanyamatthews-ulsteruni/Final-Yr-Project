@@ -11,8 +11,27 @@
   <h3>Welcome {{user.name}}</h3>
 
   <ion-card>
+    <ion-card-header>
+      Log last workout again
+    </ion-card-header>
+    <ion-card-content>
+        <h5>{{workoutStats.lastWorkoutName}}</h5>
+        <img src="../assets/imgs/iconfinder_icon_27_one_finger_click_329387.png" (click)="logLastWorkout(workoutStats)"/>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
       <ion-card-header>
-        Weight shown over time
+        Workout History
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #barCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+
+  <ion-card>
+      <ion-card-header>
+        <ion-card-title>Weight History</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <canvas #lineCanvas></canvas>
@@ -21,18 +40,11 @@
 
   <ion-card>
     <ion-card-header>
-      {{workoutStats.workoutLevel}} Level
+      <ion-card-title>{{workoutStats.workoutLevel}} Level</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star checked"></span>
-      <span class="fa fa-star"></span>
-      <span class="fa fa-star"></span>
-
-      <h6>{{workoutStats.workoutsToNextLevel}} more workouts until you level up - keep up the great work!</h6>
+      <h4><span class='bigger'>{{workoutStats.workoutsToNextLevel}} more workouts </span>until you level up - keep up the great work!</h4>
+      <canvas #doughnutCanvas></canvas>
     </ion-card-content>
   </ion-card>
 
@@ -42,54 +54,34 @@
       BMI - Body Mass Index
     </ion-card-header>
     <ion-card-content>
-      <p><b>Weight:</b> {{userHealthDetail.weight}}</p>
-      <p><b>Height:</b> {{userHealthDetail.height}}</p>
-      <p><b>BMI:</b> {{userHealthDetail.bmi}}</p>
-      <p><b>BMI Classification:</b> {{userHealthDetail.bmiDescription}}</p>
+      <p>Weight - {{userHealthDetail.weight}}</p>
+      <p>Height - {{userHealthDetail.height}}</p>
+      <p class='bigger'>BMI - {{userHealthDetail.bmi}}</p>
+      <p class='bigger'>BMI Classification - {{userHealthDetail.bmiDescription}}</p>
       <p>For more information on BMI you can visit the <a href="https://www.nhs.uk/live-well/healthy-weight/bmi-calculator/">NHS BMI site</a>.</p>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+ <ion-card>
     <ion-card-header>
-      Log last workout again
+      BMR - Basal Metabolic Rate 
     </ion-card-header>
     <ion-card-content>
-        <h5>{{workoutStats.lastWorkoutName}}</h5>
-        <button ion-button>Log</button>
+      <p class='bigger'>{{userHealthDetail.bmr}} kcal</p>
+      <p>Basal metabolic rate (BMR) is the total number of calories that your body needs to perform basic, life-sustaining functions. These basal functions include circulation, breathing and sleeping.</p>
+      <p>For more information on BMR and your metabolism, visit the <a href="https://www.nhs.uk/live-well/healthy-weight/metabolism-and-weight-loss/">NHS Metabolism site</a>.</p>
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
-    <!--<img src='../../../www/assets/imgs/dumbell.png'>-->
-
-    <ion-card-header>
-      Workout
-    </ion-card-header>
-    <ion-card-content>
-
-
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      View exercises
-    </ion-card-header>
-    <ion-card-content>
-
-
-    </ion-card-content>
-  </ion-card>
 
   <ion-card>
     <ion-card-header>
       Workout Summary 
     </ion-card-header>
     <ion-card-content>
-      <h6>Total Workouts - {{workoutStats.countOfWorkout}}</h6>
-      <h6>Last workout - {{workoutStats.lastWorkoutName}}</h6>
-      <h6>Date completed - {{workoutStats.lastWorkoutDay}}</h6>
+      <p><span class='bigger'>{{workoutStats.countOfWorkout}}</span> total workouts</p>
+      <p><span class='bigger'>{{workoutStats.lastWorkoutName}}</span> last workout</p>
+      <p><span class='bigger'>{{workoutStats.lastWorkoutDay}}</span> date of last workout</p>
     </ion-card-content>
   </ion-card>
 
