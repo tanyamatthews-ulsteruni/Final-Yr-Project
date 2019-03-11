@@ -48,13 +48,14 @@ export class AddGoalPage {
   addGoal(){
  	var userId = firebase.auth().currentUser.uid;
   const status = 'In Progress';
+  const dateAchieved = 'N/A';
 
 	if(this.amountOfWorkoutsGoals){
-		this.db.list(userId + '/goals/workoutGoals/').push({dateAdded: Date(), name: this.goalName, workoutTarget: this.gtAmountOfWorkoutsVal, targetDate: this.targetDate, status: status});
+		this.db.list(userId + '/goals/workoutGoals/').push({dateAdded: Date(), name: this.goalName, workoutTarget: this.gtAmountOfWorkoutsVal, targetDate: this.targetDate, status: status, dateAchieved: dateAchieved});
 	}else if(this.weightGoals){
-		this.db.list(userId + '/goals/weightGoals/').push({dateAdded: Date(), name: this.goalName, weightTarget: this.gtWeightVal, targetDate: this.targetDate, status: status});
+		this.db.list(userId + '/goals/weightGoals/').push({dateAdded: Date(), name: this.goalName, weightTarget: this.gtWeightVal, targetDate: this.targetDate, status: status, dateAchieved: dateAchieved});
 	}else if(this.otherGoals){
-		this.db.list(userId + '/goals/otherGoals/').push({dateAdded: Date(), name: this.goalName, goalDescription: this.gtOtherVal, targetDate: this.targetDate, status: status});
+		this.db.list(userId + '/goals/otherGoals/').push({dateAdded: Date(), name: this.goalName, goalDescription: this.gtOtherVal, targetDate: this.targetDate, status: status, dateAchieved: dateAchieved});
 	}
 	this.navCtrl.pop();
 //  this.reloadPage();

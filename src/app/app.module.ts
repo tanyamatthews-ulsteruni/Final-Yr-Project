@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { FormsModule }   from '@angular/forms';
-import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 //page imports 
 import { LoginPage } from '../pages/login/login';
