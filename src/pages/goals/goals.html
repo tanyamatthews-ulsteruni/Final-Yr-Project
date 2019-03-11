@@ -26,8 +26,8 @@
         <p><b>Current Weight:</b> {{userHealthDetail.weight}}</p>
         <p><b>Date Added:</b> {{x.dateAdded}}</p>
         <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
-
-        <button ion-button (click)="markWeightGoalComplete(x.directPath)">Mark complete</button>
+        <!--User should no longer be able to mark this complete as this is based on a metric within the app!-->
+        <!--<button ion-button (click)="markWeightGoalComplete(x.directPath)">Mark complete</button>-->
         <button ion-button (click)="deleteWeightGoal(x.directPath)">Delete goal</button>
         <br/>
         <span class='tag' id='tagActive'>Weight Goal</span>
@@ -48,8 +48,8 @@
       <p><b>Status:</b> {{workoutStats.countOfWorkout}} / {{x.workoutTarget}} complete</p>
     	<p><b>Date Added:</b> {{x.dateAdded}}</p>
     	<p><b>Target Completion Date:</b> {{x.targetDate}}</p>
-
-      <button ion-button (click)="markWorkoutGoalComplete(x.directPath)">Mark complete</button>
+      <!--User should no longer be able to mark this complete as this is based on a metric within the app!-->
+      <!--<button ion-button (click)="markWorkoutGoalComplete(x.directPath)">Mark complete</button>-->
       <button ion-button (click)="deleteWorkoutGoal(x.directPath)">Delete goal</button>
       <br/>
       <span class='tag' id='tagActive'>Workout Goal</span>
@@ -72,7 +72,7 @@
       <button ion-button (click)="markOtherGoalComplete(x.directPath)">Mark complete</button>
       <button ion-button (click)="deleteOtherGoal(x.directPath)">Delete goal</button>
       <br/>
-      <span class='tag' id='tagActive'>Other Goal</span>
+      <span class='tag' id='tagActive'>Custom Goal</span>
     </ion-card-content>
   </ion-card>
 
@@ -135,7 +135,7 @@
       <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
       <p><b>Date achieved: </b>{{x.dateAchieved}}</p>
       <br/>
-      <span class='tag' id='tagInactive'>Other Goal</span>
+      <span class='tag' id='tagInactive'>Custom Goal</span>
     </ion-card-content>
   </ion-card>
 

@@ -31,11 +31,13 @@ export class UpdateHealthDetailsPage {
     var userId = firebase.auth().currentUser.uid;
     firebase.database().ref('/' + userId + '/healthDetails/').once('value').then(function(snapshot){
 
-      snapshot.forEach((childSnapshot => {
+    snapshot.forEach((childSnapshot => {
         console.log('/' + userId + '/healthDetails/' + childSnapshot.key);
         firebase.database().ref('/' + userId + '/healthDetails/' + childSnapshot.key).update({age: age, height: height, weight: weight});//, age: this.age, height: this.height ,  weight: this.weight});
       }));
     })
+
+    firebase.database().ref('/' + userId + '/historicHealthDetails/').push({age: age, height: height, weight: weight, date: Date()});
 
     //return to previous page 
     this.navCtrl.pop();
