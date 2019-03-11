@@ -3,13 +3,13 @@ import { NavController, AlertController } from 'ionic-angular';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { FirebaseUserModel } from '../core/user.model';
 import * as firebase from 'firebase';
 
 //importing chart js. 
 import { Chart } from 'chart.js';
 
 //models 
+import { FirebaseUserModel } from '../core/user.model';
 import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
 import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 
@@ -58,7 +58,6 @@ export class HomePage {
 
     this.weightGraphData = this.getWeightOverTime();
     this.barChartData = this.getWorkoutHistory();
-    console.log(this.barChartData);
 
     setTimeout(() => {
       this.generateLineChart(this.weightGraphData);
