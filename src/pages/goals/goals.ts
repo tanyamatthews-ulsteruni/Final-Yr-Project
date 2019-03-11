@@ -15,28 +15,21 @@ import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 })
 export class GoalsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams) 
+  {}
 
   workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
   userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
 
-  weightGoalData = [];
-  workoutGoalData = [];
-  otherGoalData = [];
+  weightGoalData = []; workoutGoalData = []; otherGoalData = [];
 
-  weightGoalDataCompleted = [];
-  workoutGoalDataCompleted = [];
-  otherGoalDataCompleted = [];
+  weightGoalDataCompleted = []; workoutGoalDataCompleted = []; otherGoalDataCompleted = [];
 
-  weightGoalDataComplete = [];
-  workoutGoalDataComplete = [];
-  otherGoalDataComplete = [];
+  weightGoalDataComplete = []; workoutGoalDataComplete = []; otherGoalDataComplete = [];
 
-  currentWeight: any; 
-  currentWorkoutCount: any;
-
-  weight: any;
+  currentWeight: any; currentWorkoutCount: any; 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GoalsPage');
@@ -95,9 +88,8 @@ export class GoalsPage {
       ref = childSnapshot.key;
       if(childSnapshot.val().status == 'In Progress'){
         let name = childSnapshot.val().name; 
-        var i = childSnapshot.val().dateAdded.indexOf('GMT');
-        let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-        let targetDate = childSnapshot.val().targetDate;
+        let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+        let targetDate = childSnapshot.val().targetDate.substring(0, 15);
         let weightTarget = childSnapshot.val().weightTarget;
         weightGoals.push({
           name: name,
@@ -122,9 +114,8 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'In Progress'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let workoutTarget = childSnapshot.val().workoutTarget;
           workoutGoals.push({
             name: name,
@@ -149,8 +140,7 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'In Progress'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
           let targetDate = childSnapshot.val().targetDate;
           let goalDescription = childSnapshot.val().goalDescription;
           otherGoals.push({
@@ -176,12 +166,10 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'Complete'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let goalDescription = childSnapshot.val().goalDescription;
-          let x = childSnapshot.val().dateAchieved.indexOf('GMT');
-          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, x);          
+          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);          
           workoutGoalsComplete.push({
             name: name,
             dateAdded: dateAdded,
@@ -206,12 +194,10 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'Complete'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let goalDescription = childSnapshot.val().goalDescription;
-          let x = childSnapshot.val().dateAchieved.indexOf('GMT');
-          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, x);
+          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);
           weightGoalsComplete.push({
             name: name,
             dateAdded: dateAdded,
@@ -236,11 +222,9 @@ export class GoalsPage {
         ref = childSnapshot.key;
         if(childSnapshot.val().status == 'Complete'){
           let name = childSnapshot.val().name; 
-          var i = childSnapshot.val().dateAdded.indexOf('GMT');
-          let dateAdded = childSnapshot.val().dateAdded.substring(0, i);
-          let targetDate = childSnapshot.val().targetDate;
+          let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
+          let targetDate = childSnapshot.val().targetDate.substring(0,15);
           let goalDescription = childSnapshot.val().goalDescription;
-          let x = childSnapshot.val().dateAchieved.indexOf('GMT');
           let dateAchieved = childSnapshot.val().dateAchieved.substring(0, x);      
           otherGoalsComplete.push({
             name: name,
