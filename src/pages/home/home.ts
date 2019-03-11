@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { UserService } from '../core/user.service';
 import { AuthService } from '../core/auth.service';
 import { FirebaseUserModel } from '../core/user.model';
 import * as firebase from 'firebase';
+
+import { Chart } from 'chart.js';
+
 
 //models 
 import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
@@ -17,9 +20,12 @@ import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 
 export class HomePage {
 
- user: FirebaseUserModel = new FirebaseUserModel();
- userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
- workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
+  user: FirebaseUserModel = new FirebaseUserModel();
+  userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
+  workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
+
+  @ViewChild('doughnutCanvas') doughnutCanvas;
+  doughnutChart: any;
 
   constructor(
     public navCtrl: NavController,
@@ -39,6 +45,35 @@ export class HomePage {
 
     this.countWorkouts(this.workoutStats);
     this.getLastWorkout(this.workoutStats);
+
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+
+            type: 'doughnut',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]
+            }
+
+        });
   }
 
 

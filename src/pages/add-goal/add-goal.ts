@@ -57,6 +57,7 @@ export class AddGoalPage {
 		this.db.list(userId + '/goals/otherGoals/').push({dateAdded: Date(), name: this.goalName, goalDescription: this.gtOtherVal, targetDate: this.targetDate, status: status});
 	}
 	this.navCtrl.pop();
+//  this.reloadPage();
   }
 
 }
