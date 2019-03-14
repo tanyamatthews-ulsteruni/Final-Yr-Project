@@ -6,9 +6,10 @@
 
 <ion-content padding class="form-content">
 
-  <!--<img id='logoImg' alt="logo" src="../../assets/imgs/LogoNoTaglineSmall.png" > -->
-  <h3>Fit2Me</h3>
-  <h4>Workout your way</h4>
+  <img id='logo' alt="logo" src="../../assets/imgs/Logo.png" >
+  <!--<h3>Fit2Me</h3>
+  <h4>Workout your way</h4>-->
+  
   <form class="form" [formGroup]="loginForm" (ngSubmit)="tryLogin(loginForm.value)">
 
     <ion-item>
@@ -29,6 +30,7 @@
     <br>
     <div>
       <p>Not registered yet? <a (click)="goRegisterPage()">Register</a></p>
+      <p>Forgotten password? <a (click)="resetPassword()">Reset password here</a></p>
     </div>
     <br>
 
