@@ -12,6 +12,7 @@ import { Chart } from 'chart.js';
 import { FirebaseUserModel } from '../core/user.model';
 import { HealthDetailsDataModel } from '../../app/models/HealthDetailsDataModel';
 import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
+import { GoalStatsDataModel } from '../../app/models/GoalStatsDataModel';
 
 @IonicPage()
 @Component({
@@ -24,6 +25,7 @@ export class HomePage {
   user: FirebaseUserModel = new FirebaseUserModel();
   userHealthDetail: HealthDetailsDataModel = new HealthDetailsDataModel();
   workoutStats: WorkoutStatsDataModel = new WorkoutStatsDataModel();
+  goalStats: GoalStatsDataModel = new GoalStatsDataModel();
 
   @ViewChild('lineCanvas') lineCanvas;
   @ViewChild('doughnutCanvas') doughnutCanvas;
@@ -33,6 +35,8 @@ export class HomePage {
   lineChart: any;
   barChart: any;
   stars: any;
+  
+  updatedProfile: boolean = true;
 
   constructor(
     public navCtrl: NavController,
@@ -53,7 +57,6 @@ export class HomePage {
       this.user = user;
     }, err => console.log(err))
 
-
     this.countWorkouts(this.workoutStats);
 
     this.weightGraphData = this.getWeightOverTime();
@@ -63,10 +66,12 @@ export class HomePage {
       this.generateLineChart(this.weightGraphData);
       this.generateDoughnutChart(this.workoutStats);
       this.generateBarChart(this.barChartData);
-    }, 1500);
+    }, 700);
 
     this.getLastWorkout(this.workoutStats);
     this.calculateBMR(this.userHealthDetail);
+
+    this.checkForBadges(this.goalStats);
 
   }
 
@@ -155,7 +160,6 @@ export class HomePage {
     var user = firebase.auth().currentUser;
     var userId = user.uid;
     firebase.database().ref('/' + userId + '/workoutHistory/').limitToLast(1).once('value').then(function(snapshot){
-      console.log(snapshot);
       snapshot.forEach((childSnapshot=>{
         w.lastWorkoutDay = childSnapshot.val().date.substring(0, 15);
         w.lastWorkoutName = childSnapshot.val().name;
@@ -257,7 +261,6 @@ export class HomePage {
   }
 
   logLastWorkout(w){
-    console.log(w);
     var user = firebase.auth().currentUser;
     var userId = user.uid;
     this.db.list(userId + '/workoutHistory/').push({date: Date(), id: w.lastWorkoutId, name: w.lastWorkoutName});
@@ -285,11 +288,10 @@ export class HomePage {
     var user = firebase.auth().currentUser;
     var userId = user.uid;
     firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
-      //console.log(snapshot);
       snapshot.forEach((childSnapshot=>{
         var currentDate = childSnapshot.val().date;
         if(currentDate.includes('Dec')){
-          dec = dec + 1;
+          dec = dec +1;
         }else if(currentDate.includes('Jan')){
           jan = jan + 1;
         }else if(currentDate.includes('Feb')){
@@ -316,8 +318,7 @@ export class HomePage {
   }
 
   generateBarChart(data){
-  
-  this.barChart = new Chart(this.barCanvas.nativeElement, {
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
             type: 'bar',
             data: {
                 labels: ["Dec", "Jan", "Feb", "Mar", "Apr", "May"],
@@ -355,5 +356,17 @@ export class HomePage {
         });
 
     }
+
+    checkForBadges(g){
+      //check goal count. 
+      var user = firebase.auth().currentUser;
+        var userId = user.uid;
+        firebase.database().ref('/' + userId + '/goals/').once('value').then(function(snapshot){
+          g.countOfGoals = snapshot.numChildren();
+        });
+    }
+
+
+        
 
 }

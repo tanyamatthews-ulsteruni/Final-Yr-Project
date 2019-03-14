@@ -8,6 +8,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content id='bg' padding>
+
+  <img id='logo' alt="logo" src="/assets/imgs/Logo.png" > 
+
+
   <h3>Welcome {{user.name}}</h3>
 
   <ion-card>
@@ -16,7 +20,8 @@
     </ion-card-header>
     <ion-card-content>
         <h5>{{workoutStats.lastWorkoutName}}</h5>
-        <img src="../assets/imgs/iconfinder_icon_27_one_finger_click_329387.png" (click)="logLastWorkout(workoutStats)"/>
+        <button ion-button (click)="logLastWorkout(workoutStats)">Log last workout</button>
+
     </ion-card-content>
   </ion-card>
 
@@ -40,7 +45,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{workoutStats.workoutLevel}} Level</ion-card-title>
+      <ion-card-title>Your workout level - {{workoutStats.workoutLevel}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <h4><span class='bigger'>{{workoutStats.workoutsToNextLevel}} more workouts </span>until you level up - keep up the great work!</h4>
@@ -85,17 +90,93 @@
     </ion-card-content>
   </ion-card>
 
+  <!--BADGES-->
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Your Badges</ion-card-title>
+    </ion-card-header>
+    <ion-card-content> 
+
+    <p>Get active to unlock some badges!</p>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div>
+            <img [ngClass]='{notAchievedBadge: (goalStats.countOfGoals <1), badge: (goalStats.countOfGoals >0)}' src='../assets/imgs/badges/FirstGoalAchieved.png'>
+            <p>First Goal Completed</p>
+            <img [ngClass]='{notAchievedBadge: (goalStats.countOfGoals <10), badge: (goalStats.countOfGoals >9)}' src='../assets/imgs/badges/TenGoalsAchieved.png'>
+            <p>Ten Goals Completed</p>
+            <img [ngClass]='{notAchievedBadge: (goalStats.countOfGoals <50), badge: (goalStats.countOfGoals >49)}' src='../assets/imgs/badges/TenGoalsAchieved.png'>
+            <p>Fifty Goals Completed</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            <img [ngClass]='{notAchievedBadge: (workoutStats.countOfWorkout < 1), badge: (workoutStats.countOfWorkout > 0)}' src='../assets/imgs/badges/FirstWorkoutAchieved.png'>
+            <p>First Workout</p>
+
+            <img [ngClass]='{notAchievedBadge: (workoutStats.countOfWorkout < 10), badge: (workoutStats.countOfWorkout > 9)}' src='../assets/imgs/badges/TenWorkoutsAchieved.png'>
+            <p>Ten Workouts</p>
+
+            <img [ngClass]='{notAchievedBadge: (workoutStats.countOfWorkout < 50), badge: (workoutStats.countOfWorkout > 49)}' src='../assets/imgs/badges/TenWorkoutsAchieved.png'>
+            <p>Fifty Workouts</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+          <img [ngClass]='{notAchievedBadge: (updatedProfile == false), badge: (updatedProfile == true)}' src='../assets/imgs/badges/UpdatedProfile.png'>
+          <p>Updated health details</p>
+
+          <img [ngClass]='{notAchievedBadge: (workoutStats.workoutLevel == "Beginner"), badge: (workoutStats.workoutLevel != "Beginner")}' src='../assets/imgs/badges/LevelUp.png'>
+          <p>Leveled up once</p>
+
+          <img [ngClass]='{notAchievedBadge: (workoutStats.workoutLevel == "Intermediate"), badge: (workoutStats.workoutLevel == "Advanced")}' src='../assets/imgs/badges/LevelUp.png'>
+          <p>Leveled up twice</p>
+        </div>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+
+<!--REASONS TO WORKOUT-->
+
   <ion-card>
     <ion-card-header>
       Reasons to workout
     </ion-card-header>
     <ion-card-content>
-      <h6>Improve your mood</h6>
-      <h6>Build muscle</h6>
-      <h6>Reduce risk of diseases</h6>
-      <h6>Lose body fat</h6>
-      <h6>Improve sleep</h6>
-      <h6>For the fun</h6>
+
+    <!--Row 1 -->
+    <ion-grid>
+      <ion-row>
+
+        <ion-col><div>
+          <img class='dashboardImg' src="../assets/imgs/dashboard/weight-loss.png">
+          <p>Lose body fat</p>
+          <img class='dashboardImg' src="../assets/imgs/dashboard/strength.png">      
+          <p>Build muscle</p>
+      </div></ion-col>
+      <ion-col><div>
+          <img class='dashboardImg' src="../assets/imgs/dashboard/moon.png">
+          <p>Improve sleep</p>
+          <img class='dashboardImg' src="../assets/imgs/dashboard/meditation.png">
+          <p>Improve your mood</p>
+      </div></ion-col>
+      <ion-col><div>
+          <img class='dashboardImg' src="../assets/imgs/dashboard/boy-broad-smile.png">
+          <p>To have fun</p>
+          <img class='dashboardImg' src="../assets/imgs/dashboard/heart-frequency.png">
+          <p>Reduce risk of diseases</p>
+      </div></ion-col>
+    </ion-row>
+    </ion-grid>
+
+
     </ion-card-content>
   </ion-card>
   
