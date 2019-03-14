@@ -24,6 +24,7 @@ import { WorkoutHistoryPage } from '../pages/workout-history/workout-history';
 import { AddGoalPage } from '../pages/add-goal/add-goal';
 import { GoalsPage } from '../pages/goals/goals';
 import { GoalGraphedPage } from '../pages/goal-graphed/goal-graphed';
+import { PasswordResetPage } from '../pages/password-reset/password-reset';
 //service imports
 import { AuthService } from '../pages/core/auth.service';
 import { UserService } from '../pages/core/user.service';
@@ -62,7 +63,8 @@ import { RestProvider } from '../providers/rest/rest';
     WorkoutHistoryPage,
     GoalsPage,
     AddGoalPage,
-    GoalGraphedPage
+    GoalGraphedPage,
+    PasswordResetPage
   ],
   imports: [
     BrowserModule,
@@ -94,7 +96,8 @@ import { RestProvider } from '../providers/rest/rest';
     WorkoutHistoryPage,
     GoalsPage,
     AddGoalPage,
-    GoalGraphedPage
+    GoalGraphedPage,
+    PasswordResetPage
   ],
   providers: [
     StatusBar,
