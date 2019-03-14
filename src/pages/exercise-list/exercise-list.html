@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Exercises List</ion-title>
+    <ion-title>Exercise List</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,6 +10,8 @@
 <ion-content padding>
 
 <ion-content>
+
+  <img id='logo' alt="logo" src="/assets/imgs/Logo.png" > 
 
 <h3>Filter Exercises</h3>
 
@@ -51,7 +53,7 @@
     <ion-item *ngFor="let ex of exercises">
       <h2>{{ex.name}}</h2>
       <p>{{ex.description}}</p>
-      <button ion-button item-right (click)="viewMoreDetail(ex)">More</button>
+      <button ion-button item-right (click)="viewMoreDetail(ex)">View</button>
     </ion-item>
   </ion-list>
 </ion-content>
