@@ -17,7 +17,7 @@ import { WorkoutStatsDataModel } from '../../app/models/WorkoutStatsDataModel';
 })
 export class GoalGraphedPage {
 
-  	@ViewChild('barCanvas') barCanvas;
+  @ViewChild('barCanvas') barCanvas;
 	@ViewChild('lineCanvas') lineCanvas;
 	@ViewChild('doughnutCanvas') doughnutCanvas;
 
@@ -46,7 +46,7 @@ export class GoalGraphedPage {
       this.generateLineChart(this.weightGraphData);
       this.generateDoughnutChart(this.workoutStats);
       this.generateBarChart(this.barChartData);
-  	}, 1500);
+  	}, 900);
 
 
   }
@@ -129,17 +129,17 @@ export class GoalGraphedPage {
       snapshot.forEach((childSnapshot=>{
         var currentDate = childSnapshot.val().date;
         if(currentDate.includes('Dec')){
-          dec = dec + 1;
+          dec++;
         }else if(currentDate.includes('Jan')){
-          jan = jan + 1;
+          jan++;
         }else if(currentDate.includes('Feb')){
-          feb = feb +1;
+          feb++;
         }else if(currentDate.includes('Mar')){
-          mar = mar + 1;
+          mar++;
         }else if(currentDate.includes('Apr')){
-          apr = apr + 1; 
+          apr++; 
         }else if(currentDate.includes('May')){
-          may = may + 1;
+          may++;
         }
       }))
       barData.push({

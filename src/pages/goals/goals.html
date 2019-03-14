@@ -9,6 +9,8 @@
 
 <ion-content padding>
 
+  <img id='logo' alt="logo" src="/assets/imgs/Logo.png" > 
+
 <h2 class='center'>Goals in progress</h2>
 
 <button class='center' ion-button (click)="setGoal()">Add New Goal</button>
@@ -21,8 +23,8 @@
         <ion-card-title>{{x.name}} - Reach target weight {{x.weightTarget}} kg</ion-card-title>
      </ion-card-header>
       <ion-card-content>
-
-        <p><b>Current Weight:</b> {{userHealthDetail.weight}}</p>
+        <p><b>Goal Weight: </b> {{x.weightTarget}}kg</p>
+        <p><b>Current Weight:</b> {{userHealthDetail.weight}}kg</p>
         <p><b>Date Added:</b> {{x.dateAdded}}</p>
         <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
         <!--User should no longer be able to mark this complete as this is based on a metric within the app!-->
@@ -59,7 +61,7 @@
   <div *ngFor="let x of otherGoalData">
   <ion-card class='active'>
     <ion-card-header>
-      <ion-card-title>{{x.name}} - {{x.otherTarget}}</ion-card-title>
+      <ion-card-title>{{x.name}} - {{x.goalDescription}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
 
@@ -88,6 +90,7 @@
         <ion-card-title>{{x.name}} - Reach target weight {{x.weightTarget}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
+        <p><b>Goal Weight: </b> {{x.weightTarget}}kg</p>
         <p><b>Date Added:</b> {{x.dateAdded}}</p>
         <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
         <p><b>Date achieved: </b>{{x.dateAchieved}}</p>
@@ -106,6 +109,7 @@
        <ion-card-title>{{x.name}} - Complete {{x.workoutTarget}} workouts</ion-card-title>
       </ion-card-header>
       <ion-card-content>
+        <p><b>Target workouts:</b> {{x.workoutTarget}}</p>
         <p><b>Date Added:</b> {{x.dateAdded}}</p>
         <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
         <p><b>Date achieved: </b>{{x.dateAchieved}}</p>
@@ -122,9 +126,10 @@
     
   <ion-card class='complete'>
     <ion-card-header>
-    <ion-card-title>{{x.name}} - {{x.otherTarget}}</ion-card-title>
+    <ion-card-title>{{x.name}} - {{x.goalDescription}}</ion-card-title>
   </ion-card-header>
     <ion-card-content>
+      <p><b>Description:</b> {{x.goalDescription}}</p>
       <p><b>Date Added:</b> {{x.dateAdded}}</p>
       <p><b>Target Completion Date:</b> {{x.targetDate}}</p>
       <p><b>Date achieved: </b>{{x.dateAchieved}}</p>

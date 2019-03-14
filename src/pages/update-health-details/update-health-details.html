@@ -9,6 +9,8 @@
 
 <ion-content padding>
 
+	<img id='logo' alt="logo" src="/assets/imgs/Logo.png" > 
+
 	<h3>Set Health Details</h3>
 			<p>These details will be used to calculate your body mass index (BMI) and basal metabolic rate (BMR). Don't worry - we'll explain this more later.
 			<ion-item>
@@ -26,12 +28,12 @@
 
   			<ion-item>
 				<ion-label>Activity level</ion-label>
-				<ion-select (ngModel)="activityLevel">
-					<ion-option value="Sedentary - 1.2"> Sedentary</ion-option>
-					<ion-option value="Lightly active - 1.375">Lightly active (light exercise/sports 1-3 days/week)</ion-option>
-					<ion-option value="Moderately active - 1.55">Moderately active</ion-option>
-					<ion-option value="Very active - 1.725">Very active</ion-option>
-					<ion-option value="Extra Active - 1.9">Extra active</ion-option>
+				<ion-select [(ngModel)]="activityLevel">
+					<ion-option value="1.2"> Sedentary</ion-option>
+					<ion-option value="1.375">Lightly active (light exercise/sports 1-3 days/week)</ion-option>
+					<ion-option value="1.55">Moderately active</ion-option>
+					<ion-option value="1.725">Very active</ion-option>
+					<ion-option value="1.9">Extra active</ion-option>
 				</ion-select>
 			</ion-item>
 			<button [disabled]="!weight || !height || !age" ion-button (click)="changeDetails(age, weight, height)">Update</button>

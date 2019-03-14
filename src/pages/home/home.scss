@@ -5,12 +5,25 @@ page-home {
   }
 
   .bigger{
-    font-size: 30px;
+    font-size: 22px;
   }
 
-  img{
+  .dashboardImg{
     height: 15%;
     width: 15%;
+    display: inline-block;    
+  }
+
+  .notAchievedBadge{
+    -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+    filter: blur(5px);
+    height: 25%;
+    width: 25%;
+  }
+
+  .badge{
+    height: 25%;
+    width: 25%;
   }
 
   .tile{

@@ -9,6 +9,8 @@
 
 <ion-content padding>
 
+	<img id='logo' alt="logo" src="/assets/imgs/Logo.png" > 
+
 	<ion-item>
 		<ion-label>Goal type</ion-label>
 			<ion-select required multiple="false" placeholder='Select your goal type' [(ngModel)]="goalType" (ionChange)='showHideFurtherGoalInput(goalType)'>

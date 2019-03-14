@@ -180,14 +180,16 @@ export class GoalsPage {
           let dateAdded = childSnapshot.val().dateAdded.substring(0, 15);
           let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let goalDescription = childSnapshot.val().goalDescription;
-          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);          
+          let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);   
+          let workoutTarget = childSnapshot.val().workoutTarget;       
           workoutGoalsComplete.push({
             name: name,
             dateAdded: dateAdded,
             targetDate: targetDate,
             goalDescription: goalDescription,
             directPath: ref, 
-            dateAchieved: dateAchieved
+            dateAchieved: dateAchieved, 
+            workoutTarget: workoutTarget
           });
         }
       }))
@@ -209,13 +211,15 @@ export class GoalsPage {
           let targetDate = childSnapshot.val().targetDate.substring(0, 15);
           let goalDescription = childSnapshot.val().goalDescription;
           let dateAchieved = childSnapshot.val().dateAchieved.substring(0, 15);
+          let weightTarget = childSnapshot.val().weightTarget;
           weightGoalsComplete.push({
             name: name,
             dateAdded: dateAdded,
             targetDate: targetDate,
             goalDescription: goalDescription,
             directPath: ref, 
-            dateAchieved: dateAchieved
+            dateAchieved: dateAchieved, 
+            weightTarget: weightTarget
           });
         }
       }))
@@ -349,7 +353,7 @@ export class GoalsPage {
         //get current count of workouts.
         firebase.database().ref('/' + userId + '/workoutHistory/').once('value').then(function(snapshot){
             count = snapshot.numChildren();
-            if(count == workoutTarget){
+            if(count == workoutTarget || count > workoutTarget){
               //target weight and current weight match, so goal is complete!. 
               firebase.database().ref('/' + userId + '/goals/workoutGoals/' + ref + '/').update({status: 'Complete', dateAchieved: Date()});
 

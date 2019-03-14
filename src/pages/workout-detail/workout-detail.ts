@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest/rest';
 import { WorkoutStartPage } from '../workout-start/workout-start';
 import { WorkoutHistoryPage } from '../workout-history/workout-history';
@@ -25,7 +25,8 @@ export class WorkoutDetailPage {
       public navCtrl: NavController, 
       public navParams: NavParams, 
       public restProvider: RestProvider, 
-      public db: AngularFireDatabase
+      public db: AngularFireDatabase,
+      private alertCtrl: AlertController
     ) 
   {
   	this.workout.push(navParams.get('data'));
@@ -61,6 +62,13 @@ export class WorkoutDetailPage {
     console.log('Name = ' + this.workoutName);
     this.db.list(userId + '/workoutHistory/').push({date: Date(), id: x, name: y});
     this.navCtrl.push(WorkoutHistoryPage);
+
+    let alert = this.alertCtrl.create({
+      title: "Workout logged",
+      subTitle: "Great news on completing another workout, keep up the brilliant work!",
+      buttons: ['OK']
+    });
+    alert.present();
   }
 
 }

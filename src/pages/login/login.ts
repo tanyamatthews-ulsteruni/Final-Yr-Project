@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 import { AuthService } from '../core/auth.service';
+//import page
+import { PasswordResetPage } from '../password-reset/password-reset';
 
 @Component({
   selector: 'page-login',
@@ -61,6 +63,10 @@ export class LoginPage {
 
   goRegisterPage(){
     this.navCtrl.push(RegisterPage);
+  }
+
+  resetPassword(){
+    this.navCtrl.push(PasswordResetPage);
   }
 
 }
