@@ -361,10 +361,40 @@ export class HomePage {
       //check goal count. 
       var user = firebase.auth().currentUser;
         var userId = user.uid;
-        firebase.database().ref('/' + userId + '/goals/').once('value').then(function(snapshot){
-          g.countOfGoals = snapshot.numChildren();
+        firebase.database().ref('/' + userId + '/goals/otherGoals').once('value').then(function(snapshot){
+          console.log(snapshot);
+          snapshot.forEach((childSnapshot=>{
+          if(childSnapshot.val().status == 'Complete'){
+            g.countOfGoals++;
+          }
+        
+        }))
         });
-    }
+
+        firebase.database().ref('/' + userId + '/goals/weightGoals').once('value').then(function(snapshot){
+          console.log(snapshot);
+          snapshot.forEach((childSnapshot=>{
+          if(childSnapshot.val().status == 'Complete'){
+            g.countOfGoals++;
+          }
+        
+        }))
+        });
+
+        firebase.database().ref('/' + userId + '/goals/workoutGoals').once('value').then(function(snapshot){
+          console.log(snapshot);
+          snapshot.forEach((childSnapshot=>{
+          if(childSnapshot.val().status == 'Complete'){
+            g.countOfGoals++;
+            console.log(snapshot);
+          }
+        
+        }))
+        });
+        console.log("GOALS = " + g.countOfGoals);
+
+      }
+
 
 
         
