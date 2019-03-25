@@ -394,9 +394,4 @@ export class HomePage {
         console.log("GOALS = " + g.countOfGoals);
 
       }
-
-
-
-        
-
 }
