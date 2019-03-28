@@ -23,6 +23,7 @@ export class AuthService {
 
   doRegister(value){
    return new Promise<any>((resolve, reject) => {
+    //pass through email and password to attempt registration with users values. 
      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
      .then(res => {
        resolve(res);
@@ -32,6 +33,7 @@ export class AuthService {
 
   doLogin(value){
    return new Promise<any>((resolve, reject) => {
+    //pass through email and password to attempt login with users values. 
      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
      .then(res => {
        resolve(res);
@@ -42,6 +44,7 @@ export class AuthService {
   doLogout(){
    return new Promise((resolve, reject) => {
      if(firebase.auth().currentUser){
+      //pass current authenticated user and call sign out. 
        this.afAuth.auth.signOut()
        resolve();
      }
@@ -55,8 +58,8 @@ export class AuthService {
      return new Promise<FirebaseUserModel>((resolve, reject) => {
        if (this.platform.is('cordova')) {
          this.googlePlus.login({
-           'scopes': '', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
-           'webClientId': environment.googleWebClientId, // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+           'scopes': '', 
+           'webClientId': environment.googleWebClientId, 
            'offline': true
          }).then((response) => {
            const googleCredential = firebase.auth.GoogleAuthProvider.credential(response.idToken);
@@ -83,7 +86,7 @@ export class AuthService {
   doFacebookLogin(){
     return new Promise<FirebaseUserModel>((resolve, reject) => {
       if (this.platform.is('cordova')) {
-        //["public_profile"] is the array of permissions, you can add more if you need
+        //["public_profile"] is the array of permissions
         this.fb.login(["public_profile"])
         .then((response) => {
           const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
@@ -137,7 +140,6 @@ export class AuthService {
         this.afAuth.auth
         .signInWithPopup(new firebase.auth.TwitterAuthProvider())
         .then(result => {
-          //Default twitter img is just 48x48px and we need a bigger image https://developer.twitter.com/en/docs/accounts-and-users/user-profile-images-and-banners
           var bigImgUrl = (result.user.photoURL).replace('_normal', '_400x400');
 
           // update profile to save the big tw profile img.

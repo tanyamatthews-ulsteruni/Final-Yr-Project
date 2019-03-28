@@ -20,16 +20,13 @@ export class OnboardingPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public db: AngularFireDatabase,
-
   ) {
-  
   }
 
   workoutTypes; workoutLocation; fitnessLevel; workoutLevel; workoutDay;
   weight; height; age; activityLevel; 
   remindersEnabled; reminderFrequency; reminderTime; 
   
-
   nextSlide(){
     let currentIndex = this.slides.getActiveIndex();
     console.log('Current index is', currentIndex);
@@ -40,16 +37,17 @@ export class OnboardingPage {
   storeOnboardingDetails(){
     //get user id to store details under
     var userId = firebase.auth().currentUser.uid;
-
+    //store workout preferences to firebase. 
     this.db.list(userId + '/workoutPreferences/').push({ type: this.workoutTypes, location: this.workoutLocation , fitnessLevel: this.workoutLevel, dayOfWorkout: this.workoutDay});
+    //store health details to firebase.
     this.db.list(userId + '/healthDetails/').push({ weight: this.weight, height: this.height , age: this.age, activityLevel: this.activityLevel});
+    //check if user has enabled reminders, if so store all reminder data. 
     if(this.remindersEnabled){
           this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: this.reminderFrequency , time: this.reminderTime});
-    }
+    }//if not store only preference to not enable reminders. 
     else{
       this.db.list(userId + '/reminderPreferences/').push({ enableReminders: this.remindersEnabled, frequency: "", time: ""});
     }
-
   }
 
   onboardingDone(){

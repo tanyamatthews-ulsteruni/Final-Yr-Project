@@ -34,35 +34,40 @@ export class RegisterPage {
     this.registerForm = this.formBuilder.group({
       fullname: new FormControl(),
       email: new FormControl(),
-      password: new FormControl()
+      password: new FormControl(),
+      passwordConfirm: new FormControl()
     });
   }
 
   tryRegister(value){
-    this.authService.doRegister(value)
-     .then(res => {
-       this.errorMessage = "";
-      console.log(value.email); 
-      var user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: value.fullname,
-        photoURL: ""
-      });
-      user.updateEmail(value.email).then(function(){
-        //success 
-        console.log('Email updated successfully');
-      }).catch(function(error){
-        //error
-        console.log('Error updating email.');
-      });
+    if(value.password == value.passwordConfirm){
+      this.authService.doRegister(value)
+       .then(res => {
+         this.errorMessage = "";
+        console.log(value.email); 
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: value.fullname,
+          photoURL: ""
+        });
+        user.updateEmail(value.email).then(function(){
+          //success 
+          console.log('Email updated successfully');
+        }).catch(function(error){
+          //error
+          console.log('Error updating email.');
+        });
 
-       //push to disclaimer page to accept disclaimer
-       this.navCtrl.push(RegisterDisclaimerPage);
-       console.log(res);   
-     }, err => {
-       this.errorMessage = err.message;
-       this.successMessage = "";
-     })
+         //push to disclaimer page to accept disclaimer
+         this.navCtrl.push(RegisterDisclaimerPage);
+         console.log(res);   
+       }, err => {
+         this.errorMessage = err.message;
+         this.successMessage = "";
+       })
+     }else{
+      this.errorMessage = "Passwords don't match. Please ensure passwords match.";
+     }
   }
 
   tryFacebookLogin(){
