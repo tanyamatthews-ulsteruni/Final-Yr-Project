@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>Registration Disclaimer</ion-title>
   </ion-navbar>
 </ion-header>
@@ -29,8 +29,6 @@
 	    <ion-label>I accept</ion-label>
 	    <ion-toggle [(ngModel)]="accept"></ion-toggle>
     </ion-item>
-
-    <!--Should this message be left in or does this seem bias? -->
 
     <p>Please note you cannot register unless you agree to this disclaimer.</p>
     <button ion-button class="submit-btn" full type="submit"  [disabled]="!accept" (click)="completeRegistration()">Complete Registration</button>

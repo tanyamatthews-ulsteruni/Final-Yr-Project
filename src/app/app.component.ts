@@ -53,7 +53,7 @@ export class MyApp {
 	}
   	
   openPage(page) {
-    // Reset the content nav to have just this page
+    //surface the passed in page when clicked. 
     this.nav.setRoot(page.component);
   }
 

@@ -18,7 +18,6 @@ export class RestProvider {
   workoutsDetailExtension = "/canonical_representation/";
 
 	constructor(public http: HttpClient) {
-  		console.log('Hello RestServiceProvider Provider');
       this.getExercises();
 	}
 
@@ -30,39 +29,43 @@ getExercises(){
   return new Promise(resolve => {
     this.http.get(this.exerciseUrl).subscribe(data => {
       resolve(data);
+      //get exercise data content.
     }, err => {
       console.log(err);
+      //print error if data content can not accessed.
     });
   });}
 
 getExercisesWithFilter(type: String, equipment: String){
-  //build url based on parameter values
+  //build url based on parameter values supplied
   if(equipment != undefined && type != undefined){
+  //if both equipment and type parameter provided, add these to URL.
     this.url = this.exerciseUrl + "&equipment=" + equipment + "&muscles=" + type;
   }else if(equipment == undefined && type != ""){
+  //if both type parameter provided, add this to URL.
     this.url = this.exerciseUrl + "&muscles=" + type;
   }else if(equipment != "" && type == undefined){
+  //if equipment parameter provided, add this to URL.
     this.url = this.exerciseUrl + "&equipment=" + equipment;
   }else if(equipment == undefined && type == undefined){
+  //if neither equipment nor type parameter provided, don't add these to URL. Keep basic URL.
     this.url = this.exerciseUrl;
   }
-
-  console.log(this.url);
 
   return new Promise(resolve => {
     this.http.get(this.url).subscribe(data => {
       resolve(data);
-
+      //get exercise data content.
     }, err => {
       console.log(err);
+      //print error if data content can not accessed.
     });
   });}
 
   getExerciseImage(id: any){
     //get image for exercise id
-    console.log(id);
     this.url = this.exerciseImgUrl + id + "&" + this.format;
-    console.log(this.url);
+    //build url 
     return new Promise(resolve => {
     this.http.get(this.url).subscribe(data => {
       resolve(data);

@@ -7,18 +7,17 @@
 
   <ion-content>
     <ion-list>
+      <!--Loops through pages array-->
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
-
+      <!--call logout() function on click of logout link-->
        <ion-item menuClose (click)="logout()">Logout</ion-item>
     </ion-list>
 
     <img id='logoMenu' alt="logo" src="/assets/imgs/Logo.png" > 
 
   </ion-content>
-  
-
 
 </ion-menu>
 

@@ -34,6 +34,7 @@ export class LoginPage {
   tryLogin(value){
     this.authService.doLogin(value)
     .then(res => {
+      //direct user to homepage on success. 
       this.navCtrl.setRoot(HomePage);
     }, err => {
       console.log(err);
@@ -45,6 +46,7 @@ export class LoginPage {
   tryFacebookLogin(){
     this.authService.doFacebookLogin()
     .then((res) => {
+      //direct user to homepage on success. 
       this.navCtrl.setRoot(HomePage);
     }, (err) => {
       this.errorMessage = err.message;
@@ -55,6 +57,7 @@ export class LoginPage {
   tryGoogleLogin(){
     this.authService.doGoogleLogin()
     .then((res) => {
+      //direct user to homepage on success. 
       this.navCtrl.setRoot(HomePage);
     }, (err) => {
       this.errorMessage = err.message;
