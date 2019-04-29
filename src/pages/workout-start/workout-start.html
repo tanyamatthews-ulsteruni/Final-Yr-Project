@@ -22,16 +22,14 @@
 
 			<p>{{ex.exercise_list[0].obj.description}}</p>
 
-			<button id='showWeightInput' ion-button (click)="showWeightInput()">{{addHideWeightText}}</button>
-			<br>
-			<ion-input id='weight' [(ngModel)]="weight" *ngIf="buttonClicked" type="number" value=""></ion-input>
+			<button id='showWeightInput' ion-button (click)="showWeightInput()">{{addHideWeightText}}</button><br>
+			<ion-input id='weight' [(ngModel)]="weight" *ngIf="buttonClicked" placeholder="kg" type="number" value=""></ion-input>
 
 			<p>{{ex.exercise_list[0].repetition_units[0].name}}: {{ex.exercise_list[0].setting_obj_list[0].reps}}</p>
 			<p>Sets: {{numDone}} of {{ex.obj.sets}}</p>
 			<button ion-button (click)="setComplete(ex)">Mark set complete</button>
 			<p><i>Please note you can't go to the next exercise until you mark your sets as complete!</i></p>
 			<button ion-button [disabled]="!isEnabled" (click)="nextSlide()">Next Exercise</button>
-
 
 	    </ion-slide>
 

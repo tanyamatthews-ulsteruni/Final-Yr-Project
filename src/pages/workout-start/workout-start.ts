@@ -54,7 +54,6 @@ export class WorkoutStartPage {
   nextSlide(){
     this.slides.lockSwipes(false);
     let currentIndex = this.slides.getActiveIndex();
-    console.log('Current index is', currentIndex);
     var nextSlide = currentIndex + 1;
     this.slides.slideTo(nextSlide,500);
     //reset count of sets
@@ -100,11 +99,11 @@ export class WorkoutStartPage {
 
  showWeightInput(){
     this.buttonClicked = !this.buttonClicked;
-    if(this.addHideWeightText == 'Add Weight'){
+    if(this.addHideWeightText == 'Add Exercise Weight'){
       this.addHideWeightText = 'Remove Weight';
       this.weight = null;
     }else{
-      this.addHideWeightText = 'Add Weight';
+      this.addHideWeightText = 'Add Exercise Weight';
     }
   }
 

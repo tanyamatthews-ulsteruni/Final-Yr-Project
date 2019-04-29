@@ -16,6 +16,8 @@ export class WorkoutsPage {
   workouts:any;
   workout:any;
 
+  equipment: any;
+
   workoutTypeFilter:any;
   equipFilter:any;
 
@@ -56,22 +58,19 @@ export class WorkoutsPage {
 
   applyFilter(){
     this.workoutNames = [];
-    const equipment; 
+    //const equipment = ''; 
     if(this.equipFilter == true){
-      equipment ='#Equipment';
+      this.equipment ='#Equipment';
     }else{
-      equipment ='#NoEquipment';
+      this.equipment ='#NoEquipment';
     }
 
     this.restProvider.getAllWorkoutData().then(data =>{
-    this.exercises = data.results;
-      
-    console.log(this.workoutTypeFilter);
-    console.log(equipment);
+    //this.exercises = data.results;
 
     if(data.hasOwnProperty('results')){
       for(let w of this.workouts){
-        if(w.comment.includes(this.workoutTypeFilter) && w.comment.includes(equipment)){
+        if(w.comment.includes(this.workoutTypeFilter) && w.comment.includes(this.equipment)){
           this.workoutNames.push(w);
         }
       }

@@ -22,15 +22,15 @@ export class PasswordResetPage {
   }
 
   sendPasswordLink(userEmail){
+    //push users email to firebase path for users who need reset password.
   	this.db.list('userNeedPasswordReset/').push({email: userEmail});
-
+    //create alert format.
   	let alert = this.alertCtrl.create({
       title: "Password reset link sent",
       subTitle: "Please check your emails for details on how to reset your password. Please allow some time for this action.",
       buttons: ['OK']
     });
     alert.present();
-
   	this.navCtrl.pop();
   }
 

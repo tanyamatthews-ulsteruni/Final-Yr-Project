@@ -8,13 +8,13 @@ export class RestProvider {
 
 	apiUrl = "https://jsonplaceholder.typicode.com";
   format = "format=json&language=2";
-	exerciseUrl = "https://wger.de/api/v2/exercise?format=json&language=2&limit=150&status=2"; //limited to 150 to reduce load times on poor networks.
-  exerciseMoreInfoUrl = "https://wger.de/api/v2/exerciseinfo/"
-  exerciseImgUrl = "https://wger.de/api/v2/exerciseimage/?exercise=";
+	exerciseUrl = "http://wger.de/api/v2/exercise?format=json&language=2&limit=150&status=2"; //limited to 150 to reduce load times on poor networks.
+  exerciseMoreInfoUrl = "http://wger.de/api/v2/exerciseinfo/"
+  exerciseImgUrl = "http://wger.de/api/v2/exerciseimage/?exercise=";
   url = "";
 
   apiKey = 'fad7d1a9f71113d3e08ae7af891f7ec0051217bb';
-  workoutUrl = "https://wger.de/api/v2/workout";
+  workoutUrl = "http://wger.de/api/v2/workout";
   workoutsDetailExtension = "/canonical_representation/";
 
 	constructor(public http: HttpClient) {
@@ -92,7 +92,7 @@ getExercisesWithFilter(type: String, equipment: String){
       })
     }
     return new Promise(resolve => {
-    this.http.get('https://wger.de/api/v2/workout/', httpOptions).subscribe(data => { 
+    this.http.get('http://wger.de/api/v2/workout/', httpOptions).subscribe(data => { 
       resolve(data);
     }, err => {
       console.log(err);

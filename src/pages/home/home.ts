@@ -53,7 +53,7 @@ export class HomePage {
   ionViewDidEnter(){
     this.calculateBMI(this.userHealthDetail);
     this.userService.getCurrentUser()
-    .then(user => {
+    .then(user => { 
       this.user = user;
     }, err => console.log(err))
 
@@ -231,7 +231,6 @@ export class HomePage {
 
   generateDoughnutChart(w){
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-
             type: 'doughnut',
             data: {
                 labels: ["Workouts Completed", "Workouts Needed to Level Up"],
@@ -240,19 +239,11 @@ export class HomePage {
                     data: [w.countOfWorkout, w.workoutsToNextLevel],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                        'rgba(54, 162, 235, 0.2)'
                     ],
                     hoverBackgroundColor: [
                         "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#36A2EB"
                     ]
                 }]
             }

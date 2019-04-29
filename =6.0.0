@@ -1,0 +1,4 @@
++ @angular/platform-browser@5.2.11
+updated 1 package and audited 883695 packages in 14.376s
+found 6 vulnerabilities (3 low, 1 moderate, 2 high)
+  run `npm audit fix` to fix them, or `npm audit` for details

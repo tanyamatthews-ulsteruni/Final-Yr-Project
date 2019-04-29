@@ -1,4 +1,3 @@
-
 //firebase authentication environment settings 
 export const environment = {
   production: false,
